@@ -27,15 +27,17 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select*from TipoProducto", con);
+                    var cmd = new SqlCommand("select tp.CTipoProducto as TipoProducto, tp.NTipoProducto NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto=tp2.CTipoProducto", con);
                     using (var dr=cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             var tpproducto = new TipoProducto();
-                            tpproducto.CTipoProducto = Convert.ToInt32(dr["CTipoProducto"]);
+                            var subtpproducto = new TipoProducto();
+                            tpproducto.CTipoProducto = Convert.ToInt32(dr["TipoProducto"]);
                             tpproducto.NTipoProducto = dr["NTipoProducto"].ToString();
-                            tpproducto.CSubTipoProducto = Convert.ToInt32(dr["CSubTipoProducto"]);
+                            subtpproducto.NTipoProducto = dr["SubTipoProducto"].ToString();
+                            tpproducto.CSubTipoProducto = subtpproducto;
                             tipos.Add(tpproducto);
                         }
                     }
@@ -58,15 +60,17 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString())) 
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select*from TipoProducto where CTipoProducto='" + id + "'", con);
+                    var cmd = new SqlCommand("select tp.CTipoProducto as TipoProducto, tp.NTipoProducto NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto ='"+id+"'" , con);
                     using (var dr=cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             tpproducto = new TipoProducto();
-                            tpproducto.CTipoProducto = Convert.ToInt32(dr["CTipoProducto"]);
+                            var subtpproducto = new TipoProducto();
+                            tpproducto.CTipoProducto = Convert.ToInt32(dr["TipoProducto"]);
                             tpproducto.NTipoProducto = dr["NTipoProducto"].ToString();
-                            tpproducto.CSubTipoProducto = Convert.ToInt32(dr["CSubTipoProducto"]);
+                            subtpproducto.NTipoProducto = dr["SubTipoProducto"].ToString();
+                            tpproducto.CSubTipoProducto = subtpproducto;
                         }
                     }
                     con.Close();
