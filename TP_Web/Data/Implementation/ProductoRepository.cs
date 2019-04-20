@@ -66,7 +66,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select p.CProducto, p.NProducto, p.MPrecio, tp.NTipoProducto as NTipoProducto from Producto p, TipoProducto tp where p.CTipoProducto ='"+id+"'",con);
+                    var cmd = new SqlCommand("select p.CProducto, p.NProducto, p.MPrecio, tp.NTipoProducto from Producto p, TipoProducto tp where p.CTipoProducto ='"+id+"'",con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -128,8 +128,8 @@ namespace Data.Implementation
 
                     var cmd = new SqlCommand("update Producto set NProducto=@Nproducto,MPrecio=@MPrecio, CTipoProducto=@CTipoProducto where CProducto=@CProducto", con);
                     cmd.Parameters.AddWithValue("@CProducto", t.CProducto);
-                    cmd.Parameters.AddWithValue("@Nproducto", t.CProducto);
-                    cmd.Parameters.AddWithValue("@MPrecio", t.CProducto);
+                    cmd.Parameters.AddWithValue("@Nproducto", t.NProducto);
+                    cmd.Parameters.AddWithValue("@MPrecio", t.MPrecio);
                     cmd.Parameters.AddWithValue("@CTipoProducto", t.CTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;
