@@ -120,7 +120,7 @@ namespace Data.Implementation
                 using(var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Historial_Jefe set DFechaHJefe=@fecha, CJefe=@idjefe where CEmpleado=@id", con);
+                    var cmd = new SqlCommand("update Historial_Jefe set CJefe=@idjefe where CEmpleado=@id and DFechaHJefe=@fecha", con);
                     cmd.Parameters.AddWithValue("@id", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@fecha", t.DFechaHJefe);
                     cmd.Parameters.AddWithValue("@idjefe", t.CJefe.CEmpleado);

@@ -128,14 +128,15 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Producto_Ingrediente set CIngrediente=@idingrdnt, QUsadaIngrediente=@qusada, NUnidadMedidaUsada=@nusada where CProducto=@idprodct", con);
+                    var cmd = new SqlCommand("update Producto_Ingrediente set CIngrediente=@idingrdnt, QUsadaIngrediente=@qusada, NUnidadMedidaUsada=@nusada where CProducto=@idprodct and CIngrediente=@idingrdnt", con);
                     cmd.Parameters.AddWithValue("@idprodct", t.CProducto.CProducto);
+                    cmd.Parameters.AddWithValue("@idingrdnt", t.CIngrediente.CIngrediente);
                     cmd.Parameters.AddWithValue("@idingrdnt", t.CIngrediente.CIngrediente);
                     cmd.Parameters.AddWithValue("@qusada", t.QUsadaIngrediente);
                     cmd.Parameters.AddWithValue("@nusada", t.NUnidadMedidaUsada);
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    rpta = true;
+                    rpta = true;    
                 }
             }
             catch (Exception)
