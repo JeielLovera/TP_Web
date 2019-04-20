@@ -97,7 +97,7 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@nombre", t.NIngrediente);
                     cmd.Parameters.AddWithValue("@qunidadmedida", t.QUnidadMedidaIngrediente);
                     cmd.Parameters.AddWithValue("@nunidadmedida", t.NUnidadMedidaIngrediente);
-                    cmd.Parameters.AddWithValue("@ctipo", t.CTipoIngrediente);
+                    cmd.Parameters.AddWithValue("@ctipo", t.CTipoIngrediente.CTipoIngrediente);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
@@ -122,7 +122,7 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@id", t.CIngrediente);
                     cmd.Parameters.AddWithValue("@qunidadmedida", t.QUnidadMedidaIngrediente);
                     cmd.Parameters.AddWithValue("@nunidadmedida", t.NUnidadMedidaIngrediente);
-                    cmd.Parameters.AddWithValue("@ctipo", t.CTipoIngrediente);
+                    cmd.Parameters.AddWithValue("@ctipo", t.CTipoIngrediente.CTipoIngrediente);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;

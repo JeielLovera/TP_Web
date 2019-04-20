@@ -93,7 +93,7 @@ namespace Data.Implementation
                     con.Open();
                     var cmd = new SqlCommand("insert into TipoProducto values(@nombre,@subid)", con);
                     cmd.Parameters.AddWithValue("@nombre", t.NTipoProducto);
-                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto);
+                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                     con.Close();
@@ -117,7 +117,7 @@ namespace Data.Implementation
                     var cmd = new SqlCommand("update TipoProducto set NTipoProducto=@nombre, CSubTipoProducto=@subid where CTipoProducto=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CTipoProducto);
                     cmd.Parameters.AddWithValue("@nombre", t.NTipoProducto);
-                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto);
+                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                     con.Close();
