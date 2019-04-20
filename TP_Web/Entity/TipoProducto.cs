@@ -10,7 +10,7 @@ namespace Entity
     {
         public int CTipoProducto { get; set; }
         public String NTipoProducto { get; set; }
-        public int CSubTipoProducto { get; set; }
+        public TipoProducto CSubTipoProducto { get; set; }
 
     }
 }
