@@ -33,10 +33,10 @@ namespace Data.Implementation
                         {
                             var ingrediente = new Ingrediente();
                             var tipo = new TipoIngrediente();
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["ig.CIngrediente"]);
-                            ingrediente.NIngrediente = dr["ig.NIngrediente"].ToString();
-                            ingrediente.QUnidadMedidaIngrediente= Convert.ToInt32(dr["ig.QUnidadMedidaIngrediente"]);
-                            ingrediente.NUnidadMedidaIngrediente = dr["ig.NUnidadMedidaIngrediente"].ToString();
+                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
+                            ingrediente.QUnidadMedidaIngrediente= Convert.ToInt32(dr["QUnidadMedidaIngrediente"]);
+                            ingrediente.NUnidadMedidaIngrediente = dr["NUnidadMedidaIngrediente"].ToString();
                             tipo.NTipoIngrediente = dr["TipoIngrediente"].ToString();
                             ingrediente.CTipoIngrediente = tipo;
                             ingredientes.Add(ingrediente);                   
@@ -66,10 +66,10 @@ namespace Data.Implementation
                     {
                         ingrediente = new Ingrediente();
                         var tipo = new TipoIngrediente();
-                        ingrediente.CIngrediente = Convert.ToInt32(dr["ig.CIngrediente"]);
-                        ingrediente.NIngrediente = dr["ig.NIngrediente"].ToString();
-                        ingrediente.QUnidadMedidaIngrediente = Convert.ToInt32(dr["ig.QUnidadMedidaIngrediente"]);
-                        ingrediente.NUnidadMedidaIngrediente = dr["ig.NUnidadMedidaIngrediente"].ToString();
+                        ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                        ingrediente.NIngrediente = dr["NIngrediente"].ToString();
+                        ingrediente.QUnidadMedidaIngrediente = Convert.ToInt32(dr["QUnidadMedidaIngrediente"]);
+                        ingrediente.NUnidadMedidaIngrediente = dr["NUnidadMedidaIngrediente"].ToString();
                         tipo.NTipoIngrediente = dr["TipoIngrediente"].ToString();
                         ingrediente.CTipoIngrediente = tipo;
                         
