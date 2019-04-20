@@ -100,10 +100,10 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Producto values (@NProducto, @MPrecio,@NTipoProducto)", con);
+                    var cmd = new SqlCommand("insert into Producto values (@NProducto, @MPrecio,@CTipoProducto)", con);
                     cmd.Parameters.AddWithValue("@NProducto", t.NProducto);
                     cmd.Parameters.AddWithValue("@MPrecio", t.MPrecio);
-                    cmd.Parameters.AddWithValue("@NTipoProducto", t.CTipoProducto.NTipoProducto);
+                    cmd.Parameters.AddWithValue("@CTipoProducto", t.CTipoProducto.CTipoProducto);
 
                     cmd.ExecuteNonQuery();
                     rpta = true;
