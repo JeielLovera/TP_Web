@@ -130,7 +130,7 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@CProducto", t.CProducto);
                     cmd.Parameters.AddWithValue("@Nproducto", t.CProducto);
                     cmd.Parameters.AddWithValue("@MPrecio", t.CProducto);
-                    cmd.Parameters.AddWithValue("@CTipoProducto", t.CTipoProducto);
+                    cmd.Parameters.AddWithValue("@CTipoProducto", t.CTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                 }
