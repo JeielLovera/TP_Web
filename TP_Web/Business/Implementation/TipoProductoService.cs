@@ -12,6 +12,7 @@ namespace Business.Implementation
     public class TipoProductoService : ITipoProductoService
     {
         private ITipoProductoRepository tpproductoRepository = new TipoProductoRepository();
+        private ITipoProductoRepository subtpproductoRepository = new TipoProductoRepository();
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -29,11 +30,15 @@ namespace Business.Implementation
 
         public bool Insert(TipoProducto t)
         {
+            TipoProducto subtpproducto = subtpproductoRepository.FindById(t.CSubTipoProducto.CTipoProducto);
+            t.CSubTipoProducto = subtpproducto;
             return tpproductoRepository.Insert(t);
         }
 
         public bool Update(TipoProducto t)
         {
+            TipoProducto subtpproducto = subtpproductoRepository.FindById(t.CSubTipoProducto.CTipoProducto);
+            t.CSubTipoProducto = subtpproducto;
             return tpproductoRepository.Update(t);
         }
     }
