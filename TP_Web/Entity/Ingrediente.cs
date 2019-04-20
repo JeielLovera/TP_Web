@@ -8,11 +8,11 @@ namespace Entity
 {
     public class Ingrediente
     {
-        public int idIngrediente { get; set; }
+        public int CIngrediente { get; set; }
         public String NIngrediente { get; set; }
         public float QUnidadMedidaIngrediente { get; set; }
         public String NUnidadMedidaIngrediente { get; set; }
-        public int TipoIngrediente { get; set; }
+        public TipoIngrediente CTipoIngrediente { get; set; }
 
 
     }
