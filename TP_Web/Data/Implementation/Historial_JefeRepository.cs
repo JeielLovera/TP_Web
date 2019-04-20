@@ -97,9 +97,9 @@ namespace Data.Implementation
                 {
                     con.Open();
                     var cmd = new SqlCommand("insert into Historial_Jefe values(@idempleado,@fecha,@idjefe)", con);
-                    cmd.Parameters.AddWithValue("@idempleado", t.CEmpleado);
+                    cmd.Parameters.AddWithValue("@idempleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@fecha", t.DFechaHJefe);
-                    cmd.Parameters.AddWithValue("@idjefe", t.CJefe);
+                    cmd.Parameters.AddWithValue("@idjefe", t.CJefe.CEmpleado);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
@@ -121,9 +121,9 @@ namespace Data.Implementation
                 {
                     con.Open();
                     var cmd = new SqlCommand("update Historial_Jefe set DFechaHJefe=@fecha, CJefe=@idjefe where CEmpleado=@id", con);
-                    cmd.Parameters.AddWithValue("@id", t.CEmpleado);
+                    cmd.Parameters.AddWithValue("@id", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@fecha", t.DFechaHJefe);
-                    cmd.Parameters.AddWithValue("@idjefe", t.CJefe);
+                    cmd.Parameters.AddWithValue("@idjefe", t.CJefe.CEmpleado);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
