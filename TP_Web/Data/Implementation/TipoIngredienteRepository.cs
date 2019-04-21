@@ -75,6 +75,16 @@ namespace Data.Implementation
             return tpingrediente;
         }
 
+        public TipoIngrediente FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TipoIngrediente FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(TipoIngrediente t)
         {
             bool rpta = false;
