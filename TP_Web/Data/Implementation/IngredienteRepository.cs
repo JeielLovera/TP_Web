@@ -61,7 +61,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select ig.CIngrediente, ig.NIngrediente, ig.QUnidadMedidaIngrediente, ig.NUnidadMedidaIngrediente, tp.NTipoIngrediente as TipoIngrediente from Ingrediente ig, TipoIngrediente tp where ig.CTipoIngrediente='"+id+"'", con);
+                    var cmd = new SqlCommand("select ig.CIngrediente, ig.NIngrediente, ig.QUnidadMedidaIngrediente, ig.NUnidadMedidaIngrediente, tp.NTipoIngrediente as TipoIngrediente from Ingrediente ig, TipoIngrediente tp where ig.CSubTipoIngrediente=tp.CTipoIngrediente and ig.CIngrediente='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         ingrediente = new Ingrediente();
@@ -83,6 +83,16 @@ namespace Data.Implementation
             }
             return ingrediente;
             
+        }
+
+        public Ingrediente FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Ingrediente FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Ingrediente t)
