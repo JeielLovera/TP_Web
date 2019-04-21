@@ -10,6 +10,5 @@ namespace Entity
     {
         public int CRol { get; set; }
         public String NRol { get; set; }
-		public int aea;
     }
 }
