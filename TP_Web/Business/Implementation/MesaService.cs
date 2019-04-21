@@ -27,7 +27,15 @@ namespace Business.Implementation
         {
             return mesaRepository.FindById(id);
         }
+        public Mesa FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Mesa FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
+        }
         public bool Insert(Mesa t)
         {
             Local local = localRepository.FindById(t.CLocal.CLocal);
@@ -40,5 +48,7 @@ namespace Business.Implementation
         {
             return mesaRepository.Update(t);
         }
+
+        
     }
 }
