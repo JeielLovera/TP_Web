@@ -27,7 +27,7 @@ namespace Business.Implementation
 
         public Historial_Jefe FindById(int? id)
         {
-            return historialRepository.FindById(id);
+            throw new NotImplementedException();
         }
 
         public bool Insert(Historial_Jefe t)
@@ -46,6 +46,16 @@ namespace Business.Implementation
             t.CEmpleado = empleado;
             t.CJefe = jefe;
             return historialRepository.Update(t);
+        }
+
+        public Historial_Jefe FindById(int? id, int? id2)
+        {
+            return historialRepository.FindById(id,id2);
+        }
+
+        public Historial_Jefe FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
     }
 }

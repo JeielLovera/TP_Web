@@ -56,14 +56,19 @@ namespace Data.Implementation
 
         public Historial_Jefe FindById(int? id)
         {
+            throw new NotImplementedException();
+        }
+
+        public Historial_Jefe FindById(int? id, int? id2)
+        {            
             Historial_Jefe historial = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select h.CEmpleado, ep1.NEmpleado, h.DFechaHJefe FechaHistorial, ep2.NEmpleado NJefe from Historial_Jefe h, Empleado ep1, Empleado ep2 where h.CEmpleado=ep1.CEmpleado and h.CJefe=ep2.CEmpleado and h.CEmpleado='" + id + "'", con);
-                    using(var dr = cmd.ExecuteReader())
+                    var cmd = new SqlCommand("select h.CEmpleado, ep1.NEmpleado, h.DFechaHJefe FechaHistorial, ep2.NEmpleado NJefe from Historial_Jefe h, Empleado ep1, Empleado ep2 where h.CEmpleado=ep1.CEmpleado and h.CJefe=ep2.CEmpleado and h.CEmpleado='" + id + "' and h.DFechaHJefe='"+id2+"'", con);
+                    using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
@@ -86,6 +91,11 @@ namespace Data.Implementation
                 throw;
             }
             return historial;
+        }
+
+        public Historial_Jefe FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Historial_Jefe t)
