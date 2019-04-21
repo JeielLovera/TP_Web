@@ -28,6 +28,16 @@ namespace Business.Implementation
             return ProductoRepository.FindById(id);
         }
 
+        public Producto FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Producto FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(Producto t)
         {
             TipoProducto tipoproducto = tipoProductoRepository.FindById(t.CTipoProducto.CTipoProducto);
@@ -38,6 +48,9 @@ namespace Business.Implementation
 
         public bool Update(Producto t)
         {
+            TipoProducto tipoproducto = tipoProductoRepository.FindById(t.CTipoProducto.CTipoProducto);
+            t.CTipoProducto = tipoproducto;
+
             return ProductoRepository.Update(t);
         }
     }
