@@ -59,14 +59,19 @@ namespace Data.Implementation
 
         public Producto_Ingrediente FindById(int? id)
         {
+            throw new NotImplementedException();            
+        }
+
+        public Producto_Ingrediente FindById(int? id, int? id2)
+        {
             Producto_Ingrediente productoingrediente = null;
             try
             {
-                using(var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select ip.CProducto, p.NProducto, ip.CIngrediente, i.NIngrediente, ip.QUsadaIngrediente, ip.NUnidadMedidaUsada from Producto_Ingrediente pi, Producto p, Ingrediente i where pi.CProducto=p.CProducto and pi.CIngrediente=i.CIngrediente and pi.CProducto='"+id+"'", con);
-                    using(var dr = cmd.ExecuteReader())
+                    var cmd = new SqlCommand("select ip.CProducto, p.NProducto, ip.CIngrediente, i.NIngrediente, ip.QUsadaIngrediente, ip.NUnidadMedidaUsada from Producto_Ingrediente pi, Producto p, Ingrediente i where pi.CProducto=p.CProducto and pi.CIngrediente=i.CIngrediente and pi.CProducto='" + id + "' pi.CIngrediente='" + id2 + "'", con);
+                    using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
@@ -82,7 +87,7 @@ namespace Data.Implementation
                             productoingrediente.CIngrediente = ingrediente;
                             productoingrediente.QUsadaIngrediente = Convert.ToInt32(dr["QUsadaIngrediente"]);
                             productoingrediente.NUnidadMedidaUsada = dr["NUnidadMedidaUsada"].ToString();
-                            
+
                         }
                     }
                     con.Close();
@@ -93,6 +98,11 @@ namespace Data.Implementation
                 throw;
             }
             return productoingrediente;
+        }
+
+        public Producto_Ingrediente FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Producto_Ingrediente t)
