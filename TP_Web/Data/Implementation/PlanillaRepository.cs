@@ -59,6 +59,11 @@ namespace Data.Implementation
 
         public Planilla FindById(int? id)
         {
+            throw new NotImplementedException();
+        }
+
+        public Planilla FindById(int? id, int? id2)
+        {
             Planilla planilla = null;
 
             try
@@ -66,10 +71,10 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select e.CEmpleado, e.NEmpleado,p.DFechaHRol Fecha, r.NRol Rol, p.Msueldo from Empleado e, Planilla p, Rol r where e.CEmpleado = p.CEmpleado and p.CRol = r.CRol and e.CEmpleado='"+id+"'", con);
+                    var cmd = new SqlCommand("select e.CEmpleado, e.NEmpleado,p.DFechaHRol Fecha, r.NRol Rol, p.Msueldo from Empleado e, Planilla p, Rol r where e.CEmpleado = p.CEmpleado and p.CRol = r.CRol and e.CEmpleado='" + id + "' and p.DFechaHRol='" + id2 + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
-                        while(dr.Read())
+                        while (dr.Read())
                         {
                             planilla = new Planilla();
                             var empleado = new Empleado();
@@ -84,13 +89,19 @@ namespace Data.Implementation
                             planilla.MSueldo = Convert.ToSingle(dr["Msueldo"]);
                         }
                     }
+                    con.Close();
                 }
 
             }
-            catch(Exception)
+            catch (Exception)
             { throw; }
 
             return planilla;
+        }
+
+        public Planilla FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Planilla t)
@@ -104,15 +115,16 @@ namespace Data.Implementation
                     con.Open();
                     var cmd = new SqlCommand("insert into Planilla values(@Cempleado,@fecha, @crol,@sueldo)", con);
                     cmd.Parameters.AddWithValue("@Cempleado", t.CEmpleado.CEmpleado);
-                    cmd.Parameters.AddWithValue("@fecha",t.DFechaHRol);
-                    cmd.Parameters.AddWithValue("@crol",t.CRol.CRol);
-                    cmd.Parameters.AddWithValue("@sueldo",t.MSueldo);
+                    cmd.Parameters.AddWithValue("@fecha", t.DFechaHRol);
+                    cmd.Parameters.AddWithValue("@crol", t.CRol.CRol);
+                    cmd.Parameters.AddWithValue("@sueldo", t.MSueldo);
 
                     cmd.ExecuteNonQuery();
+                    con.Close();
                     rpta = true;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -135,6 +147,7 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@sueldo", t.MSueldo);
 
                     cmd.ExecuteNonQuery();
+                    con.Close();
                     rpta = true;
                 }
             }
