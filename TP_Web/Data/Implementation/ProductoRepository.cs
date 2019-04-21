@@ -66,7 +66,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select p.CProducto, p.NProducto, p.MPrecio, tp.NTipoProducto from Producto p, TipoProducto tp where p.CTipoProducto ='"+id+"'",con);
+                    var cmd = new SqlCommand("select p.CProducto, p.NProducto, p.MPrecio, tp.NTipoProducto from Producto p, TipoProducto tp where p.CTipoProducto ='" + id + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -86,9 +86,19 @@ namespace Data.Implementation
                     con.Close();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             { throw; }
             return producto;
+        }
+
+        public Producto FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Producto FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Producto t)
@@ -100,17 +110,17 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Producto values (@NProducto, @MPrecio,@CTipoProducto)", con);
+                    var cmd = new SqlCommand("insert into Producto values (@NProducto, @MPrecio,@NTipoProducto)", con);
                     cmd.Parameters.AddWithValue("@NProducto", t.NProducto);
                     cmd.Parameters.AddWithValue("@MPrecio", t.MPrecio);
-                    cmd.Parameters.AddWithValue("@CTipoProducto", t.CTipoProducto.CTipoProducto);
+                    cmd.Parameters.AddWithValue("@NTipoProducto", t.CTipoProducto.NTipoProducto);
 
                     cmd.ExecuteNonQuery();
                     rpta = true;
                     con.Close();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             { throw; }
 
             return rpta;
@@ -135,7 +145,7 @@ namespace Data.Implementation
                     rpta = true;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             { throw; }
             return rpta;
         }
