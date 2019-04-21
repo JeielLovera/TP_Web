@@ -50,7 +50,7 @@ namespace Business.Implementation
 
         public Producto_Ingrediente FindById(int? id, int? id2)
         {            
-            return prodctingrdntRepository.FindById(id);
+            return prodctingrdntRepository.FindById(id,id2);
         }
 
         public Producto_Ingrediente FindById(int? id, int? id2, int? id3)

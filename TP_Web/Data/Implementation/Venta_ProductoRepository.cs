@@ -56,13 +56,19 @@ namespace Data.Implementation
 
         public Venta_Producto FindById(int? id)
         {
+            throw new NotImplementedException();
+            
+        }
+
+        public Venta_Producto FindById(int? id, int? id2)
+        {
             Venta_Producto ventaproducto = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select vt.CVenta, vt.CProducto, p.NProducto, vt.QCantidad from Venta_Producto vt, Producto p where vt.CProducto=p.CProducto and vt.CVenta='"+id+"'", con);
+                    var cmd = new SqlCommand("select vt.CVenta, vt.CProducto, p.NProducto, vt.QCantidad from Venta_Producto vt, Producto p where vt.CProducto=p.CProducto and vt.CProducto='" + id + "' vt.CVenta='"+id2+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -77,7 +83,7 @@ namespace Data.Implementation
                             producto.NProducto = dr["NProducto"].ToString();
                             ventaproducto.CProducto = producto;
                             ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidada"]);
-                            
+
                         }
                     }
                     con.Close();
@@ -89,6 +95,11 @@ namespace Data.Implementation
                 throw;
             }
             return ventaproducto;
+        }
+
+        public Venta_Producto FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Venta_Producto t)

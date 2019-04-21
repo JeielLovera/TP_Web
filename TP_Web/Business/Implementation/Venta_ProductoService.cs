@@ -27,7 +27,7 @@ namespace Business.Implementation
 
         public Venta_Producto FindById(int? id)
         {
-            return vntprodctRepository.FindById(id);
+            throw new NotImplementedException();
         }
 
         public bool Insert(Venta_Producto t)
@@ -46,6 +46,16 @@ namespace Business.Implementation
             t.CProducto = producto;
             t.CVenta = venta;
             return vntprodctRepository.Insert(t);
+        }
+
+        public Venta_Producto FindById(int? id, int? id2)
+        {
+            return vntprodctRepository.FindById(id,id2);
+        }
+
+        public Venta_Producto FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
     }
 }
