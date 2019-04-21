@@ -130,6 +130,7 @@ namespace Data.Implementation
                     con.Open();
                     var cmd = new SqlCommand("update Ingrediente set NIngrediente=@nombre, QUnidadMedidaIngrediente=@qunidadmedida, NUnidadMedidaIngrediente=@nunidadmedida, CTipoIngrediente=@ctipo where CIngrediente=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CIngrediente);
+					cmd.Parameters.AddWithValue("@nombre", t.NIngrediente);
                     cmd.Parameters.AddWithValue("@qunidadmedida", t.QUnidadMedidaIngrediente);
                     cmd.Parameters.AddWithValue("@nunidadmedida", t.NUnidadMedidaIngrediente);
                     cmd.Parameters.AddWithValue("@ctipo", t.CTipoIngrediente.CTipoIngrediente);
