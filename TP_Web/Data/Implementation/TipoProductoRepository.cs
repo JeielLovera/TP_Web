@@ -60,7 +60,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString())) 
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select tp.CTipoProducto as TipoProducto, tp.NTipoProducto NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CTipoProducto ='"+id+"'" , con);
+                    var cmd = new SqlCommand("select tp.CTipoProducto as TipoProducto, tp.NTipoProducto NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto ='"+id+"'" , con);
                     using (var dr=cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -81,6 +81,16 @@ namespace Data.Implementation
                 throw;
             }
             return tpproducto;
+        }
+
+        public TipoProducto FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TipoProducto FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(TipoProducto t)
