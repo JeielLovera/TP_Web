@@ -41,6 +41,11 @@ namespace Business.Implementation
 
         public bool Update(Planilla t)
         {
+            Empleado empleado = empleadorepo.FindById(t.CEmpleado.CEmpleado);
+            Rol rol = rolrepo.FindById(t.CRol.CRol);
+
+            t.CEmpleado = empleado;
+            t.CRol = rol;
             return planillarepo.Update(t);
         }
     }
