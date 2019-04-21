@@ -85,6 +85,16 @@ namespace Data.Implementation
             return mesa;
         }
 
+        public Mesa FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Mesa FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(Mesa t)
         {
             bool rpta = false;
