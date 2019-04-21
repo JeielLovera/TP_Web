@@ -39,7 +39,7 @@ namespace Data.Implementation
                             local.NumTelefono = Convert.ToInt32(dr["NumTelefono"]);
                         }
                     }
-
+                    con.Close();
                 }
             }
             catch(Exception)
@@ -66,6 +66,7 @@ namespace Data.Implementation
                             local.NumTelefono = Convert.ToInt32(dr["NumTelefono"]);
                         }
                     }
+                    con.Close();
                 }
             }
             catch(Exception)
@@ -101,6 +102,7 @@ namespace Data.Implementation
                     cmd.ExecuteNonQuery();
 
                     rpta = true;
+                    con.Close();
                 }
             }
             catch(Exception)
@@ -123,6 +125,7 @@ namespace Data.Implementation
 
                     cmd.ExecuteNonQuery();
                     rpta = true;
+                    con.Close();
                 }
             }
             catch(Exception)
