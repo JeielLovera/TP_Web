@@ -8,10 +8,10 @@ namespace Entity
 {
     public class Orden_ProductoPerzonalizado
     {
-        public int CVenta { get; set; }
-        public int COrden { get; set; }
-        public int CIngrediente { get; set; }
-        public int CEmpleado { get; set; }
+        public Venta CVenta { get; set; }
+        public Orden COrden { get; set; }
+        public Ingrediente CIngrediente { get; set; }
+        public Empleado CEmpleado { get; set; }
         public int QOrdenProductoPerzonalizado { get; set; }
         public string NUnidadMedidaUsada { get; set; }
     }

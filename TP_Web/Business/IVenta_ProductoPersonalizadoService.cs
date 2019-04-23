@@ -7,8 +7,7 @@ using Entity;
 
 namespace Business
 {
-    public interface IOrden_ProductoPerzonalizadoService:ICrudService<Orden_ProductoPerzonalizado>
+    public interface IVenta_ProductoPersonalizadoService:ICrudService<Venta_ProductoPersonalizado>
     {
-
     }
 }

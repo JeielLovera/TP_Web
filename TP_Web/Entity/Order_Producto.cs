@@ -8,10 +8,10 @@ namespace Entity
 {
     public class Order_Producto
     {
-        public int CProducto { get; set; }
-        public int CVenta { get; set; }
-        public int COrden { get; set; }
-        public int CEmpleado { get; set; }
+        public Producto CProducto { get; set; }
+        public Venta CVenta { get; set; }
+        public Orden COrden { get; set; }
+        public Empleado CEmpleado { get; set; }
         public int QOrdenProducto { get; set; }
     }
 }

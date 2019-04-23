@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using Entity;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Data.Implementation
 {
@@ -29,14 +33,20 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            var orden = new Orden_ProductoPerzonalizado();
+                            var orden_p_p = new Orden_ProductoPerzonalizado();
+                            var orden = new Orden();
+                            var venta = new Venta();
+                            var empleado = new Empleado();
+                            var ingrediente = new Ingrediente();
 
+                            orden_p_p.COrden = orden;
+                            orden_p_p.CVenta = venta;
+                            orden_p_p.CEmpleado = empleado;
+                            orden_p_p.CIngrediente = ingrediente;
+                            orden_p_p.QOrdenProductoPerzonalizado = Convert.ToInt32(dr["QOrdenProductoPerzonalizado"]);
+                            orden_p_p.NUnidadMedidaUsada = Convert.ToString(dr["NUnidadMedidaUsada"]);
 
-                            orden.CVenta = Convert.ToInt32(dr["CVenta"]);
-                            orden.COrden = Convert.ToInt32(dr["COrden"]);
-                            orden.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
-
-                            ordenes.Add(orden);
+                            ordenes.Add(orden_p_p);
                         }
                     }
                     con.Close();
@@ -51,7 +61,7 @@ namespace Data.Implementation
 
         public Orden_ProductoPerzonalizado FindById(int? id, int id2)
         {
-            Orden_ProductoPerzonalizado orden = null;
+            Orden_ProductoPerzonalizado orden_p_p = null;
 
             try
             {
@@ -63,14 +73,18 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            orden = new Orden_ProductoPerzonalizado();
+                            
+                            var orden = new Orden();
+                            var venta = new Venta();
+                            var empleado = new Empleado();
+                            var ingrediente = new Ingrediente();
 
-
-                            orden.CVenta = Convert.ToInt32(dr["CVenta"]);
-                            orden.COrden = Convert.ToInt32(dr["COrden"]);
-                            orden.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
-
-                            return orden;
+                            orden_p_p.COrden = orden;
+                            orden_p_p.CVenta = venta;
+                            orden_p_p.CEmpleado = empleado;
+                            orden_p_p.CIngrediente = ingrediente;
+                            orden_p_p.QOrdenProductoPerzonalizado = Convert.ToInt32(dr["QOrdenProductoPerzonalizado"]);
+                            orden_p_p.NUnidadMedidaUsada = Convert.ToString(dr["NUnidadMedidaUsada"]);
 
                         }
                     }
@@ -82,9 +96,24 @@ namespace Data.Implementation
                 throw;
             }
 
-            return orden;
+            return orden_p_p;
         }
-                                                                                    
+
+        public Orden_ProductoPerzonalizado FindById(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Orden_ProductoPerzonalizado FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Orden_ProductoPerzonalizado FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(Orden_ProductoPerzonalizado t)
         {
             bool rpta = false;

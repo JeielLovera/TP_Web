@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entity;
 
-namespace Business
+namespace Entity
 {
-    public interface IOrden_ProductoPerzonalizadoService:ICrudService<Orden_ProductoPerzonalizado>
+     public class Distrito
     {
-
+      public int CDistrito { get; set; }
+      public string NDistrito { get; set; }
     }
 }

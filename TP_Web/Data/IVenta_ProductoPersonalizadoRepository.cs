@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity;
 
-namespace Business
+namespace Data
 {
-    public interface IOrden_ProductoPerzonalizadoService:ICrudService<Orden_ProductoPerzonalizado>
+    public interface IVenta_ProductoPersonalizadoRepository : ICrudRepository<Venta_ProductoPersonalizado>
     {
-
     }
 }

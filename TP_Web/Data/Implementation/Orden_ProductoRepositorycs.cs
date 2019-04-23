@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using Entity;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Data.Implementation
 {
@@ -29,15 +33,20 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            var orden = new Order_Producto();
+                            var orden_producto = new Order_Producto();
 
+                            var orden = new Orden();
+                            var producto = new Producto();
+                            var empleado = new Empleado();
+                            var venta = new Venta();
 
-                            orden.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            orden.COrden = Convert.ToInt32(dr["COrden"]);
-                            orden.CProducto = Convert.ToInt32(dr["CProducto"]);
-                            orden.CVenta = Convert.ToInt32(dr["CVenta"]);
+                            orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
+                            orden_producto.CEmpleado = empleado;
+                            orden_producto.COrden = orden;
+                            orden_producto.CVenta = venta;
+                            orden_producto.CProducto = producto;
 
-                            ordenes.Add(orden);
+                            ordenes.Add(orden_producto);
                         }
                     }
                     con.Close();
@@ -52,7 +61,7 @@ namespace Data.Implementation
 
         public Order_Producto FindById(int? id, int id2)
         {
-            Order_Producto orden = null;
+            Order_Producto orden_producto = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
@@ -63,12 +72,16 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            orden = new Order_Producto();
-                           
-                            orden.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            orden.COrden = Convert.ToInt32(dr["COrden"]);
-                            orden.CProducto = Convert.ToInt32(dr["CProducto"]);
-                            orden.CVenta = Convert.ToInt32(dr["CVenta"]);
+                            var orden = new Orden();
+                            var producto = new Producto();
+                            var empleado = new Empleado();
+                            var venta = new Venta();
+
+                            orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
+                            orden_producto.CEmpleado = empleado;
+                            orden_producto.COrden = orden;
+                            orden_producto.CVenta = venta;
+                            orden_producto.CProducto = producto;
 
                         }
                     }
@@ -80,7 +93,22 @@ namespace Data.Implementation
             {
                 throw;
             }
-            return orden;
+            return orden_producto;
+        }
+
+        public Order_Producto FindById(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order_Producto FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order_Producto FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Order_Producto t)

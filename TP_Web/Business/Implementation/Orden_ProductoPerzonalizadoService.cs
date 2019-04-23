@@ -4,12 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity;
+using Data;
+using Data.Implementation;
 
 namespace Business.Implementation
 {
     public class Orden_ProductoPerzonalizadoService : IOrden_ProductoPerzonalizadoService
     {
-        private IOrden_ProductoPerzonalizadoService orden = new Orden_ProductoPerzonalizadoService();
+        private IOrden_ProductoPerzonalizadoRepository orden_per = new Orden_ProductoPerzonalizadoRepository();
+        private IVentaRepository ventaRepository = new VentaRepository();
+        private IOrdenRepository ordenRepository = new OrdenRepository();
+        private IEmpleadoRepository empleadoRepository = new EmpleadoRepository();
+        private IIngredienteRepository ingredienteRepository = new IngredienteRepository();
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -17,22 +24,43 @@ namespace Business.Implementation
 
         public List<Orden_ProductoPerzonalizado> FindAll()
         {
-            return orden.FindAll();
+           return orden_per.FindAll();
         }
 
-        public Orden_ProductoPerzonalizado FindById(int? id, int id2)
+        public Orden_ProductoPerzonalizado FindById(int? id)
         {
-            return orden.FindById(id,id2);
+            return orden_per.FindById(id);
+        }
+
+        public Orden_ProductoPerzonalizado FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Orden_ProductoPerzonalizado FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(Orden_ProductoPerzonalizado t)
         {
-            return orden.Insert(t);
+            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
+            Orden orden = ordenRepository.FindById(t.COrden.COrden);
+            Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
+            Ingrediente ingrediente = ingredienteRepository.FindById(t.CIngrediente.CIngrediente);
+
+            t.CVenta = venta;
+            t.COrden = orden;
+            t.CEmpleado = empleado;
+            t.CIngrediente = ingrediente;
+
+
+           return  orden_per.Insert(t);
         }
 
         public bool Update(Orden_ProductoPerzonalizado t)
         {
-            return orden.Update(t);
+            throw new NotImplementedException();
         }
     }
 }
