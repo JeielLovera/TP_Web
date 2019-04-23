@@ -41,7 +41,7 @@ namespace Data.Implementation
                             planilla.DFechaHRol = Convert.ToDateTime(dr["Fecha"]);
                             rol.NRol= (dr["Rol"]).ToString();
                             planilla.CRol = rol;
-                            planilla.MSueldo = Convert.ToSingle(dr["Msueldo"]);
+                            planilla.MSueldo = Convert.ToDouble(dr["Msueldo"]);
 
                             planillas.Add(planilla);
                         }
@@ -86,7 +86,7 @@ namespace Data.Implementation
                             planilla.DFechaHRol = Convert.ToDateTime(dr["Fecha"]);
                             rol.NRol = (dr["Rol"]).ToString();
                             planilla.CRol = rol;
-                            planilla.MSueldo = Convert.ToSingle(dr["Msueldo"]);
+                            planilla.MSueldo = Convert.ToDouble(dr["Msueldo"]);
                         }
                     }
                     con.Close();

@@ -28,7 +28,15 @@ namespace Business.Implementation
         {
             return planillarepo.FindById(id);
         }
+        public Planilla FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Planilla FindById(int? id, int? id2, int? id3)
+        {
+            throw new NotImplementedException();
+        }
         public bool Insert(Planilla t)
         {
             Empleado empleado = empleadorepo.FindById(t.CEmpleado.CEmpleado);
@@ -48,5 +56,7 @@ namespace Business.Implementation
             t.CRol = rol;
             return planillarepo.Update(t);
         }
+
+       
     }
 }

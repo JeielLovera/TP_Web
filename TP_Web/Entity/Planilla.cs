@@ -11,6 +11,6 @@ namespace Entity
         public Empleado CEmpleado { get; set; }
         public DateTime DFechaHRol { get; set; }
         public Rol CRol { get; set; }
-        public float MSueldo { get; set; }
+        public double MSueldo { get; set; }
     }
 }

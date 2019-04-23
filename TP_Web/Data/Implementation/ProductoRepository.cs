@@ -37,7 +37,7 @@ namespace Data.Implementation
 
                             producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             producto.NProducto = dr["NProducto"].ToString();
-                            producto.MPrecio = Convert.ToSingle(dr["MPrecio"]);
+                            producto.MPrecio = Convert.ToDouble(dr["MPrecio"]);
 
                             tipo.NTipoProducto = dr["NTipoProducto"].ToString();
 
@@ -76,7 +76,7 @@ namespace Data.Implementation
 
                             producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             producto.NProducto = dr["NProducto"].ToString();
-                            producto.MPrecio = Convert.ToSingle(dr["MPrecio"]);
+                            producto.MPrecio = Convert.ToDouble(dr["MPrecio"]);
                             tp.NTipoProducto = dr["NTipoProducto"].ToString();
 
                             producto.CTipoProducto = tp;

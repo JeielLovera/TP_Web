@@ -61,7 +61,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select ig.CIngrediente, ig.NIngrediente, ig.QUnidadMedidaIngrediente, ig.NUnidadMedidaIngrediente, tp.NTipoIngrediente as TipoIngrediente from Ingrediente ig, TipoIngrediente tp where ig.CSubTipoIngrediente=tp.CTipoIngrediente and ig.CIngrediente='"+id+"'", con);
+                    var cmd = new SqlCommand("select ig.CIngrediente, ig.NIngrediente, ig.QUnidadMedidaIngrediente, ig.NUnidadMedidaIngrediente, tp.NTipoIngrediente as TipoIngrediente from Ingrediente ig, TipoIngrediente tp where ig.CTipoIngrediente=tp.CTipoIngrediente and ig.CIngrediente='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         ingrediente = new Ingrediente();
@@ -130,6 +130,7 @@ namespace Data.Implementation
                     con.Open();
                     var cmd = new SqlCommand("update Ingrediente set NIngrediente=@nombre, QUnidadMedidaIngrediente=@qunidadmedida, NUnidadMedidaIngrediente=@nunidadmedida, CTipoIngrediente=@ctipo where CIngrediente=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CIngrediente);
+					cmd.Parameters.AddWithValue("@nombre", t.NIngrediente);
                     cmd.Parameters.AddWithValue("@qunidadmedida", t.QUnidadMedidaIngrediente);
                     cmd.Parameters.AddWithValue("@nunidadmedida", t.NUnidadMedidaIngrediente);
                     cmd.Parameters.AddWithValue("@ctipo", t.CTipoIngrediente.CTipoIngrediente);
