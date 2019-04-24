@@ -52,7 +52,12 @@ namespace Business.Implementation
 
         public bool Update(Venta_ProductoPersonalizado t)
         {
-            throw new NotImplementedException();
+            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
+            Ingrediente ingrediente = ingredienteRepository.FindById(t.CIngrediente.CIngrediente);
+            t.CVenta = venta;
+            t.CIngrediente = ingrediente;
+
+            return venta_pro_repo.Update(t);
         }
     }
 }
