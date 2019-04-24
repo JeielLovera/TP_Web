@@ -12,6 +12,8 @@ namespace Business.Implementation
     public class EmpleadoService : IEmpleadoService
     {
         IEmpleadoRepository empleadorepo = new EmpleadoRepository();
+        IRolRepository rolReposotory = new RolRepository();
+        IEmpleadoRepository jefeRepository = new EmpleadoRepository();
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -39,11 +41,19 @@ namespace Business.Implementation
 
         public bool Insert(Empleado t)
         {
+            Empleado jefe = jefeRepository.FindById(t.CJefe.CEmpleado);
+            t.CJefe = jefe;
+            Rol rol = rolReposotory.FindById(t.CRol.CRol);
+            t.CRol = rol;
             return empleadorepo.Insert(t);
         }
 
         public bool Update(Empleado t)
         {
+            Empleado jefe = jefeRepository.FindById(t.CJefe.CEmpleado);
+            t.CJefe = jefe;
+            Rol rol = rolReposotory.FindById(t.CRol.CRol);
+            t.CRol = rol;
             return empleadorepo.Update(t);
         }
     }
