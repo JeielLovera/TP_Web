@@ -44,7 +44,7 @@ namespace Business.Implementation
 
         public bool Update(Distrito t)
         {
-            throw new NotImplementedException();
+            return distrito.Update(t);
         }
     }
 }
