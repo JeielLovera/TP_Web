@@ -37,6 +37,7 @@ namespace Data.Implementation
                             cliente.CCliente = Convert.ToInt32(dr["CCliente"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
                             cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
+                            direccion.CDireccion = Convert.ToInt32(dr["CDireccion"]);
                             cliente.CDireccion = direccion;
 
                             clientes.Add(cliente);
@@ -72,6 +73,7 @@ namespace Data.Implementation
                             cliente.CCliente = Convert.ToInt32(dr["CCliente"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
                             cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
+                            direccion.CDireccion = Convert.ToInt32(dr["CDireccion"]);
                             cliente.CDireccion = direccion;
                         }
                     }
@@ -109,7 +111,7 @@ namespace Data.Implementation
 
                     cmd.Parameters.AddWithValue("@NCliente", t.NCliente);
                     cmd.Parameters.AddWithValue("@NumTelefonoCliente", t.NumTelefonoCliente);
-                    cmd.Parameters.AddWithValue("@CDireccion", t.CDireccion);
+                    cmd.Parameters.AddWithValue("@CDireccion", t.CDireccion.CDireccion);
 
                     cmd.ExecuteNonQuery();
 

@@ -14,6 +14,7 @@ namespace Business.Implementation
         private IDireccionRepository calle_rep = new DireccionRepository();
         private IDistritoRepository distritoRepository = new DistritoRepository();
         private ITipo_DireccionRepository tipo_DireccionRepository = new Tipo_DireccionRepository();
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -52,7 +53,13 @@ namespace Business.Implementation
 
         public bool Update(Direccion t)
         {
-            throw new NotImplementedException();
+            Distrito distrito = distritoRepository.FindById(t.CDistrito.CDistrito);
+            Tipo_Direccion tipo = tipo_DireccionRepository.FindById(t.CTipoDireccion.CTipo);
+
+            t.CDistrito = distrito;
+            t.CTipoDireccion = tipo;
+
+            return calle_rep.Update(t);
         }
     }
 }

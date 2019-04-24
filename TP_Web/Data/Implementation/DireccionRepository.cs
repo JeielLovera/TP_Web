@@ -37,7 +37,9 @@ namespace Data.Implementation
 
                             detalle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
                             detalle.NDireccion = Convert.ToString(dr["NDireccion"]);
+                            distrito.CDistrito = Convert.ToInt32(dr["CDistrito"]);
                             detalle.CDistrito = distrito;
+                            tipo.CTipo = Convert.ToInt32(dr["CTipo"]);
                             detalle.CTipoDireccion = tipo;
 
                             details.Add(detalle);
@@ -63,19 +65,21 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Direccion where ='" + id +"'", con);
+                    var cmd = new SqlCommand("select * from Direccion where CDireccion='" + id +"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                            var detalle = new Direccion();
+                            calle = new Direccion();
                             var distrito = new Distrito();
                             var tipo = new Tipo_Direccion();
 
-                            detalle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
-                            detalle.NDireccion = Convert.ToString(dr["NDireccion"]);
-                            detalle.CDistrito = distrito;
-                            detalle.CTipoDireccion = tipo;
+                            calle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
+                            calle.NDireccion = Convert.ToString(dr["NDireccion"]);
+                            distrito.CDistrito = Convert.ToInt32(dr["CDistrito"]);
+                            calle.CDistrito = distrito;
+                            tipo.CTipo = Convert.ToInt32(dr["CTipo"]);
+                            calle.CTipoDireccion = tipo;
 
                         }
                     }
@@ -109,12 +113,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Direccion values(@NDireccion,@CDistrito,@CTipoDireccion)", con);
+                    var cmd = new SqlCommand("insert into Direccion values(@cdireccion,@cdistrito,@ctipo)", con);
 
                     
-                    cmd.Parameters.AddWithValue("@NDireccion", t.NDireccion);
-                    cmd.Parameters.AddWithValue("@CDistrito", t.CDistrito);
-                    cmd.Parameters.AddWithValue("@CTipoDireccion", t.CTipoDireccion);
+                    cmd.Parameters.AddWithValue("@cdireccion", t.NDireccion);
+                    cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);
+                    cmd.Parameters.AddWithValue("@ctipo", t.CTipoDireccion.CTipo);
 
                     cmd.ExecuteNonQuery();
 
@@ -133,7 +137,33 @@ namespace Data.Implementation
 
         public bool Update(Direccion t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("update Direccion set NDireccion=@ndireccion , CDistrito=@cdistrito, CTipoDireccion=@ctipo where CDireccion=@cdireccion", con);
+
+                    cmd.Parameters.AddWithValue("@cdireccion", t.CDireccion);
+                    cmd.Parameters.AddWithValue("@ndireccion", t.NDireccion);
+                    cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);
+                    cmd.Parameters.AddWithValue("@ctipo", t.CTipoDireccion.CTipo);
+
+                    cmd.ExecuteNonQuery();
+
+                    rpta = true;
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return rpta;
         }
     }
 }
