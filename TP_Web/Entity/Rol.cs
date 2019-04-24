@@ -10,5 +10,6 @@ namespace Entity
     {
         public int CRol { get; set; }
         public String NRol { get; set; }
+        public double MSueldo { get; set; }
     }
 }
