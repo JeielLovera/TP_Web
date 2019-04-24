@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Entity.Ingrediente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CIngrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NIngrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QUnidadMedidaIngrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NUnidadMedidaIngrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.CTipoIngrediente.NTipoIngrediente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CIngrediente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIngrediente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QUnidadMedidaIngrediente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUnidadMedidaIngrediente)
+        </td>
+        <th>
+            @Html.DisplayFor(modelItem=>item.CTipoIngrediente.NTipoIngrediente)
+        </th>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.CIngrediente  }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.CIngrediente }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.CIngrediente })
+        </td>
+    </tr>
+}
+
+</table>
