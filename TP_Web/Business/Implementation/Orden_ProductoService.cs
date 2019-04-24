@@ -33,12 +33,12 @@ namespace Business.Implementation
 
         public Orden_Producto FindById(int? id, int? id2)
         {
-            return orden_pro.FindById(id,id2);
+            throw new NotImplementedException();
         }
 
         public Orden_Producto FindById(int? id, int? id2, int? id3)
         {
-            throw new NotImplementedException();
+            return orden_pro.FindById(id, id2, id3);
         }
 
         public bool Insert(Orden_Producto t)
@@ -58,7 +58,17 @@ namespace Business.Implementation
 
         public bool Update(Orden_Producto t)
         {
-            throw new NotImplementedException();
+            Producto producto = prodctRepository.FindById(t.CProducto.CProducto);
+            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
+            Orden orden = ordenRepository.FindById(t.COrden.COrden);
+            Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
+
+            t.CProducto = producto;
+            t.CVenta = venta;
+            t.COrden = orden;
+            t.CEmpleado = empleado;
+
+            return orden_pro.Update(t);
         }
     }
 }
