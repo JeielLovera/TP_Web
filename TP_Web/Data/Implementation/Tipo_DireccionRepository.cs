@@ -26,14 +26,14 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Tipo_Direccion", con);
+                    var cmd = new SqlCommand("select * from TipoDireccion", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             var direccion = new Tipo_Direccion();
-                            direccion.CTipo = Convert.ToInt32(dr["CTipo"]);
-                            direccion.NTipo = Convert.ToString(dr["NTipo"]);
+                            direccion.CTipo = Convert.ToInt32(dr["CTipoDireccion"]);
+                            direccion.NTipo = Convert.ToString(dr["NTipoDireccion"]);
 
                             direcciones.Add(direccion);
                         }
@@ -95,7 +95,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Tipo_Direccion values(@NTipo)", con);
+                    var cmd = new SqlCommand("insert into TipoDireccion values(@NTipo)", con);
 
                     cmd.Parameters.AddWithValue("@NTipo", t.NTipo);
                     cmd.ExecuteNonQuery();
@@ -119,7 +119,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Tipo_Direccion set NTipo=@NTipo where CTipo = @CTipo", con);
+                    var cmd = new SqlCommand("update TipoDireccion set NTipo=@NTipo where CTipo = @CTipo", con);
 
                     cmd.Parameters.AddWithValue("@CTipo", t.CTipo);
                     cmd.Parameters.AddWithValue("@NTipo", t.NTipo);
