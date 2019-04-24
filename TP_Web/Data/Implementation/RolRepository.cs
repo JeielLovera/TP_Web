@@ -34,7 +34,7 @@ namespace Data.Implementation
                             var rol = new Rol();
                             rol.CRol = Convert.ToInt32(dr["CRol"]);
                             rol.NRol = dr["NRol"].ToString();
-
+                            rol.MSueldo = Convert.ToDouble(dr["MSueldo"]);
                             Roles.Add(rol);
 
                         }
@@ -65,6 +65,7 @@ namespace Data.Implementation
                             rol = new Rol();
                             rol.CRol = Convert.ToInt32(dr["CRol"]);
                             rol.NRol = dr["NRol"].ToString();
+                            rol.MSueldo = Convert.ToDouble(dr["MSueldo"]);
                         }
                     }
                     con.Close();
@@ -94,10 +95,10 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Rol values (@cRol, @nRol)", con);
+                    var cmd = new SqlCommand("insert into Rol values (@nRol, @MSueldo)", con);
                    
                     cmd.Parameters.AddWithValue("@nRol", t.NRol);
-
+                    cmd.Parameters.AddWithValue("@MSueldo", t.MSueldo);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                 }
@@ -116,11 +117,11 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BS_Piazza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Rol set NRol=@nRol where CRol=@cRol", con);
+                    var cmd = new SqlCommand("update Rol set NRol=@nRol, MSueldo=@MSueldo where CRol=@cRol", con);
 
                     cmd.Parameters.AddWithValue("@cRol", t.CRol);
                     cmd.Parameters.AddWithValue("@nRol", t.NRol);
-
+                    cmd.Parameters.AddWithValue("@MSueldo", t.MSueldo);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                 }
