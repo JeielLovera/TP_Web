@@ -32,13 +32,19 @@ namespace Data.Implementation
                         while (dr.Read())
                         {
                             var empleado = new Empleado();
+                            var jefe = new Empleado();
+                            var rol = new Rol();
                             empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
                             empleado.NEmpleado = dr["NEmpleado"].ToString();
                             empleado.CDniEmpleado = Convert.ToInt32(dr["CDniEmpleado"]);
                             empleado.TDireccionEmpleado = dr["TDireccionEmpleado"].ToString();
-                            empleado.NumTelefonoEmpleado= Convert.ToInt32(dr["NumTelefonoEmpleado"]);
+                            empleado.NumTelefonoEmpleado = Convert.ToInt32(dr["NumTelefonoEmpleado"]);
                             empleado.FActivo = Convert.ToBoolean(dr["FActivo"]);
-
+                            rol.CRol = Convert.ToInt32(dr["CRol"]);
+                            empleado.CRol = rol;
+                            jefe.CDniEmpleado = Convert.ToInt32(dr["CJefe"]);
+                            empleado.CJefe = jefe;
+                            
                             empleados.Add(empleado);
                         }
                     }
@@ -53,8 +59,7 @@ namespace Data.Implementation
         public Empleado FindById(int? id)
         {
             Empleado empleado = null;
-
-
+            
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
@@ -66,12 +71,18 @@ namespace Data.Implementation
                         while(dr.Read())
                         {
                             var emp = new Empleado();
+                            var rol = new Rol();
+                            var jefe = new Empleado();
                             emp.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
                             emp.NEmpleado = dr["NEmpleado"].ToString();
                             emp.CDniEmpleado = Convert.ToInt32(dr["CDniEmpleado"]);
                             emp.TDireccionEmpleado = dr["TDireccionEmpleado"].ToString();
                             emp.NumTelefonoEmpleado = Convert.ToInt32(dr["NumTelefonoEmpleado"]);
                             emp.FActivo = Convert.ToBoolean(dr["FActivo"]);
+                            rol.CRol = Convert.ToInt32(dr["CRol"]);
+                            empleado.CRol = rol;
+                            jefe.CDniEmpleado = Convert.ToInt32(dr["CJefe"]);
+                            empleado.CJefe = jefe;
                         }
                     }
                     con.Close();
@@ -104,15 +115,18 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Empleado values(@NEmpleado,@CDniEmpleado,@TDireccionEmpleado,@NumTelefonoEmpleado, @FActivo )", con);
+                    var cmd = new SqlCommand("insert into Empleado values(@NEmpleado,@CDniEmpleado,@TDireccionEmpleado,@NumTelefonoEmpleado, @FActivo,@CRol, @CJefe)", con);
 
                     cmd.Parameters.AddWithValue("@NEmpleado", t.NEmpleado);
                     cmd.Parameters.AddWithValue("@CDniEmpleado", t.CDniEmpleado);
                     cmd.Parameters.AddWithValue("@TDireccionEmpleado", t.TDireccionEmpleado);
                     cmd.Parameters.AddWithValue("@NumTelefonoEmpleado", t.NumTelefonoEmpleado);
                     cmd.Parameters.AddWithValue("@FActivo", t.FActivo);
+                    cmd.Parameters.AddWithValue("@CRol", t.CRol.CRol);
+                    cmd.Parameters.AddWithValue("@CJefe", t.CJefe.CEmpleado);
 
                     cmd.ExecuteNonQuery();
+                    con.Close();
                     rpta = true;
                 }
             }
@@ -131,15 +145,18 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Empleado set @NEmpleado,@CDniEmpleado,@TDireccionEmpleado,@NumTelefonoEmpleado, @FActivo where CEmpleado=@CEmpleado", con);
+                    var cmd = new SqlCommand("update Empleado set @NEmpleado,@CDniEmpleado,@TDireccionEmpleado,@NumTelefonoEmpleado, @FActivo,@CRol, @CJefe where CEmpleado=@CEmpleado", con);
 
                     cmd.Parameters.AddWithValue("@NEmpleado", t.NEmpleado);
                     cmd.Parameters.AddWithValue("@CDniEmpleado", t.CDniEmpleado);
                     cmd.Parameters.AddWithValue("@TDireccionEmpleado", t.TDireccionEmpleado);
                     cmd.Parameters.AddWithValue("@NumTelefonoEmpleado", t.NumTelefonoEmpleado);
                     cmd.Parameters.AddWithValue("@FActivo", t.FActivo);
+                    cmd.Parameters.AddWithValue("@CRol", t.CRol.CRol);
+                    cmd.Parameters.AddWithValue("@CJefe", t.CJefe.CEmpleado);
 
                     cmd.ExecuteNonQuery();
+                    con.Close();
                     rpta = true;
                 }
             }
