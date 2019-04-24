@@ -47,7 +47,9 @@ namespace Business.Implementation
 
         public bool Update(Cliente t)
         {
-            throw new NotImplementedException();
+            Direccion direccion = direccionRepository.FindById(t.CDireccion.CDireccion);
+            t.CDireccion = direccion;
+            return clienteRepository.Update(t);
         }
     }
 }

@@ -12,9 +12,10 @@ namespace Business.Implementation
     public class VentaService : IVentaService
     {
         private IVentaRepository ventaRepository = new VentaRepository();
-        private IMesaRepository mesaRepository = new MesaRepository();
         private ILocalRepository localRepository = new LocalRepository();
         private IEmpleadoRepository empleadoRepository = new EmpleadoRepository();
+        private IClienteRepository clienteRepository = new ClienteRepository();
+        private IDireccionRepository direccionRepository = new DireccionRepository();
 
         public bool Delete(int id)
         {
@@ -33,23 +34,27 @@ namespace Business.Implementation
 
         public bool Insert(Venta t)
         {
-            Local local = localRepository.FindById(t.CMesa.CLocal.CLocal);
-            Mesa mesa = mesaRepository.FindById(t.CMesa.CMesa);
-            Empleado mozo = empleadoRepository.FindById(t.CMozo.CEmpleado);
+            Local local = localRepository.FindById(t.CLocal.CLocal);            
+            Empleado motorizado = empleadoRepository.FindById(t.CMotorizado.CEmpleado);
+            Cliente cliente = clienteRepository.FindById(t.CCliente.CCliente);
+            Direccion direccion = direccionRepository.FindById(t.CCliente.CDireccion.CDireccion);
             t.CLocal = local;
-            t.CMesa = mesa;
-            t.CMozo = mozo;
+            t.CMotorizado = motorizado;
+            t.CCliente = cliente;
+            t.CCliente.CDireccion = direccion;
             return ventaRepository.Insert(t);
         }
 
         public bool Update(Venta t)
         {
-            Local local = localRepository.FindById(t.CMesa.CLocal.CLocal);
-            Mesa mesa = mesaRepository.FindById(t.CMesa.CMesa);
-            Empleado mozo = empleadoRepository.FindById(t.CMozo.CEmpleado);
+            Local local = localRepository.FindById(t.CLocal.CLocal);
+            Empleado motorizado = empleadoRepository.FindById(t.CMotorizado.CEmpleado);
+            Cliente cliente = clienteRepository.FindById(t.CCliente.CCliente);
+            Direccion direccion = direccionRepository.FindById(t.CCliente.CDireccion.CDireccion);
             t.CLocal = local;
-            t.CMesa = mesa;
-            t.CMozo = mozo;
+            t.CMotorizado = motorizado;
+            t.CCliente = cliente;
+            t.CCliente.CDireccion = direccion;
             return ventaRepository.Update(t);
         }
 

@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace Data.Implementation
 {
-    public class Orden_ProductoRepositorycs : IOrden_ProductoRepository
+    public class Orden_ProductoRepository : IOrden_ProductoRepository
     {
         public bool Delete(int id)
         {
@@ -121,10 +121,10 @@ namespace Data.Implementation
                 {
                     con.Open();
                     var cmd = new SqlCommand("insert into Producto values (@CProducto, @CVenta,@COrden,@CEmpleado,@QOrdenProducto)", con);
-                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden);
-                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado);
+                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
+                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@QOrdenProducto", t.QOrdenProducto);
 
                     cmd.ExecuteNonQuery();
@@ -148,11 +148,11 @@ namespace Data.Implementation
                 {
                     con.Open();
 
-                    var cmd = new SqlCommand("update Producto set CEmpleado=@CEmpleado,CVenta=@CVenta, COrden=@COrden, QOrdenProducto =@QOrdenProducto where CProducto=@CProducto", con);
-                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden);
-                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado);
+                    var cmd = new SqlCommand("update Producto set CEmpleado=@CEmpleado, QOrdenProducto =@QOrdenProducto where CProducto=@CProducto, CVenta=@CVenta, COrden=@COrden", con);
+                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
+                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@QOrdenProducto", t.QOrdenProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;

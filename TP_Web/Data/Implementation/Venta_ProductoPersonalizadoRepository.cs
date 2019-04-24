@@ -104,8 +104,8 @@ namespace Data.Implementation
                 {
                     con.Open();
                     var cmd = new SqlCommand("insert into Venta_ProductoPersonalizado values (@CVenta,@CIngrediente,@QUsadaIngrediente,@PrecioXGramo) ", con);
-                    cmd.Parameters.AddWithValue("@CVenta",t.CVenta);
-                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
                     cmd.Parameters.AddWithValue("@QUsadaIngrediente", t.QUsadaIngrediente);
                     cmd.Parameters.AddWithValue("@PrecioXGramo", t.PrecioXGramo);
                     cmd.ExecuteNonQuery();

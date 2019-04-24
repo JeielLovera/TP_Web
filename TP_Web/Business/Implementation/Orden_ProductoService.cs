@@ -10,7 +10,7 @@ namespace Business.Implementation
 {
     public class Orden_ProductoService : IOrden_ProductoService
     {
-        private IOrden_ProductoRepository orden_pro = new Orden_ProductoRepositorycs();
+        private IOrden_ProductoRepository orden_pro = new Orden_ProductoRepository();
         private IProductoRepository prodctRepository = new ProductoRepository();
         private IVentaRepository ventaRepository = new VentaRepository();
         private IOrdenRepository ordenRepository = new OrdenRepository();

@@ -9,7 +9,7 @@ namespace Entity
 {
     public class Cliente
     {
-        public string CCLiente { get; set; }
+        public int CCliente { get; set; }
         public string NCliente { get; set; }
         public int NumTelefonoCliente { get; set; }
         public Direccion CDireccion { get; set; }

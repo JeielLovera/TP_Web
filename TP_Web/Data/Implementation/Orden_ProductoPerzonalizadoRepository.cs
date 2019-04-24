@@ -27,7 +27,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select opp.CVenta, opp.COrden, opp.CIngrediente, FROM  Orden_Producto op, Orden_ProductoPerzonalizado opp where op.COrden = opp.COrden", con);
+                    var cmd = new SqlCommand("select opp.CVenta, opp.COrden, opp.CIngrediente, ig.NIngrediente, FROM  Orden_ProductoPerzonalizado opp, Ingrediente ig where opp.CIngrediente=ig.CIngrediente", con);
 
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -39,7 +39,11 @@ namespace Data.Implementation
                             var empleado = new Empleado();
                             var ingrediente = new Ingrediente();
 
+                            orden.COrden = Convert.ToInt32(dr["COrden"]);
                             orden_p_p.COrden = orden;
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
+                            orden_p_p.CIngrediente = ingrediente;
+
                             orden_p_p.CVenta = venta;
                             orden_p_p.CEmpleado = empleado;
                             orden_p_p.CIngrediente = ingrediente;

@@ -34,7 +34,7 @@ namespace Data.Implementation
                             var cliente = new Cliente();
                             var direccion = new Direccion();
 
-                            cliente.CCLiente = Convert.ToString(dr["CCliente"]);
+                            cliente.CCliente = Convert.ToInt32(dr["CCliente"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
                             cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
                             cliente.CDireccion = direccion;
@@ -69,7 +69,7 @@ namespace Data.Implementation
                         {
                             var direccion = new Direccion();
 
-                            cliente.CCLiente = Convert.ToString(dr["CCliente"]);
+                            cliente.CCliente = Convert.ToInt32(dr["CCliente"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
                             cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
                             cliente.CDireccion = direccion;
@@ -96,7 +96,7 @@ namespace Data.Implementation
             throw new NotImplementedException();
         }
 
-        public bool Insert(Entity.Cliente t)
+        public bool Insert(Cliente t)
         {
             bool rpta = false;
             try
@@ -124,9 +124,32 @@ namespace Data.Implementation
             return rpta;
         }
 
-        public bool Update(Entity.Cliente t)
+        public bool Update(Cliente t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("update Cliente set NCliente=@ncliente, NumTelefonoCliente=@telefono, CDireccion=@direccion where CCliente=@ccliente", con);
+
+                    cmd.Parameters.AddWithValue("@ccliente", t.CCliente);
+                    cmd.Parameters.AddWithValue("@ncliente", t.NCliente);
+                    cmd.Parameters.AddWithValue("@telefono", t.NumTelefonoCliente);
+                    cmd.Parameters.AddWithValue("@direccion", t.CDireccion.CDireccion);
+
+                    cmd.ExecuteNonQuery();
+
+                    rpta = true;
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
     }
 }
