@@ -18,34 +18,36 @@ namespace Data.Implementation
             throw new NotImplementedException();
         }
 
-        public List<Order_Producto> FindAll()
+        public List<Orden_Producto> FindAll()
         {
-            var ordenes = new List<Order_Producto>();
+            var ordenes = new List<Orden_Producto>();
 
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select op.COrden, p.CProducto,p.NProducto,p.MPrecioFROM  Orden_Producto op, Producto p where op.CProducto = p.CProducto", con);
+                    var cmd = new SqlCommand("select * from Orden_Producto", con);
 
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                            var orden_producto = new Order_Producto();
-
+                            var orden_producto = new Orden_Producto();
                             var orden = new Orden();
                             var producto = new Producto();
                             var empleado = new Empleado();
                             var venta = new Venta();
 
                             orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
+                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
                             orden_producto.CEmpleado = empleado;
+                            orden.COrden = Convert.ToInt32(dr["COrden"]);
                             orden_producto.COrden = orden;
+                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_producto.CVenta = venta;
+                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             orden_producto.CProducto = producto;
-
                             ordenes.Add(orden_producto);
                         }
                     }
@@ -59,28 +61,40 @@ namespace Data.Implementation
             return ordenes;
         }
 
-        public Order_Producto FindById(int? id, int id2)
+
+        public Orden_Producto FindById(int? id)
         {
-            Order_Producto orden_producto = null;
+            throw new NotImplementedException();
+        }
+
+
+        public Orden_Producto FindById(int? id, int? id2, int? id3)
+        {
+            Orden_Producto orden_producto = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select op.CEmpleado, op.COrden, op.CProducto, op.CVenta from Orden_Producto op where op.COrden='" + id + "' op.CVenta='" + id2 + "'", con);
+                    var cmd = new SqlCommand("select * from Orden_Producto where COrden='" + id + "' and CVenta='" + id2 + "' and CIngrediente='" + id3 + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
+                            orden_producto = new Orden_Producto();
                             var orden = new Orden();
                             var producto = new Producto();
                             var empleado = new Empleado();
                             var venta = new Venta();
 
                             orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
+                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
                             orden_producto.CEmpleado = empleado;
+                            orden.COrden = Convert.ToInt32(dr["COrden"]);
                             orden_producto.COrden = orden;
+                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_producto.CVenta = venta;
+                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             orden_producto.CProducto = producto;
 
                         }
@@ -96,22 +110,7 @@ namespace Data.Implementation
             return orden_producto;
         }
 
-        public Order_Producto FindById(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order_Producto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order_Producto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Insert(Order_Producto t)
+        public bool Insert(Orden_Producto t)
         {
             bool rpta = false;
 
@@ -138,7 +137,7 @@ namespace Data.Implementation
             return rpta;
         }
 
-        public bool Update(Order_Producto t)
+        public bool Update(Orden_Producto t)
         {
             bool rpta = false;
 
@@ -148,7 +147,7 @@ namespace Data.Implementation
                 {
                     con.Open();
 
-                    var cmd = new SqlCommand("update Producto set CEmpleado=@CEmpleado, QOrdenProducto =@QOrdenProducto where CProducto=@CProducto, CVenta=@CVenta, COrden=@COrden", con);
+                    var cmd = new SqlCommand("update Orden_Producto set CEmpleado=@CEmpleado, QOrdenProducto = @QOrdenProducto where CProducto=@CProducto and CVenta=@CVenta and COrden=@COrden", con);
                     cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);
                     cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
                     cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
@@ -161,6 +160,11 @@ namespace Data.Implementation
             catch (Exception)
             { throw; }
             return rpta;
+        }
+
+        public Orden_Producto FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

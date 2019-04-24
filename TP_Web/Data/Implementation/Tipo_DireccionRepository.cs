@@ -113,7 +113,27 @@ namespace Data.Implementation
 
         public bool Update(Entity.Tipo_Direccion t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("update Tipo_Direccion set NTipo=@NTipo where CTipo = @CTipo", con);
+
+                    cmd.Parameters.AddWithValue("@CTipo", t.CTipo);
+                    cmd.Parameters.AddWithValue("@NTipo", t.NTipo);
+                    cmd.ExecuteNonQuery();
+
+                    rpta = true;
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
     }
 }

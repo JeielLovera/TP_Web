@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Order_Producto
+    public class Orden_Producto
     {
         public Producto CProducto { get; set; }
         public Venta CVenta { get; set; }

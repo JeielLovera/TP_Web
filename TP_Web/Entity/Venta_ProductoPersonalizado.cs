@@ -11,6 +11,6 @@ namespace Entity
         public Venta CVenta { get; set; }
         public Ingrediente CIngrediente { get; set; }
         public int QUsadaIngrediente { get; set; }
-        public int PrecioXGramo { get; set; }
+        public double PrecioXGramo { get; set; }
     }
 }

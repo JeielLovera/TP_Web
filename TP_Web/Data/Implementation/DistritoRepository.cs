@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Tipo_Direccion", con);
+                    var cmd = new SqlCommand("select * from Distrito", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -95,7 +95,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Tipo_Direccion values(@NDistrito)", con);
+                    var cmd = new SqlCommand("insert into Distrito values(@NDistrito)", con);
 
                     cmd.Parameters.AddWithValue("@NDistrito", t.NDistrito);
                     cmd.ExecuteNonQuery();
@@ -113,7 +113,27 @@ namespace Data.Implementation
 
         public bool Update(Entity.Distrito t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("update Distrito set NDistrito=@NDistrito where CDistrito=@CDistrito", con);
+
+                    cmd.Parameters.AddWithValue("@CDistrito", t.CDistrito);
+                    cmd.Parameters.AddWithValue("@NDistrito", t.NDistrito);
+                    cmd.ExecuteNonQuery();
+
+                    rpta = true;
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
     }
 }

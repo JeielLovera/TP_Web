@@ -13,6 +13,5 @@ namespace Entity
         public Ingrediente CIngrediente { get; set; }
         public Empleado CEmpleado { get; set; }
         public int QOrdenProductoPerzonalizado { get; set; }
-        public string NUnidadMedidaUsada { get; set; }
     }
 }

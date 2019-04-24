@@ -42,7 +42,7 @@ namespace Data.Implementation
                             empleado.FActivo = Convert.ToBoolean(dr["FActivo"]);
                             rol.CRol = Convert.ToInt32(dr["CRol"]);
                             empleado.CRol = rol;
-                            jefe.CDniEmpleado = Convert.ToInt32(dr["CJefe"]);
+                            jefe.CEmpleado = Convert.ToInt32(dr["CJefe"]);
                             empleado.CJefe = jefe;
                             
                             empleados.Add(empleado);
@@ -81,7 +81,7 @@ namespace Data.Implementation
                             emp.FActivo = Convert.ToBoolean(dr["FActivo"]);
                             rol.CRol = Convert.ToInt32(dr["CRol"]);
                             empleado.CRol = rol;
-                            jefe.CDniEmpleado = Convert.ToInt32(dr["CJefe"]);
+                            jefe.CEmpleado = Convert.ToInt32(dr["CJefe"]);
                             empleado.CJefe = jefe;
                         }
                     }

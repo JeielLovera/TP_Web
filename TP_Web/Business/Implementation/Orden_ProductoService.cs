@@ -15,32 +15,33 @@ namespace Business.Implementation
         private IVentaRepository ventaRepository = new VentaRepository();
         private IOrdenRepository ordenRepository = new OrdenRepository();
         private IEmpleadoRepository empleadoRepository = new EmpleadoRepository();
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Order_Producto> FindAll()
+        public List<Orden_Producto> FindAll()
         {
             return orden_pro.FindAll();
         }
 
-        public Order_Producto FindById(int? id)
+        public Orden_Producto FindById(int? id)
         {
             throw new NotImplementedException();
         }
 
-        public Order_Producto FindById(int? id, int? id2)
+        public Orden_Producto FindById(int? id, int? id2)
         {
             return orden_pro.FindById(id,id2);
         }
 
-        public Order_Producto FindById(int? id, int? id2, int? id3)
+        public Orden_Producto FindById(int? id, int? id2, int? id3)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(Order_Producto t)
+        public bool Insert(Orden_Producto t)
         {
             Producto producto = prodctRepository.FindById(t.CProducto.CProducto);
             Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
@@ -55,7 +56,7 @@ namespace Business.Implementation
             return orden_pro.Insert(t);
         }
 
-        public bool Update(Order_Producto t)
+        public bool Update(Orden_Producto t)
         {
             throw new NotImplementedException();
         }

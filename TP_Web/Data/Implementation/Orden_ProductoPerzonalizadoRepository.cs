@@ -27,7 +27,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select opp.CVenta, opp.COrden, opp.CIngrediente, ig.NIngrediente, FROM  Orden_ProductoPerzonalizado opp, Ingrediente ig where opp.CIngrediente=ig.CIngrediente", con);
+                    var cmd = new SqlCommand("select * from Orden_ProductoPerzonalizado", con);
 
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -41,14 +41,14 @@ namespace Data.Implementation
 
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
                             orden_p_p.COrden = orden;
-                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
-                            orden_p_p.CIngrediente = ingrediente;
-
+                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_p_p.CVenta = venta;
+                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
                             orden_p_p.CEmpleado = empleado;
+                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
                             orden_p_p.CIngrediente = ingrediente;
                             orden_p_p.QOrdenProductoPerzonalizado = Convert.ToInt32(dr["QOrdenProductoPerzonalizado"]);
-                            orden_p_p.NUnidadMedidaUsada = Convert.ToString(dr["NUnidadMedidaUsada"]);
+                            
 
                             ordenes.Add(orden_p_p);
                         }
@@ -62,8 +62,17 @@ namespace Data.Implementation
 
             return ordenes;
         }
+        public Orden_ProductoPerzonalizado FindById(int? id)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Orden_ProductoPerzonalizado FindById(int? id, int id2)
+        public Orden_ProductoPerzonalizado FindById(int? id, int? id2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Orden_ProductoPerzonalizado FindById(int? id, int? id2, int? id3)
         {
             Orden_ProductoPerzonalizado orden_p_p = null;
 
@@ -72,23 +81,27 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden_ProductoPerzonalizado opp where opp.COrden='" + id + "' and o.CVenta='" + id2 + "'", con);
+                    var cmd = new SqlCommand("select * from Orden_ProductoPerzonalizado opp where opp.COrden='" + id + "' and opp.CVenta='" + id2 + "' and opp.CIngrediente =" + id3 + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                            
+
                             var orden = new Orden();
                             var venta = new Venta();
                             var empleado = new Empleado();
                             var ingrediente = new Ingrediente();
 
+                            orden.COrden = Convert.ToInt32(dr["COrden"]);
                             orden_p_p.COrden = orden;
+                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_p_p.CVenta = venta;
+                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
                             orden_p_p.CEmpleado = empleado;
+                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
                             orden_p_p.CIngrediente = ingrediente;
                             orden_p_p.QOrdenProductoPerzonalizado = Convert.ToInt32(dr["QOrdenProductoPerzonalizado"]);
-                            orden_p_p.NUnidadMedidaUsada = Convert.ToString(dr["NUnidadMedidaUsada"]);
+                           
 
                         }
                     }
@@ -103,21 +116,6 @@ namespace Data.Implementation
             return orden_p_p;
         }
 
-        public Orden_ProductoPerzonalizado FindById(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Orden_ProductoPerzonalizado FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Orden_ProductoPerzonalizado FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Insert(Orden_ProductoPerzonalizado t)
         {
             bool rpta = false;
@@ -127,13 +125,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Producto values (@CVenta, @COrden,@CIngrediente,@CEmpleado,@QOrdenProductoPerzonalizado,@NUnidadMedidaUsada)", con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden);
-                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente);
-                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado);
+                    var cmd = new SqlCommand("insert into Producto values (@CVenta, @COrden,@CIngrediente,@CEmpleado,@QOrdenProductoPerzonalizado)", con);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
+                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
+                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPerzonalizado);
-                    cmd.Parameters.AddWithValue("@NUnidadMedidaUsada", t.NUnidadMedidaUsada);
 
                     cmd.ExecuteNonQuery();
                     rpta = true;
@@ -156,13 +153,13 @@ namespace Data.Implementation
                 {
                     con.Open();
 
-                    var cmd = new SqlCommand("update ORden_ProductoPerzonalizado set CIngrediente=@CIngrediente,CEmpleado=@CEmpleado, COrden=@COrden, QOrdenProductoPerzonalizado =@QOrdenProductoPerzonalizado, NUnidadMedidaUsada =@ NUnidadMedidaUsada where COrden=@COrden and CVenta = @CVenta" , con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden);
-                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente);
-                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado);
+                    var cmd = new SqlCommand("update ORden_ProductoPerzonalizado CEmpleado =@CEmpleado, QOrdenProductoPerzonalizado=@QOrdenProductoPerzonalizado  where COrden=@COrden and CVenta = @CVenta and CIngrediente=@CIngrediente", con);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
+                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
+                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPerzonalizado);
-                    cmd.Parameters.AddWithValue("@NUnidadMedidaUsada", t.NUnidadMedidaUsada);
+                   
                     cmd.ExecuteNonQuery();
                     rpta = true;
                 }

@@ -29,7 +29,7 @@ namespace Business.Implementation
 
         public Orden_ProductoPerzonalizado FindById(int? id)
         {
-            return orden_per.FindById(id);
+            throw new NotImplementedException();
         }
 
         public Orden_ProductoPerzonalizado FindById(int? id, int? id2)
@@ -39,7 +39,7 @@ namespace Business.Implementation
 
         public Orden_ProductoPerzonalizado FindById(int? id, int? id2, int? id3)
         {
-            throw new NotImplementedException();
+            return orden_per.FindById(id, id2, id3);
         }
 
         public bool Insert(Orden_ProductoPerzonalizado t)
@@ -60,7 +60,18 @@ namespace Business.Implementation
 
         public bool Update(Orden_ProductoPerzonalizado t)
         {
-            throw new NotImplementedException();
+            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
+            Orden orden = ordenRepository.FindById(t.COrden.COrden);
+            Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
+            Ingrediente ingrediente = ingredienteRepository.FindById(t.CIngrediente.CIngrediente);
+
+            t.CVenta = venta;
+            t.COrden = orden;
+            t.CEmpleado = empleado;
+            t.CIngrediente = ingrediente;
+
+
+            return orden_per.Update(t);
         }
     }
 }
