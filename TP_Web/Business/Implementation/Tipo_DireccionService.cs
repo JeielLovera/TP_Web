@@ -44,7 +44,7 @@ namespace Business.Implementation
 
         public bool Update(Tipo_Direccion t)
         {
-            throw new NotImplementedException();
+            return direccion.Update(t);
         }
     }
 }
