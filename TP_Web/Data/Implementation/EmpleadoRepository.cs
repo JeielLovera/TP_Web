@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Empleado", con);
+                    var cmd = new SqlCommand("select ep.CEmpleado, ep.NEmpleado, ep.CDniEmpleado, ep.TDireccionEmpleado, ep.NumTelefonoEmpleado, ep.FActivo, r.NRol, jf.NEmpleado NJefe from Empleado ep, Rol r, Empleado jf where ep.CRol=r.CRol and ep.CJefe=jf.CEmpleado", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -40,10 +40,12 @@ namespace Data.Implementation
                             empleado.TDireccionEmpleado = dr["TDireccionEmpleado"].ToString();
                             empleado.NumTelefonoEmpleado = Convert.ToInt32(dr["NumTelefonoEmpleado"]);
                             empleado.FActivo = Convert.ToBoolean(dr["FActivo"]);
-                            rol.CRol = Convert.ToInt32(dr["CRol"]);
+                            rol.NRol = dr["NRol"].ToString();
                             empleado.CRol = rol;
-                            jefe.CEmpleado = Convert.ToInt32(dr["CJefe"]);
+                            jefe.NEmpleado = dr["NJefe"].ToString();
                             empleado.CJefe = jefe;
+                            
+                            
                             
                             empleados.Add(empleado);
                         }
@@ -65,24 +67,25 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from  Empleado where CEmpleado='" + id + "'", con);
+                    var cmd = new SqlCommand("select ep.CEmpleado, ep.NEmpleado, ep.CDniEmpleado, ep.TDireccionEmpleado, ep.NumTelefonoEmpleado, ep.FActivo, r.NRol, jf.NEmpleado NJefe from Empleado ep, Rol r, Empleado jf where ep.CRol=r.CRol and ep.CJefe=jf.CEmpleado", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while(dr.Read())
                         {
-                            var emp = new Empleado();
-                            var rol = new Rol();
+                            empleado = new Empleado();
                             var jefe = new Empleado();
-                            emp.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            emp.NEmpleado = dr["NEmpleado"].ToString();
-                            emp.CDniEmpleado = Convert.ToInt32(dr["CDniEmpleado"]);
-                            emp.TDireccionEmpleado = dr["TDireccionEmpleado"].ToString();
-                            emp.NumTelefonoEmpleado = Convert.ToInt32(dr["NumTelefonoEmpleado"]);
-                            emp.FActivo = Convert.ToBoolean(dr["FActivo"]);
-                            rol.CRol = Convert.ToInt32(dr["CRol"]);
+                            var rol = new Rol();
+                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
+                            empleado.NEmpleado = dr["NEmpleado"].ToString();
+                            empleado.CDniEmpleado = Convert.ToInt32(dr["CDniEmpleado"]);
+                            empleado.TDireccionEmpleado = dr["TDireccionEmpleado"].ToString();
+                            empleado.NumTelefonoEmpleado = Convert.ToInt32(dr["NumTelefonoEmpleado"]);
+                            empleado.FActivo = Convert.ToBoolean(dr["FActivo"]);
+                            rol.NRol = dr["NRol"].ToString();
                             empleado.CRol = rol;
-                            jefe.CEmpleado = Convert.ToInt32(dr["CJefe"]);
+                            jefe.NEmpleado = dr["NJefe"].ToString();
                             empleado.CJefe = jefe;
+
                         }
                     }
                     con.Close();
