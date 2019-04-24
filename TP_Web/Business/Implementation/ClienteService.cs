@@ -12,6 +12,7 @@ namespace Business.Implementation
     public class ClienteService : IClienteService
     {
         private IClienteRepository clienteRepository = new ClienteRepository();
+        private IDireccionRepository direccionRepository = new DireccionRepository();
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -39,6 +40,8 @@ namespace Business.Implementation
 
         public bool Insert(Cliente t)
         {
+            Direccion direccion = direccionRepository.FindById(t.CDireccion.CDireccion);
+            t.CDireccion = direccion;
             return clienteRepository.Insert(t);
         }
 

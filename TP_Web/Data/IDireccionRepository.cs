@@ -7,7 +7,7 @@ using Entity;
 
 namespace Data
 {
-    public interface ICalle_Avenida_JironRepository : ICrudRepository<Calle_Avenida_Jiron>
+    public interface IDireccionRepository : ICrudRepository<Direccion>
     {
     }
 }

@@ -32,12 +32,13 @@ namespace Data.Implementation
                         while (dr.Read())
                         {
                             var cliente = new Cliente();
+                            var direccion = new Direccion();
 
                             cliente.CCLiente = Convert.ToString(dr["CCliente"]);
-                            cliente.CDniCliente = Convert.ToInt32(dr["CDniCliente"]);
-                            cliente.CRuc = Convert.ToInt32(dr["CRuc"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
                             cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
+                            cliente.CDireccion = direccion;
+
                             clientes.Add(cliente);
                         }
                     }
@@ -66,11 +67,12 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
+                            var direccion = new Direccion();
+
                             cliente.CCLiente = Convert.ToString(dr["CCliente"]);
-                            cliente.CDniCliente = Convert.ToInt32(dr["CDniCliente"]);
-                            cliente.CRuc = Convert.ToInt32(dr["CRuc"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
                             cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
+                            cliente.CDireccion = direccion;
                         }
                     }
                     con.Close();
@@ -102,12 +104,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Cliente values(@CDniCliente,@CRuc,@NCliente,@NumTelefonoCliente)", con);
+                    var cmd = new SqlCommand("insert into Cliente values(@NCliente,@NumTelefonoCliente, @CDireccion)", con);
 
-                    cmd.Parameters.AddWithValue("@CDniCliente", t.CDniCliente);
-                    cmd.Parameters.AddWithValue("@CRuc", t.CRuc);
+
                     cmd.Parameters.AddWithValue("@NCliente", t.NCliente);
                     cmd.Parameters.AddWithValue("@NumTelefonoCliente", t.NumTelefonoCliente);
+                    cmd.Parameters.AddWithValue("@CDireccion", t.CDireccion);
 
                     cmd.ExecuteNonQuery();
 

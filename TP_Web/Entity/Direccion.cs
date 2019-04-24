@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Calle_Avenida_Jiron
+    public class Direccion
     {
-        public int CCalle_Av_Jiron { get; set; }
+        public int CDireccion { get; set; }
         public Distrito CDistrito { get; set; }
-        public Tipo_Direccion CTipo { get; set; }
-        public string NCalle_Avenida_Jiron { get; set; }
+        public Tipo_Direccion CTipoDireccion { get; set; }
+        public string NDireccion { get; set; }
 
     }
 }

@@ -11,34 +11,34 @@ using System.Configuration;
 
 namespace Data.Implementation
 {
-    public class Calle_Avenida_JironcsRepository : ICalle_Avenida_JironRepository
+    public class DireccionRepository : IDireccionRepository
     {
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Calle_Avenida_Jiron> FindAll()
+        public List<Direccion> FindAll()
         {
-            var details = new List<Calle_Avenida_Jiron>();
+            var details = new List<Direccion>();
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Calle_Avenida_Jiron", con);
+                    var cmd = new SqlCommand("select * from Direccion", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                            var detalle = new Calle_Avenida_Jiron();
+                            var detalle = new Direccion();
                             var distrito = new Distrito();
                             var tipo = new Tipo_Direccion();
 
-                            detalle.CCalle_Av_Jiron = Convert.ToInt32(dr["CCalle_Av_Jiron"]);
-                            detalle.NCalle_Avenida_Jiron = Convert.ToString(dr["NCalle_Avenida_Jiron"]);
+                            detalle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
+                            detalle.NDireccion = Convert.ToString(dr["NDireccion"]);
                             detalle.CDistrito = distrito;
-                            detalle.CTipo = tipo;
+                            detalle.CTipoDireccion = tipo;
 
                             details.Add(detalle);
                         }
@@ -54,9 +54,9 @@ namespace Data.Implementation
             return details;
         }
 
-        public Calle_Avenida_Jiron FindById(int? id)
+        public Direccion FindById(int? id)
         {
-            Calle_Avenida_Jiron calle = null;
+            Direccion calle = null;
 
             try
             {
@@ -68,14 +68,14 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            var detalle = new Calle_Avenida_Jiron();
+                            var detalle = new Direccion();
                             var distrito = new Distrito();
                             var tipo = new Tipo_Direccion();
 
-                            detalle.CCalle_Av_Jiron = Convert.ToInt32(dr["CCalle_Av_Jiron"]);
-                            detalle.NCalle_Avenida_Jiron = Convert.ToString(dr["NCalle_Avenida_Jiron"]);
+                            detalle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
+                            detalle.NDireccion = Convert.ToString(dr["NDireccion"]);
                             detalle.CDistrito = distrito;
-                            detalle.CTipo = tipo;
+                            detalle.CTipoDireccion = tipo;
 
                         }
                     }
@@ -90,17 +90,17 @@ namespace Data.Implementation
             return calle;
         }
 
-        public Calle_Avenida_Jiron FindById(int? id, int? id2)
+        public Direccion FindById(int? id, int? id2)
         {
             throw new NotImplementedException();
         }
 
-        public Calle_Avenida_Jiron FindById(int? id, int? id2, int? id3)
+        public Direccion FindById(int? id, int? id2, int? id3)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(Calle_Avenida_Jiron t)
+        public bool Insert(Direccion t)
         {
             bool rpta = false;
 
@@ -109,12 +109,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Calle_Avenida_Jiron values(@CDniCliente,@CRuc,@NCliente,@NumTelefonoCliente)", con);
+                    var cmd = new SqlCommand("insert into Direccion values(@NDireccion,@CDistrito,@CTipoDireccion)", con);
 
-                    cmd.Parameters.AddWithValue("@CCalle_Av_Jiron", t.CCalle_Av_Jiron);
-                    cmd.Parameters.AddWithValue("@NCalle_Avenida_Jiron", t.NCalle_Avenida_Jiron);
+                    
+                    cmd.Parameters.AddWithValue("@NDireccion", t.NDireccion);
                     cmd.Parameters.AddWithValue("@CDistrito", t.CDistrito);
-                    cmd.Parameters.AddWithValue("@CTipo", t.CTipo);
+                    cmd.Parameters.AddWithValue("@CTipoDireccion", t.CTipoDireccion);
 
                     cmd.ExecuteNonQuery();
 
@@ -131,7 +131,7 @@ namespace Data.Implementation
             return rpta;
         }
 
-        public bool Update(Calle_Avenida_Jiron t)
+        public bool Update(Direccion t)
         {
             throw new NotImplementedException();
         }

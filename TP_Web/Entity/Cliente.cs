@@ -11,8 +11,7 @@ namespace Entity
     {
         public string CCLiente { get; set; }
         public string NCliente { get; set; }
-        public int CDniCliente { get; set; }
         public int NumTelefonoCliente { get; set; }
-        public int CRuc { get; set; }
+        public Direccion CDireccion { get; set; }
     }
 }

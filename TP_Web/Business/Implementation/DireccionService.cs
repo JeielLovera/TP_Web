@@ -9,9 +9,9 @@ using Data.Implementation;
 
 namespace Business.Implementation
 {
-    public class Calle_Avenida_JironcsService : ICalle_Avenida_JironcsService
+    public class DireccionService : IDireccionService
     {
-        private ICalle_Avenida_JironRepository calle_rep = new Calle_Avenida_JironcsRepository();
+        private IDireccionRepository calle_rep = new DireccionRepository();
         private IDistritoRepository distritoRepository = new DistritoRepository();
         private ITipo_DireccionRepository tipo_DireccionRepository = new Tipo_DireccionRepository();
         public bool Delete(int id)
@@ -19,38 +19,38 @@ namespace Business.Implementation
             throw new NotImplementedException();
         }
 
-        public List<Calle_Avenida_Jiron> FindAll()
+        public List<Direccion> FindAll()
         {
             return calle_rep.FindAll();
         }
 
-        public Calle_Avenida_Jiron FindById(int? id)
+        public Direccion FindById(int? id)
         {
             return calle_rep.FindById(id);
         }
 
-        public Calle_Avenida_Jiron FindById(int? id, int? id2)
+        public Direccion FindById(int? id, int? id2)
         {
             throw new NotImplementedException();
         }
 
-        public Calle_Avenida_Jiron FindById(int? id, int? id2, int? id3)
+        public Direccion FindById(int? id, int? id2, int? id3)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(Calle_Avenida_Jiron t)
+        public bool Insert(Direccion t)
         {
             Distrito distrito = distritoRepository.FindById(t.CDistrito.CDistrito);
-            Tipo_Direccion tipo = tipo_DireccionRepository.FindById(t.CTipo.CTipo);
+            Tipo_Direccion tipo = tipo_DireccionRepository.FindById(t.CTipoDireccion.CTipo);
 
             t.CDistrito = distrito;
-            t.CTipo = tipo;
+            t.CTipoDireccion = tipo;
 
             return calle_rep.Insert(t);
         }
 
-        public bool Update(Calle_Avenida_Jiron t)
+        public bool Update(Direccion t)
         {
             throw new NotImplementedException();
         }
