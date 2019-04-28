@@ -12,6 +12,7 @@
 </p>
 <table class="table">
     <tr>
+
         <th>
             @Html.DisplayNameFor(model => model.CProducto)
         </th>
@@ -21,11 +22,9 @@
         <th>
             @Html.DisplayNameFor(model => model.MPrecio)
         </th>
-
         <th>
-            @Html.DisplayNameFor(model => model.CTipoProducto.CTipoProducto)
+            @Html.DisplayNameFor(model => model.CTipoProducto.NTipoProducto)
         </th>
-
         <th></th>
     </tr>
 
@@ -42,9 +41,8 @@
         </td>
 
         <td>
-            @Html.DisplayFor(modelItem => item.CTipoProducto.CTipoProducto)
+            @Html.DisplayFor(modelItem => item.CTipoProducto.NTipoProducto)
         </td>
-
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
