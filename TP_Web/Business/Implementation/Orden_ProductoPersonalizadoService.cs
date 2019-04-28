@@ -12,7 +12,6 @@ namespace Business.Implementation
     public class Orden_ProductoPersonalizadoService : IOrden_ProductoPersonalizadoService
     {
         private IOrden_ProductoPersonalizadoRepository orden_per = new Orden_ProductoPersonalizadoRepository();
-        private IVentaRepository ventaRepository = new VentaRepository();
         private IOrdenRepository ordenRepository = new OrdenRepository();
         private IEmpleadoRepository empleadoRepository = new EmpleadoRepository();
         private IIngredienteRepository ingredienteRepository = new IngredienteRepository();
@@ -29,47 +28,29 @@ namespace Business.Implementation
 
         public Orden_ProductoPersonalizado FindById(int? id)
         {
-            throw new NotImplementedException();
+            return orden_per.FindById(id);
         }
-
-        public Orden_ProductoPersonalizado FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Orden_ProductoPersonalizado FindById(int? id, int? id2, int? id3)
-        {
-            return orden_per.FindById(id, id2, id3);
-        }
-
+              
         public bool Insert(Orden_ProductoPersonalizado t)
         {
-            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
             Orden orden = ordenRepository.FindById(t.COrden.COrden);
             Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
             Ingrediente ingrediente = ingredienteRepository.FindById(t.CIngrediente.CIngrediente);
-
-            t.CVenta = venta;
             t.COrden = orden;
             t.CEmpleado = empleado;
             t.CIngrediente = ingrediente;
-
-
-           return  orden_per.Insert(t);
+            
+            return  orden_per.Insert(t);
         }
 
         public bool Update(Orden_ProductoPersonalizado t)
         {
-            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
             Orden orden = ordenRepository.FindById(t.COrden.COrden);
             Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
             Ingrediente ingrediente = ingredienteRepository.FindById(t.CIngrediente.CIngrediente);
-
-            t.CVenta = venta;
             t.COrden = orden;
             t.CEmpleado = empleado;
             t.CIngrediente = ingrediente;
-
 
             return orden_per.Update(t);
         }

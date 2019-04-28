@@ -12,7 +12,6 @@ namespace Business.Implementation
     {
         private IOrden_ProductoRepository orden_pro = new Orden_ProductoRepository();
         private IProductoRepository prodctRepository = new ProductoRepository();
-        private IVentaRepository ventaRepository = new VentaRepository();
         private IOrdenRepository ordenRepository = new OrdenRepository();
         private IEmpleadoRepository empleadoRepository = new EmpleadoRepository();
 
@@ -28,28 +27,16 @@ namespace Business.Implementation
 
         public Orden_Producto FindById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Orden_Producto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Orden_Producto FindById(int? id, int? id2, int? id3)
-        {
-            return orden_pro.FindById(id, id2, id3);
+            return orden_pro.FindById(id);
         }
 
         public bool Insert(Orden_Producto t)
         {
             Producto producto = prodctRepository.FindById(t.CProducto.CProducto);
-            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
             Orden orden = ordenRepository.FindById(t.COrden.COrden);
             Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
 
             t.CProducto = producto;
-            t.CVenta = venta;
             t.COrden = orden;
             t.CEmpleado = empleado;
 
@@ -59,12 +46,10 @@ namespace Business.Implementation
         public bool Update(Orden_Producto t)
         {
             Producto producto = prodctRepository.FindById(t.CProducto.CProducto);
-            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
             Orden orden = ordenRepository.FindById(t.COrden.COrden);
             Empleado empleado = empleadoRepository.FindById(t.CEmpleado.CEmpleado);
 
             t.CProducto = producto;
-            t.CVenta = venta;
             t.COrden = orden;
             t.CEmpleado = empleado;
 

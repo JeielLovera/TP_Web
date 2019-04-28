@@ -27,7 +27,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden_Producto", con);
+                    var cmd = new SqlCommand("select op.COrden_Producto, op.COrden, o.CVenta, p.NProducto, ep.NEmpleado, op.QOrdenProducto from Orden_Producto op, Producto p, Empleado ep, Orden o where op.CProducto=p.CProducto and op.CEmpleado=ep.CEmpleado and op.COrden=o.COrden", con);
 
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -37,18 +37,18 @@ namespace Data.Implementation
                             var orden = new Orden();
                             var producto = new Producto();
                             var empleado = new Empleado();
-                            var venta = new Venta();
 
-                            orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
-                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            orden_producto.CEmpleado = empleado;
+                            orden_producto.COrden_Producto = Convert.ToInt32(dr["COrden_Producto"]);
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
+                            orden.CVenta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_producto.COrden = orden;
-                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
-                            orden_producto.CVenta = venta;
-                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
+                            producto.NProducto = dr["NProducto"].ToString();
                             orden_producto.CProducto = producto;
+                            empleado.NEmpleado = dr["NEmpleado"].ToString();
+                            orden_producto.CEmpleado = empleado;
+                            orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
                             ordenes.Add(orden_producto);
+                            
                         }
                     }
                     con.Close();
@@ -64,19 +64,15 @@ namespace Data.Implementation
 
         public Orden_Producto FindById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-
-        public Orden_Producto FindById(int? id, int? id2, int? id3)
-        {
             Orden_Producto orden_producto = null;
+
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden_Producto where COrden='" + id + "' and CVenta='" + id2 + "' and CIngrediente='" + id3 + "'", con);
+                    var cmd = new SqlCommand("select op.COrden_Producto, op.COrden, o.CVenta, p.NProducto, ep.NEmpleado, op.QOrdenProducto from Orden_Producto op, Producto p, Empleado ep, Orden o where op.CProducto=p.CProducto and op.CEmpleado=ep.CEmpleado and op.COrden=o.COrden and op.COrden_Producto='" + id+"'", con);
+
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -85,17 +81,17 @@ namespace Data.Implementation
                             var orden = new Orden();
                             var producto = new Producto();
                             var empleado = new Empleado();
-                            var venta = new Venta();
 
-                            orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
-                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            orden_producto.CEmpleado = empleado;
+                            orden_producto.COrden_Producto = Convert.ToInt32(dr["COrden_Producto"]);
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
+                            orden.CVenta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_producto.COrden = orden;
-                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
-                            orden_producto.CVenta = venta;
-                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
+                            producto.NProducto = dr["NProducto"].ToString();
                             orden_producto.CProducto = producto;
+                            empleado.NEmpleado = dr["NEmpleado"].ToString();
+                            orden_producto.CEmpleado = empleado;
+                            orden_producto.QOrdenProducto = Convert.ToInt32(dr["QOrdenProducto"]);
+
 
                         }
                     }
@@ -104,11 +100,11 @@ namespace Data.Implementation
 
             }
             catch (Exception)
-            {
-                throw;
-            }
+            { throw; }
+
             return orden_producto;
         }
+
 
         public bool Insert(Orden_Producto t)
         {
@@ -119,10 +115,9 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Producto values (@CProducto, @CVenta,@COrden,@CEmpleado,@QOrdenProducto)", con);
-                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    var cmd = new SqlCommand("insert into Producto values (@COrden,@CProducto,@CEmpleado,@QOrdenProducto)", con);
                     cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
+                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);                    
                     cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@QOrdenProducto", t.QOrdenProducto);
 
@@ -147,10 +142,8 @@ namespace Data.Implementation
                 {
                     con.Open();
 
-                    var cmd = new SqlCommand("update Orden_Producto set CEmpleado=@CEmpleado, QOrdenProducto = @QOrdenProducto where CProducto=@CProducto and CVenta=@CVenta and COrden=@COrden", con);
-                    cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
+                    var cmd = new SqlCommand("update Orden_Producto set CEmpleado=@CEmpleado, QOrdenProducto = @QOrdenProducto where COrden_Producto=@id", con);
+                    cmd.Parameters.AddWithValue("@id", t.COrden_Producto);
                     cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
                     cmd.Parameters.AddWithValue("@QOrdenProducto", t.QOrdenProducto);
                     cmd.ExecuteNonQuery();
@@ -162,9 +155,5 @@ namespace Data.Implementation
             return rpta;
         }
 
-        public Orden_Producto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

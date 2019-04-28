@@ -27,7 +27,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden_ProductoPerzonalizado", con);
+                    var cmd = new SqlCommand("select opp.COrden_Pro_Per, opp.COrden, o.CVenta, ig.NIngrediente, ep.NEmpleado, opp.QOrdenProductoPersonalizado from Orden_ProductoPersonalizado opp, Orden o, Ingrediente ig, Empleado ep where opp.COrden=o.COrden and opp.CIngrediente=ig.CIngrediente and opp.CEmpleado=ep.CEmpleado", con);
 
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -35,21 +35,18 @@ namespace Data.Implementation
                         {
                             var orden_p_p = new Orden_ProductoPersonalizado();
                             var orden = new Orden();
-                            var venta = new Venta();
                             var empleado = new Empleado();
                             var ingrediente = new Ingrediente();
 
+                            orden_p_p.COrden_Pro_Per = Convert.ToInt32(dr["COrden_Pro_Per"]);
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
+                            orden.CVenta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_p_p.COrden = orden;
-                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
-                            orden_p_p.CVenta = venta;
-                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            orden_p_p.CEmpleado = empleado;
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             orden_p_p.CIngrediente = ingrediente;
-                            orden_p_p.QOrdenProductoPerzonalizado = Convert.ToInt32(dr["QOrdenProductoPerzonalizado"]);
-                            
-
+                            empleado.NEmpleado = dr["NEmpleado"].ToString();
+                            orden_p_p.CEmpleado = empleado;
+                            orden_p_p.QOrdenProductoPersonalizado = Convert.ToInt32(dr["QOrdenProductoPersonalizado"]);
                             ordenes.Add(orden_p_p);
                         }
                     }
@@ -64,57 +61,44 @@ namespace Data.Implementation
         }
         public Orden_ProductoPersonalizado FindById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Orden_ProductoPersonalizado FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Orden_ProductoPersonalizado FindById(int? id, int? id2, int? id3)
-        {
             Orden_ProductoPersonalizado orden_p_p = null;
-
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden_ProductoPerzonalizado opp where opp.COrden='" + id + "' and opp.CVenta='" + id2 + "' and opp.CIngrediente =" + id3 + "'", con);
+                    var cmd = new SqlCommand("select opp.COrden_Pro_Per, opp.COrden, o.CVenta, ig.NIngrediente, ep.NEmpleado, opp.QOrdenProductoPersonalizado from Orden_ProductoPersonalizado opp, Orden o, Ingrediente ig, Empleado ep where opp.COrden=o.COrden and opp.CIngrediente=ig.CIngrediente and opp.CEmpleado=ep.CEmpleado and opp.COrden_Pro_Per='" + id+"'", con);
+
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-
+                            orden_p_p = new Orden_ProductoPersonalizado();
                             var orden = new Orden();
-                            var venta = new Venta();
                             var empleado = new Empleado();
                             var ingrediente = new Ingrediente();
 
+                            orden_p_p.COrden_Pro_Per = Convert.ToInt32(dr["COrden_Pro_Per"]);
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
+                            orden.CVenta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             orden_p_p.COrden = orden;
-                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
-                            orden_p_p.CVenta = venta;
-                            empleado.CEmpleado = Convert.ToInt32(dr["CEmpleado"]);
-                            orden_p_p.CEmpleado = empleado;
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             orden_p_p.CIngrediente = ingrediente;
-                            orden_p_p.QOrdenProductoPerzonalizado = Convert.ToInt32(dr["QOrdenProductoPerzonalizado"]);
-                           
-
+                            empleado.NEmpleado = dr["NEmpleado"].ToString();
+                            orden_p_p.CEmpleado = empleado;
+                            orden_p_p.QOrdenProductoPersonalizado = Convert.ToInt32(dr["QOrdenProductoPersonalizado"]);
                         }
                     }
                     con.Close();
                 }
+
             }
             catch (Exception)
-            {
-                throw;
-            }
-
+            { throw; }
             return orden_p_p;
         }
+
+
 
         public bool Insert(Orden_ProductoPersonalizado t)
         {
@@ -125,12 +109,11 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Producto values (@CVenta, @COrden,@CIngrediente,@CEmpleado,@QOrdenProductoPerzonalizado)", con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    var cmd = new SqlCommand("insert into Orden_ProductoPersonalizado values (@COrden,@CIngrediente,@CEmpleado,@QOrdenProductoPersonalizado)", con);
                     cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
                     cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
                     cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
-                    cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPerzonalizado);
+                    cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPersonalizado);
 
                     cmd.ExecuteNonQuery();
                     rpta = true;
@@ -153,12 +136,10 @@ namespace Data.Implementation
                 {
                     con.Open();
 
-                    var cmd = new SqlCommand("update ORden_ProductoPerzonalizado CEmpleado =@CEmpleado, QOrdenProductoPerzonalizado=@QOrdenProductoPerzonalizado  where COrden=@COrden and CVenta = @CVenta and CIngrediente=@CIngrediente", con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
-                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
+                    var cmd = new SqlCommand("update Orden_ProductoPersonalizado CEmpleado =@CEmpleado, QOrdenProductoPerzonalizado=@QOrdenProductoPerzonalizado  where COrden_Pro_Per=@id", con);
+                    cmd.Parameters.AddWithValue("@id", t.COrden_Pro_Per);
                     cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
-                    cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPerzonalizado);
+                    cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPersonalizado);
                    
                     cmd.ExecuteNonQuery();
                     rpta = true;
