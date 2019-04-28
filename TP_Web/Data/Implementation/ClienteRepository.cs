@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Cliente", con);
+                    var cmd = new SqlCommand("select cl.CCliente, cl.NCliente, cl.NumTelefono, dir.NDireccion from Cliente cl, Direccion dir where cl.CDireccion=dir.CDireccion", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -36,8 +36,8 @@ namespace Data.Implementation
 
                             cliente.CCliente = Convert.ToInt32(dr["CCliente"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
-                            cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
-                            direccion.CDireccion = Convert.ToInt32(dr["CDireccion"]);
+                            cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefono"]);
+                            direccion.NDireccion = dr["NDireccion"].ToString();
                             cliente.CDireccion = direccion;
 
                             clientes.Add(cliente);
@@ -57,23 +57,23 @@ namespace Data.Implementation
         public Entity.Cliente FindById(int? id)
         {
             Cliente cliente = null;
-
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Cliente where CCliente='" + id + "'", con);
+                    var cmd = new SqlCommand("select cl.CCliente, cl.NCliente, cl.NumTelefono, dir.NDireccion from Cliente cl, Direccion dir where cl.CDireccion=dir.CDireccion and cl.CCliente='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
+                            cliente = new Cliente();
                             var direccion = new Direccion();
 
                             cliente.CCliente = Convert.ToInt32(dr["CCliente"]);
                             cliente.NCliente = Convert.ToString(dr["NCliente"]);
-                            cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefonoCliente"]);
-                            direccion.CDireccion = Convert.ToInt32(dr["CDireccion"]);
+                            cliente.NumTelefonoCliente = Convert.ToInt32(dr["NumTelefono"]);
+                            direccion.NDireccion = dr["NDireccion"].ToString();
                             cliente.CDireccion = direccion;
                         }
                     }
@@ -87,17 +87,7 @@ namespace Data.Implementation
             }
             return cliente;
         }
-
-        public Entity.Cliente FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Entity.Cliente FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public bool Insert(Cliente t)
         {
             bool rpta = false;
@@ -134,7 +124,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Cliente set NCliente=@ncliente, NumTelefonoCliente=@telefono, CDireccion=@direccion where CCliente=@ccliente", con);
+                    var cmd = new SqlCommand("update Cliente set NCliente=@ncliente, NumTelefono=@telefono, CDireccion=@direccion where CCliente=@ccliente", con);
 
                     cmd.Parameters.AddWithValue("@ccliente", t.CCliente);
                     cmd.Parameters.AddWithValue("@ncliente", t.NCliente);

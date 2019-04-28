@@ -26,17 +26,7 @@ namespace Business.Implementation
         {
             return distrito.FindById(id);
         }
-
-        public Distrito FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Distrito FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public bool Insert(Distrito t)
         {
             return distrito.Insert(t);

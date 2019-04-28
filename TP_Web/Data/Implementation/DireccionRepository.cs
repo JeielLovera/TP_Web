@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Direccion", con);
+                    var cmd = new SqlCommand("select dir.CDireccion, dir.NDireccion, tp.NTipoDireccion, dt.NDistrito from Direccion dir, Distrito dt, TipoDireccion tp where dir.CDistrito=dt.CDistrito and dir.CTipoDireccion=tp.CTipoDireccion ", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -36,11 +36,11 @@ namespace Data.Implementation
                             var tipo = new Tipo_Direccion();
 
                             detalle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
-                            detalle.NDireccion = Convert.ToString(dr["NDireccion"]);
-                            distrito.CDistrito = Convert.ToInt32(dr["CDistrito"]);
-                            detalle.CDistrito = distrito;
-                            tipo.CTipo = Convert.ToInt32(dr["CTipo"]);
+                            detalle.NDireccion = dr["NDireccion"].ToString();
+                            tipo.NTipo = dr["NTipoDireccion"].ToString();
                             detalle.CTipoDireccion = tipo;
+                            distrito.NDistrito = dr["NDistrito"].ToString();
+                            detalle.CDistrito = distrito;
 
                             details.Add(detalle);
                         }
@@ -58,29 +58,27 @@ namespace Data.Implementation
 
         public Direccion FindById(int? id)
         {
-            Direccion calle = null;
-
+            Direccion detalle = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Direccion where CDireccion='" + id +"'", con);
+                    var cmd = new SqlCommand("select dir.CDireccion, dir.NDireccion, tp.NTipoDireccion, dt.NDistrito from Direccion dir, Distrito dt, TipoDireccion tp where dir.CDistrito=dt.CDistrito and dir.CTipoDireccion=tp.CTipoDireccion and dir.CDireccion='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                            calle = new Direccion();
+                            detalle = new Direccion();
                             var distrito = new Distrito();
                             var tipo = new Tipo_Direccion();
 
-                            calle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
-                            calle.NDireccion = Convert.ToString(dr["NDireccion"]);
-                            distrito.CDistrito = Convert.ToInt32(dr["CDistrito"]);
-                            calle.CDistrito = distrito;
-                            tipo.CTipo = Convert.ToInt32(dr["CTipo"]);
-                            calle.CTipoDireccion = tipo;
-
+                            detalle.CDireccion = Convert.ToInt32(dr["CDireccion"]);
+                            detalle.NDireccion = dr["NDireccion"].ToString();
+                            tipo.NTipo = dr["NTipoDireccion"].ToString();
+                            detalle.CTipoDireccion = tipo;
+                            distrito.NDistrito = dr["NDistrito"].ToString();
+                            detalle.CDistrito = distrito;
                         }
                     }
                     con.Close();
@@ -91,17 +89,7 @@ namespace Data.Implementation
 
                 throw;
             }
-            return calle;
-        }
-
-        public Direccion FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Direccion FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
+            return detalle;
         }
 
         public bool Insert(Direccion t)
@@ -113,10 +101,10 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Direccion values(@cdireccion,@cdistrito,@ctipo)", con);
+                    var cmd = new SqlCommand("insert into Direccion values(@ndireccion,@cdistrito,@ctipo)", con);
 
                     
-                    cmd.Parameters.AddWithValue("@cdireccion", t.NDireccion);
+                    cmd.Parameters.AddWithValue("@ndireccion", t.NDireccion);
                     cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);
                     cmd.Parameters.AddWithValue("@ctipo", t.CTipoDireccion.CTipo);
 

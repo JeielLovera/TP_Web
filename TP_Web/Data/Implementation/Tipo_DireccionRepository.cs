@@ -62,8 +62,8 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         { 
-                            direccion.CTipo = Convert.ToInt32(dr["CTipo"]);
-                            direccion.NTipo = Convert.ToString(dr["NTipo"]);
+                            direccion.CTipo = Convert.ToInt32(dr["CTipoDireccion"]);
+                            direccion.NTipo = Convert.ToString(dr["NTipoDireccion"]);
                         }
                     }
                     con.Close();
@@ -76,17 +76,7 @@ namespace Data.Implementation
             }
             return direccion;
         }
-
-        public Entity.Tipo_Direccion FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Entity.Tipo_Direccion FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+                
         public bool Insert(Entity.Tipo_Direccion t)
         {
             bool rpta = false;
@@ -119,7 +109,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update TipoDireccion set NTipo=@NTipo where CTipo = @CTipo", con);
+                    var cmd = new SqlCommand("update TipoDireccion set NTipoDireccion=@NTipo where CTipoDireccion = @CTipo", con);
 
                     cmd.Parameters.AddWithValue("@CTipo", t.CTipo);
                     cmd.Parameters.AddWithValue("@NTipo", t.NTipo);

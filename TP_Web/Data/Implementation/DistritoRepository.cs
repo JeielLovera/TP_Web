@@ -76,16 +76,7 @@ namespace Data.Implementation
             }
             return distrito;
         }
-
-        public Entity.Distrito FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Entity.Distrito FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
+               
 
         public bool Insert(Entity.Distrito t)
         {

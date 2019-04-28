@@ -26,16 +26,7 @@ namespace Business.Implementation
         {
             return direccion.FindById(id);
         }
-
-        public Tipo_Direccion FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Tipo_Direccion FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
+               
 
         public bool Insert(Tipo_Direccion t)
         {

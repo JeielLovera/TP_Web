@@ -28,16 +28,6 @@ namespace Business.Implementation
             return clienteRepository.FindById(id);
         }
 
-        public Cliente FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Cliente FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Insert(Cliente t)
         {
             Direccion direccion = direccionRepository.FindById(t.CDireccion.CDireccion);
