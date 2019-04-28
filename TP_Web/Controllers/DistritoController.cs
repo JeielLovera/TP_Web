@@ -23,10 +23,10 @@ namespace TP_PIZZA.Controllers
             return View();
         }
         [HttpPost]
-         public ActionResult Create(Distrito distrito)
+        public ActionResult Create(Distrito distrito)
         {
             bool rpta = distritoService.Insert(distrito);
-            if (rpta) { RedirectToAction("Index"); }
+            if (rpta) { return RedirectToAction("Index"); }
             return View();
         }
     }
