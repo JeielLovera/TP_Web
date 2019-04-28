@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using(var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select vt.CVenta, vt.CProducto, p.NProducto, vt.QCantidad from Venta_Producto vt, Producto p where vt.CProducto=p.CProducto", con);
+                    var cmd = new SqlCommand("select vp.CVenta_Producto, vp.CVenta, p.NProducto, vp.QCantidad from Venta_Producto vp, Producto p where vp.CProducto=p.CProducto", con);
                     using(var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -35,9 +35,9 @@ namespace Data.Implementation
                             var venta = new Venta();
                             var producto = new Producto();
 
+                            ventaproducto.CVenta_Producto = Convert.ToInt32(dr["CVenta_Producto"]);
                             venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             ventaproducto.CVenta = venta;
-                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             producto.NProducto = dr["NProducto"].ToString();
                             ventaproducto.CProducto = producto;
                             ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidada"]);
@@ -56,19 +56,13 @@ namespace Data.Implementation
 
         public Venta_Producto FindById(int? id)
         {
-            throw new NotImplementedException();
-            
-        }
-
-        public Venta_Producto FindById(int? id, int? id2)
-        {
             Venta_Producto ventaproducto = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select vt.CVenta, vt.CProducto, p.NProducto, vt.QCantidad from Venta_Producto vt, Producto p where vt.CProducto=p.CProducto and vt.CProducto='" + id + "' vt.CVenta='"+id2+"'", con);
+                    var cmd = new SqlCommand("select vp.CVenta_Producto, vp.CVenta, p.NProducto, vp.QCantidad from Venta_Producto vp, Producto p where vp.CProducto=p.CProducto and vp.CVenta_Producto='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -77,31 +71,25 @@ namespace Data.Implementation
                             var venta = new Venta();
                             var producto = new Producto();
 
+                            ventaproducto.CVenta_Producto = Convert.ToInt32(dr["CVenta_Producto"]);
                             venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             ventaproducto.CVenta = venta;
-                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             producto.NProducto = dr["NProducto"].ToString();
                             ventaproducto.CProducto = producto;
                             ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidada"]);
-
                         }
                     }
                     con.Close();
                 }
-
             }
             catch (Exception)
             {
                 throw;
             }
             return ventaproducto;
-        }
 
-        public Venta_Producto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
         }
-
+        
         public bool Insert(Venta_Producto t)
         {
             bool rpta = false;
@@ -134,9 +122,8 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update VentaProducto set QCantidad=@cantidad where CProducto=@cproducto and CVenta=@cventa", con);
-                    cmd.Parameters.AddWithValue("@cproducto", t.CProducto.CProducto);
-                    cmd.Parameters.AddWithValue("@cventa", t.CVenta.CVenta);
+                    var cmd = new SqlCommand("update VentaProducto set QCantidad=@cantidad where CVenta_Producto=@id", con);
+                    cmd.Parameters.AddWithValue("@id", t.CVenta_Producto);
                     cmd.Parameters.AddWithValue("@cantidad", t.QCantidad);
                     con.Close();
                     rpta = true;

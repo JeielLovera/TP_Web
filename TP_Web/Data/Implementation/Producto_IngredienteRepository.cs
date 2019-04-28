@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using(var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select ip.CProducto, p.NProducto, ip.CIngrediente, i.NIngrediente, ip.QUsadaIngrediente, ip.NUnidadMedidaUsada from Producto_Ingrediente pi, Producto p, Ingrediente i where pi.CProducto=p.CProducto and pi.CIngrediente=i.CIngrediente", con);
+                    var cmd = new SqlCommand("select pi.CProducto_Ingrediente, p.NProducto, i.NIngrediente, pi.QUsadaIngrediente, pi.NUnidadMedidaUsada from Producto_Ingrediente pi, Producto p, Ingrediente i where pi.CProducto=p.CProducto and pi.CIngrediente=i.CIngrediente", con);
                     using(var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -35,10 +35,9 @@ namespace Data.Implementation
                             var producto = new Producto();
                             var ingrediente = new Ingrediente();
 
-                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
+                            productoingrediente.CProducto_Ingrediente = Convert.ToInt32(dr["CProducto_Ingrediente"]);
                             producto.NProducto = dr["NProducto"].ToString();
-                            productoingrediente.CProducto = producto;
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            productoingrediente.CProducto = producto;                            
                             ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             productoingrediente.CIngrediente = ingrediente;
                             productoingrediente.QUsadaIngrediente = Convert.ToInt32(dr["QUsadaIngrediente"]);
@@ -59,18 +58,13 @@ namespace Data.Implementation
 
         public Producto_Ingrediente FindById(int? id)
         {
-            throw new NotImplementedException();            
-        }
-
-        public Producto_Ingrediente FindById(int? id, int? id2)
-        {
             Producto_Ingrediente productoingrediente = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select ip.CProducto, p.NProducto, ip.CIngrediente, i.NIngrediente, ip.QUsadaIngrediente, ip.NUnidadMedidaUsada from Producto_Ingrediente pi, Producto p, Ingrediente i where pi.CProducto=p.CProducto and pi.CIngrediente=i.CIngrediente and pi.CProducto='" + id + "' pi.CIngrediente='" + id2 + "'", con);
+                    var cmd = new SqlCommand("select pi.CProducto_Ingrediente, p.NProducto, i.NIngrediente, pi.QUsadaIngrediente, pi.NUnidadMedidaUsada from Producto_Ingrediente pi, Producto p, Ingrediente i where pi.CProducto=p.CProducto and pi.CIngrediente=i.CIngrediente and pi.CProducto_Ingrediente='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -79,19 +73,18 @@ namespace Data.Implementation
                             var producto = new Producto();
                             var ingrediente = new Ingrediente();
 
-                            producto.CProducto = Convert.ToInt32(dr["CProducto"]);
+                            productoingrediente.CProducto_Ingrediente = Convert.ToInt32(dr["CProducto_Ingrediente"]);
                             producto.NProducto = dr["NProducto"].ToString();
                             productoingrediente.CProducto = producto;
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
                             ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             productoingrediente.CIngrediente = ingrediente;
                             productoingrediente.QUsadaIngrediente = Convert.ToInt32(dr["QUsadaIngrediente"]);
                             productoingrediente.NUnidadMedidaUsada = dr["NUnidadMedidaUsada"].ToString();
-
                         }
                     }
                     con.Close();
                 }
+
             }
             catch (Exception)
             {
@@ -100,10 +93,9 @@ namespace Data.Implementation
             return productoingrediente;
         }
 
-        public Producto_Ingrediente FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
+        
+
+        
 
         public bool Insert(Producto_Ingrediente t)
         {
@@ -138,10 +130,8 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Producto_Ingrediente set CIngrediente=@idingrdnt, QUsadaIngrediente=@qusada, NUnidadMedidaUsada=@nusada where CProducto=@idprodct and CIngrediente=@idingrdnt", con);
-                    cmd.Parameters.AddWithValue("@idprodct", t.CProducto.CProducto);
-                    cmd.Parameters.AddWithValue("@idingrdnt", t.CIngrediente.CIngrediente);
-                    cmd.Parameters.AddWithValue("@idingrdnt", t.CIngrediente.CIngrediente);
+                    var cmd = new SqlCommand("update Producto_Ingrediente set QUsadaIngrediente=@qusada, NUnidadMedidaUsada=@nusada where CProducto_Ingrediente=@id", con);
+                    cmd.Parameters.AddWithValue("@id", t.CProducto_Ingrediente);
                     cmd.Parameters.AddWithValue("@qusada", t.QUsadaIngrediente);
                     cmd.Parameters.AddWithValue("@nusada", t.NUnidadMedidaUsada);
                     cmd.ExecuteNonQuery();

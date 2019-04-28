@@ -82,17 +82,7 @@ namespace Data.Implementation
             }
             return tpproducto;
         }
-
-        public TipoProducto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoProducto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+                        
         public bool Insert(TipoProducto t)
         {
             bool rpta = false;
