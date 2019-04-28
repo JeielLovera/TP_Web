@@ -13,7 +13,6 @@ namespace Data
         bool Delete(int id);
         List<T> FindAll();
         T FindById(int? id);
-        T FindById(int? id, int? id2);
-        T FindById(int? id, int? id2, int? id3);
+
     }
 }
