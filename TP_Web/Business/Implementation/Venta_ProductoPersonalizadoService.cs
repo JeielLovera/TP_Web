@@ -27,17 +27,7 @@ namespace Business.Implementation
 
         public Venta_ProductoPersonalizado FindById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Venta_ProductoPersonalizado FindById(int? id, int? id2)
-        {
-            return venta_pro_repo.FindById(id, id2);
-        }
-
-        public Venta_ProductoPersonalizado FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
+            return venta_pro_repo.FindById(id);
         }
 
         public bool Insert(Venta_ProductoPersonalizado t)
@@ -52,7 +42,12 @@ namespace Business.Implementation
 
         public bool Update(Venta_ProductoPersonalizado t)
         {
-            throw new NotImplementedException();
+            Venta venta = ventaRepository.FindById(t.CVenta.CVenta);
+            Ingrediente ingrediente = ingredienteRepository.FindById(t.CIngrediente.CIngrediente);
+            t.CVenta = venta;
+            t.CIngrediente = ingrediente;
+
+            return venta_pro_repo.Update(t);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Venta_ProductoPersonalizado", con);
+                    var cmd = new SqlCommand("select vpp.CVenta_Pro_Per, vpp.CVenta, ig.NIngrediente, vpp.QUsadaIngrediente, vpp.PrecioXGramo from Venta_ProductoPersonalizado vpp, Ingrediente ig where vpp.CIngrediente=ig.CIngrediente", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -33,13 +33,13 @@ namespace Data.Implementation
                             var venta = new Venta();
                             var ingrediente = new Ingrediente();
 
+                            ventapp.CVenta_Pro_Per = Convert.ToInt32(dr["CVenta_Pro_Per"]);
                             venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             ventapp.CVenta = venta;
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             ventapp.CIngrediente = ingrediente;
-                            ventapp.PrecioXGramo = Convert.ToDouble(dr["PrecioXGramo"]);
                             ventapp.QUsadaIngrediente = Convert.ToInt32(dr["QUsadaIngrediente"]);
-
+                            ventapp.PrecioXGramo = Convert.ToDouble(dr["PrecioXGramo"]);
                             ventas.Add(ventapp);
                         }
                     }
@@ -56,18 +56,13 @@ namespace Data.Implementation
 
         public Venta_ProductoPersonalizado FindById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Venta_ProductoPersonalizado FindById(int? id, int? id2)
-        {
             Venta_ProductoPersonalizado ventapp = null;
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Venta_ProductoPersonalizado where CVenta ='" + id + "' and CIngrediente='" +id2 +"'", con);
+                    var cmd = new SqlCommand("select vpp.CVenta_Pro_Per, vpp.CVenta, ig.NIngrediente, vpp.QUsadaIngrediente, vpp.PrecioXGramo from Venta_ProductoPersonalizado vpp, Ingrediente ig where vpp.CIngrediente=ig.CIngrediente and vpp.CVenta_Pro_Per='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -76,12 +71,14 @@ namespace Data.Implementation
                             var venta = new Venta();
                             var ingrediente = new Ingrediente();
 
+                            ventapp.CVenta_Pro_Per = Convert.ToInt32(dr["CVenta_Pro_Per"]);
                             venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             ventapp.CVenta = venta;
-                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             ventapp.CIngrediente = ingrediente;
-                            ventapp.PrecioXGramo = Convert.ToDouble(dr["PrecioXGramo"]);
                             ventapp.QUsadaIngrediente = Convert.ToInt32(dr["QUsadaIngrediente"]);
+                            ventapp.PrecioXGramo = Convert.ToDouble(dr["PrecioXGramo"]);
+
                         }
                     }
                     con.Close();
@@ -94,12 +91,7 @@ namespace Data.Implementation
             }
             return ventapp;
         }
-
-        public Venta_ProductoPersonalizado FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public bool Insert(Venta_ProductoPersonalizado t)
         {
             bool rpta = false;
@@ -124,8 +116,6 @@ namespace Data.Implementation
                 throw;
             }
 
-
-
             return rpta;
         }
 
@@ -137,9 +127,8 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Venta_ProductoPersonalizado set QUsadaIngrediente = @QUsadaIngrediente, PrecioXGramo=@PrecioXGramo where CVenta =@CVenta and CIngrediente=@CIngrediente", con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
-                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
+                    var cmd = new SqlCommand("update Venta_ProductoPersonalizado set QUsadaIngrediente = @QUsadaIngrediente, PrecioXGramo=@PrecioXGramo where CVenta_Pro_Per=@id", con);
+                    cmd.Parameters.AddWithValue("@id", t.CVenta_Pro_Per);
                     cmd.Parameters.AddWithValue("@QUsadaIngrediente", t.QUsadaIngrediente);
                     cmd.Parameters.AddWithValue("@PrecioXGramo", t.PrecioXGramo);
                     cmd.ExecuteNonQuery();
