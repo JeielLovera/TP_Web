@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Entity.Producto>
+﻿@model IEnumerable<Entity.TipoProducto>
 
 @{
     ViewBag.Title = "Index";
@@ -12,36 +12,27 @@
 </p>
 <table class="table">
     <tr>
-
         <th>
-            @Html.DisplayNameFor(model => model.CProducto)
+            @Html.DisplayNameFor(model => model.CTipoProducto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NProducto)
+            @Html.DisplayNameFor(model => model.NTipoProducto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MPrecio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CTipoProducto.NTipoProducto)
-        </th>
-        <th></th>
+            @Html.DisplayNameFor(model => model.CSubTipoProducto.NTipoProducto)
+        </th><th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CProducto)
+            @Html.DisplayFor(modelItem => item.CTipoProducto)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NProducto)
+            @Html.DisplayFor(modelItem => item.NTipoProducto)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MPrecio)
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.CTipoProducto.NTipoProducto)
+            @Html.DisplayFor(modelItem => item.CSubTipoProducto.NTipoProducto)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

@@ -16,7 +16,7 @@
         <h4>Producto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-     
+       
 
         <div class="form-group">
             @Html.LabelFor(model => model.NProducto, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -38,11 +38,10 @@
             @Html.LabelFor(model => model.CTipoProducto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CTipoProducto.CTipoProducto,
-                                    new SelectList(ViewBag.tipoproducto, "CTipoProducto", "NTipoProducto"), "---Select---", "")
-                @Html.ValidationMessageFor(model => model.CTipoProducto.CTipoProducto, "", new { @class = "text-danger" })
+                                    new SelectList(ViewBag.tpproducto, "CTipoProducto","NTipoProducto"), "---Select---", "")
+                @Html.ValidationMessageFor(model => model.CTipoProducto.NTipoProducto, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
