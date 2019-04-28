@@ -61,19 +61,24 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select ig.CIngrediente, ig.NIngrediente, ig.QUnidadMedidaIngrediente, ig.NUnidadMedidaIngrediente, tp.NTipoIngrediente as TipoIngrediente from Ingrediente ig, TipoIngrediente tp where ig.CTipoIngrediente=tp.CTipoIngrediente and ig.CIngrediente='"+id+"'", con);
+                    var cmd = new SqlCommand("select ig.CIngrediente, ig.NIngrediente, ig.QUnidadMedidaIngrediente, ig.NUnidadMedidaIngrediente, tp.NTipoIngrediente from Ingrediente ig, TipoIngrediente tp where ig.CTipoIngrediente=tp.CTipoIngrediente and ig.CIngrediente='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
-                        ingrediente = new Ingrediente();
-                        var tipo = new TipoIngrediente();
-                        ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
-                        ingrediente.NIngrediente = dr["NIngrediente"].ToString();
-                        ingrediente.QUnidadMedidaIngrediente = Convert.ToInt32(dr["QUnidadMedidaIngrediente"]);
-                        ingrediente.NUnidadMedidaIngrediente = dr["NUnidadMedidaIngrediente"].ToString();
-                        tipo.NTipoIngrediente = dr["TipoIngrediente"].ToString();
-                        ingrediente.CTipoIngrediente = tipo;
+                        while (dr.Read())
+                        {
+                            ingrediente = new Ingrediente();
+                            var tipo = new TipoIngrediente();
+                            ingrediente.CIngrediente = Convert.ToInt32(dr["CIngrediente"]);
+                            ingrediente.NIngrediente = dr["NIngrediente"].ToString();
+                            ingrediente.QUnidadMedidaIngrediente = Convert.ToInt32(dr["QUnidadMedidaIngrediente"]);
+                            ingrediente.NUnidadMedidaIngrediente = dr["NUnidadMedidaIngrediente"].ToString();
+                            tipo.NTipoIngrediente = dr["NTipoIngrediente"].ToString();
+                            ingrediente.CTipoIngrediente = tipo;
+                        }
+                        
                         
                     }
+                    con.Close();
                 }
 
             }
