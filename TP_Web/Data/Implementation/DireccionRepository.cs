@@ -101,17 +101,16 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Direccion values(@ndireccion,@cdistrito,@ctipo)", con);
+                    var cmd = new SqlCommand("insert into Direccion values(@ndireccion,@ctipo,@cdistrito)", con);
 
                     
                     cmd.Parameters.AddWithValue("@ndireccion", t.NDireccion);
-                    cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);
                     cmd.Parameters.AddWithValue("@ctipo", t.CTipoDireccion.CTipo);
+                    cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);                    
 
                     cmd.ExecuteNonQuery();
-
-                    rpta = true;
                     con.Close();
+                    rpta = true;                    
                 }
             }
             catch (Exception)

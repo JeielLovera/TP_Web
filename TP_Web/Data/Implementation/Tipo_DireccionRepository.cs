@@ -57,11 +57,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Tipo_Direccion where CTipo='" + id + "'", con);
+                    var cmd = new SqlCommand("select * from TipoDireccion where CTipoDireccion='" + id + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
-                        { 
+                        {
+                            direccion=new Tipo_Direccion();
                             direccion.CTipo = Convert.ToInt32(dr["CTipoDireccion"]);
                             direccion.NTipo = Convert.ToString(dr["NTipoDireccion"]);
                         }
