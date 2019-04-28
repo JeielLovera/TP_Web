@@ -27,17 +27,14 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select tp.CTipoProducto, tp.NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto = tp2.CTipoProducto", con);
+                    var cmd = new SqlCommand("select*from TipoProducto", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             var tpproducto = new TipoProducto();
-                            var subtpproducto = new TipoProducto();
                             tpproducto.CTipoProducto = Convert.ToInt32(dr["CTipoProducto"]);
                             tpproducto.NTipoProducto = dr["NTipoProducto"].ToString();
-                            subtpproducto.NTipoProducto = dr["SubTipoProducto"].ToString();
-                            tpproducto.CSubTipoProducto = subtpproducto;
                             tipos.Add(tpproducto);
                         }
                     }
@@ -60,17 +57,15 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select tp.CTipoProducto, tp.NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto = tp2.CTipoProducto and tp.CTipoProducto ='" + id + "'", con);
+                    var cmd = new SqlCommand("select*from TipoProducto where CTipoProducto='"+id+"'",con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             tpproducto = new TipoProducto();
-                            var subtpproducto = new TipoProducto();
                             tpproducto.CTipoProducto = Convert.ToInt32(dr["CTipoProducto"]);
                             tpproducto.NTipoProducto = dr["NTipoProducto"].ToString();
-                            subtpproducto.NTipoProducto = dr["SubTipoProducto"].ToString();
-                            tpproducto.CSubTipoProducto = subtpproducto;
+ 
                         }
                     }
                     con.Close();
@@ -91,9 +86,8 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into TipoProducto values(@nombre,@subid)", con);
+                    var cmd = new SqlCommand("insert into TipoProducto values(@nombre)", con);
                     cmd.Parameters.AddWithValue("@nombre", t.NTipoProducto);
-                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
@@ -115,10 +109,9 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update TipoProducto set NTipoProducto=@nombre, CSubTipoProducto=@subid where CTipoProducto=@id", con);
+                    var cmd = new SqlCommand("update TipoProducto set NTipoProducto=@nombre where CTipoProducto=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CTipoProducto);
                     cmd.Parameters.AddWithValue("@nombre", t.NTipoProducto);
-                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                     con.Close();
