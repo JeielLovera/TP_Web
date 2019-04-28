@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public interface IOrden_ProductoPerzonalizadoRepository : ICrudRepository<Orden_ProductoPerzonalizado>
+    public interface IOrden_ProductoPersonalizadoRepository : ICrudRepository<Orden_ProductoPersonalizado>
     {
     }
 }

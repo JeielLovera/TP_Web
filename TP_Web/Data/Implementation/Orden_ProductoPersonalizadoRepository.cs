@@ -11,16 +11,16 @@ using System.Configuration;
 
 namespace Data.Implementation
 {
-    public class Orden_ProductoPerzonalizadoRepository : IOrden_ProductoPerzonalizadoRepository
+    public class Orden_ProductoPersonalizadoRepository : IOrden_ProductoPersonalizadoRepository
     {
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Orden_ProductoPerzonalizado> FindAll()
+        public List<Orden_ProductoPersonalizado> FindAll()
         {
-            var ordenes = new List<Orden_ProductoPerzonalizado>();
+            var ordenes = new List<Orden_ProductoPersonalizado>();
 
             try
             {
@@ -33,7 +33,7 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            var orden_p_p = new Orden_ProductoPerzonalizado();
+                            var orden_p_p = new Orden_ProductoPersonalizado();
                             var orden = new Orden();
                             var venta = new Venta();
                             var empleado = new Empleado();
@@ -62,19 +62,19 @@ namespace Data.Implementation
 
             return ordenes;
         }
-        public Orden_ProductoPerzonalizado FindById(int? id)
+        public Orden_ProductoPersonalizado FindById(int? id)
         {
             throw new NotImplementedException();
         }
 
-        public Orden_ProductoPerzonalizado FindById(int? id, int? id2)
+        public Orden_ProductoPersonalizado FindById(int? id, int? id2)
         {
             throw new NotImplementedException();
         }
 
-        public Orden_ProductoPerzonalizado FindById(int? id, int? id2, int? id3)
+        public Orden_ProductoPersonalizado FindById(int? id, int? id2, int? id3)
         {
-            Orden_ProductoPerzonalizado orden_p_p = null;
+            Orden_ProductoPersonalizado orden_p_p = null;
 
             try
             {
@@ -116,7 +116,7 @@ namespace Data.Implementation
             return orden_p_p;
         }
 
-        public bool Insert(Orden_ProductoPerzonalizado t)
+        public bool Insert(Orden_ProductoPersonalizado t)
         {
             bool rpta = false;
 
@@ -143,7 +143,7 @@ namespace Data.Implementation
             return rpta;
         }
 
-        public bool Update(Orden_ProductoPerzonalizado t)
+        public bool Update(Orden_ProductoPersonalizado t)
         {
             bool rpta = false;
 
