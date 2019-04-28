@@ -8,6 +8,7 @@ namespace Entity
 {
     public class Producto_Ingrediente
     {
+        public int CProducto_Ingrediente { get; set; }
         public Producto CProducto { get; set; }
         public Ingrediente CIngrediente { get; set; }
         public int QUsadaIngrediente { get; set; }

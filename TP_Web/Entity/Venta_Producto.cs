@@ -8,6 +8,7 @@ namespace Entity
 {
     public class Venta_Producto
     {
+        public int CVenta_Producto { get; set; }
         public Producto CProducto { get; set; }
         public Venta CVenta { get; set; }
         public int QCantidad { get; set; }
