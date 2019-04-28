@@ -9,7 +9,7 @@ using Entity;
 
 namespace Business.Implementation
 {
-    public class Producto_IngredienteService : IProducto_IngredienteRepository
+    public class Producto_IngredienteService : IProducto_IngredienteService
     {
         private IProducto_IngredienteRepository prodctingrdntRepository = new Producto_IngredienteRepository();
         private IProductoRepository prodctRepository = new ProductoRepository();
