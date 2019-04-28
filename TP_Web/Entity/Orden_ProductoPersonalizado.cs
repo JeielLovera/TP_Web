@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class Orden_ProductoPerzonalizado
+    public class Orden_ProductoPersonalizado
     {
-        public Venta CVenta { get; set; }
+        public int COrden_Pro_Per { get; set; }
         public Orden COrden { get; set; }
         public Ingrediente CIngrediente { get; set; }
         public Empleado CEmpleado { get; set; }
-        public int QOrdenProductoPerzonalizado { get; set; }
+        public int QOrdenProductoPersonalizado { get; set; }
     }
 }
