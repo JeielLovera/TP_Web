@@ -26,7 +26,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Local", con);
+                    var cmd = new SqlCommand("select CLocal, TDireccionLocal, NumTelefono from Local", con);
 
                     using (var dr = cmd.ExecuteReader())
                     {
@@ -37,6 +37,7 @@ namespace Data.Implementation
                             local.CLocal = Convert.ToInt32(dr["CLocal"]);
                             local.TDireccionLocal = dr["TDireccionLocal"].ToString();
                             local.NumTelefono = Convert.ToInt32(dr["NumTelefono"]);
+                            locales.Add(local);
                         }
                     }
                     con.Close();
@@ -90,9 +91,9 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@numtelefono", t.NumTelefono);
 
                     cmd.ExecuteNonQuery();
-
-                    rpta = true;
                     con.Close();
+                    rpta = true;
+                    
                 }
             }
             catch(Exception)
