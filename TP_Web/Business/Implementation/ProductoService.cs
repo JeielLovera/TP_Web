@@ -28,15 +28,6 @@ namespace Business.Implementation
             return ProductoRepository.FindById(id);
         }
 
-        public Producto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Producto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Insert(Producto t)
         {

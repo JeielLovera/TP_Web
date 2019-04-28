@@ -76,16 +76,6 @@ namespace Data.Implementation
             return rol;
         }
 
-        public Rol FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Rol FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Insert(Rol t)
         {
             bool rpta = false;

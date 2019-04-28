@@ -27,16 +27,6 @@ namespace Business.Implementation
             return RolRepository.FindById(id);
         }
 
-        public Rol FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Rol FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Insert(Rol t)
         {
             return RolRepository.Insert(t);
