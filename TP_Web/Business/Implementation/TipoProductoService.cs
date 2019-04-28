@@ -41,15 +41,6 @@ namespace Business.Implementation
             t.CSubTipoProducto = subtpproducto;
             return tpproductoRepository.Update(t);
         }
-
-        public TipoProducto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoProducto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

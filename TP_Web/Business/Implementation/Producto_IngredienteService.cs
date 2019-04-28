@@ -27,7 +27,7 @@ namespace Business.Implementation
 
         public Producto_Ingrediente FindById(int? id)
         {
-            throw new NotImplementedException();
+            return prodctingrdntRepository.FindById(id);
         }
 
         public bool Insert(Producto_Ingrediente t)
@@ -48,14 +48,6 @@ namespace Business.Implementation
             return prodctingrdntRepository.Update(t);
         }
 
-        public Producto_Ingrediente FindById(int? id, int? id2)
-        {            
-            return prodctingrdntRepository.FindById(id,id2);
-        }
-
-        public Producto_Ingrediente FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

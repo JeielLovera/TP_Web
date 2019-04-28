@@ -28,17 +28,7 @@ namespace Business.Implementation
         {
             return empleadorepo.FindById(id);
         }
-
-        public Empleado FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Empleado FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+               
         public bool Insert(Empleado t)
         {
             Empleado jefe = jefeRepository.FindById(t.CJefe.CEmpleado);

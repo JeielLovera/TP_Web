@@ -29,17 +29,7 @@ namespace Business.Implementation
             return ingredienteRepository.FindById(id);
 
         }
-
-        public Ingrediente FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Ingrediente FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public bool Insert(Ingrediente t)
         {
             TipoIngrediente tpingrediente = tpingredienteRepository.FindById(t.CTipoIngrediente.CTipoIngrediente);
