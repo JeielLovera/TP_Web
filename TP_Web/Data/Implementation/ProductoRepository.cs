@@ -67,7 +67,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select p.CProducto, p.NProducto, p.MPrecio, tp.NTipoProducto from Producto p, TipoProducto tp where p.CTipoProducto=tp.CTipoProducto and p.CTipoProducto='"+ id +"'", con);
+                    var cmd = new SqlCommand("select p.CProducto, p.NProducto, p.MPrecio, tp.NTipoProducto from Producto p, TipoProducto tp where p.CTipoProducto=tp.CTipoProducto and p.CTipoProducto='" + id + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -78,7 +78,7 @@ namespace Data.Implementation
                             producto.CProducto = Convert.ToInt32(dr["CProducto"]);
                             producto.NProducto = dr["NProducto"].ToString();
                             producto.MPrecio = Convert.ToDouble(dr["MPrecio"]);
-                            tp.NTipoProducto = dr["NTipoProducto"].ToString();                            
+                            tp.NTipoProducto = dr["NTipoProducto"].ToString();
                             producto.CTipoProducto = tp;
 
                         }
@@ -91,16 +91,6 @@ namespace Data.Implementation
                 throw;
             }
             return producto;
-        }
-
-        public Producto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Producto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
         }
 
         public bool Insert(Producto t)
@@ -120,7 +110,7 @@ namespace Data.Implementation
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
-                    
+
                 }
             }
             catch (Exception)

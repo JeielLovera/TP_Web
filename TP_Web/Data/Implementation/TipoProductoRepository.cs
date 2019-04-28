@@ -28,7 +28,7 @@ namespace Data.Implementation
                 {
                     con.Open();
                     var cmd = new SqlCommand("select tp.CTipoProducto, tp.NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto = tp2.CTipoProducto", con);
-                    using (var dr=cmd.ExecuteReader())
+                    using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
@@ -36,7 +36,7 @@ namespace Data.Implementation
                             var subtpproducto = new TipoProducto();
                             tpproducto.CTipoProducto = Convert.ToInt32(dr["CTipoProducto"]);
                             tpproducto.NTipoProducto = dr["NTipoProducto"].ToString();
-                            subtpproducto.NTipoProducto = dr["SubTipoProducto"].ToString();                            
+                            subtpproducto.NTipoProducto = dr["SubTipoProducto"].ToString();
                             tpproducto.CSubTipoProducto = subtpproducto;
                             tipos.Add(tpproducto);
                         }
@@ -57,11 +57,11 @@ namespace Data.Implementation
             TipoProducto tpproducto = null;
             try
             {
-                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString())) 
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select tp.CTipoProducto, tp.NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto = tp2.CTipoProducto and tp.CTipoProducto ='"+id+"'" , con);
-                    using (var dr=cmd.ExecuteReader())
+                    var cmd = new SqlCommand("select tp.CTipoProducto, tp.NTipoProducto, tp2.NTipoProducto SubTipoProducto from TipoProducto tp, TipoProducto tp2 where tp.CSubTipoProducto = tp2.CTipoProducto and tp.CTipoProducto ='" + id + "'", con);
+                    using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
@@ -82,23 +82,13 @@ namespace Data.Implementation
             }
             return tpproducto;
         }
-
-        public TipoProducto FindById(int? id, int? id2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TipoProducto FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+                        
         public bool Insert(TipoProducto t)
         {
             bool rpta = false;
             try
             {
-                using (var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
                     var cmd = new SqlCommand("insert into TipoProducto values(@nombre,@subid)", con);
@@ -107,7 +97,7 @@ namespace Data.Implementation
                     cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
-                    
+
                 }
             }
             catch (Exception)
@@ -122,13 +112,13 @@ namespace Data.Implementation
             bool rpta = false;
             try
             {
-                using (var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
                     var cmd = new SqlCommand("update TipoProducto set NTipoProducto=@nombre, CSubTipoProducto=@subid where CTipoProducto=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CTipoProducto);
                     cmd.Parameters.AddWithValue("@nombre", t.NTipoProducto);
-                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto.CTipoProducto);                    
+                    cmd.Parameters.AddWithValue("@subid", t.CSubTipoProducto.CTipoProducto);
                     cmd.ExecuteNonQuery();
                     rpta = true;
                     con.Close();
