@@ -25,19 +25,9 @@ namespace Business.Implementation
 
         public Orden FindById(int? id)
         {
-            throw new NotImplementedException();
+            return ordenrepo.FindById(id);
         }
-
-        public Orden FindById(int? id, int? id2)
-        {
-            return ordenrepo.FindById(id, id2);
-        }
-
-        public Orden FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public bool Insert(Orden t)
         {
             Venta venta = ventarepo.FindById(t.CVenta.CVenta);

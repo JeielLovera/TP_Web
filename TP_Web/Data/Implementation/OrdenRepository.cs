@@ -53,11 +53,6 @@ namespace Data.Implementation
 
         public Orden FindById(int? id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Orden FindById(int? id, int? id2)
-        {
             Orden orden = null;
 
             try
@@ -65,7 +60,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden o where o.CVenta='" + id + "' and o.COrden='"+id2+"'", con);
+                    var cmd = new SqlCommand("select * from Orden o where o.CVenta='" + id + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -91,10 +86,6 @@ namespace Data.Implementation
             return orden;
         }
 
-        public Orden FindById(int? id, int? id2, int? id3)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Insert(Orden t)
         {
@@ -105,9 +96,9 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Orden values(@CVenta,@COrden, @FOrdenAtendida, @DHoraEntrega)", con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    var cmd = new SqlCommand("insert into Orden values(@COrden,@CVenta, @FOrdenAtendida, @DHoraEntrega)", con);
                     cmd.Parameters.AddWithValue("@COrden", t.COrden);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);                    
                     cmd.Parameters.AddWithValue("@FOrdenAtendida", t.FOrdenAtendida);
                     cmd.Parameters.AddWithValue("@DHoraEntrega", t.DHoraEntrega);
 
@@ -131,8 +122,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Orden set FOrdenAtendida=@FOrdenAtendida, DHoraEntrega=@DHoraEntrega where CVenta = @CVenta and COrden = @COrden",con);
-                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    var cmd = new SqlCommand("update Orden set FOrdenAtendida=@FOrdenAtendida, DHoraEntrega=@DHoraEntrega where COrden = @COrden",con);
                     cmd.Parameters.AddWithValue("@COrden", t.COrden);
                     cmd.Parameters.AddWithValue("@FOrdenAtendida", t.FOrdenAtendida);
                     cmd.Parameters.AddWithValue("@DHoraEntrega", t.DHoraEntrega);
