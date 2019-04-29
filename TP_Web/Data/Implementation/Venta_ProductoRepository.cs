@@ -40,7 +40,7 @@ namespace Data.Implementation
                             ventaproducto.CVenta = venta;
                             producto.NProducto = dr["NProducto"].ToString();
                             ventaproducto.CProducto = producto;
-                            ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidada"]);
+                            ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidad"]);
                             arr_vntproduct.Add(ventaproducto);
                         }
                     }
@@ -76,7 +76,7 @@ namespace Data.Implementation
                             ventaproducto.CVenta = venta;
                             producto.NProducto = dr["NProducto"].ToString();
                             ventaproducto.CProducto = producto;
-                            ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidada"]);
+                            ventaproducto.QCantidad = Convert.ToInt32(dr["QCantidad"]);
                         }
                     }
                     con.Close();
