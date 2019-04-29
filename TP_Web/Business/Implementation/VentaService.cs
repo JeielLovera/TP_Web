@@ -37,10 +37,10 @@ namespace Business.Implementation
             Local local = localRepository.FindById(t.CLocal.CLocal);            
             Empleado motorizado = empleadoRepository.FindById(t.CMotorizado.CEmpleado);
             Cliente cliente = clienteRepository.FindById(t.CCliente.CCliente);
-            Direccion direccion = direccionRepository.FindById(t.CCliente.CDireccion.CDireccion);
             t.CLocal = local;
             t.CMotorizado = motorizado;
             t.CCliente = cliente;
+            Direccion direccion = direccionRepository.FindById(t.CCliente.CDireccion.CDireccion);           
             t.CCliente.CDireccion = direccion;
             return ventaRepository.Insert(t);
         }
