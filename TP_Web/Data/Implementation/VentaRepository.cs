@@ -77,7 +77,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.CEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.Cliente=cl.Cliente and dir.CDireccion=cl.CDireccion and v.CVenta='"+id+"'", con);
+                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.CEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.CCliente=cl.CCliente and dir.CDireccion=cl.CDireccion and v.CVenta='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
