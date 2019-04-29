@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Entity.Orden_Producto>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COrden_Producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QOrdenProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COrden.COrden)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CEmpleado.NEmpleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CProducto.NProducto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COrden_Producto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QOrdenProducto)
+        </td>
+
+        <th>
+            @Html.DisplayFor(modelItem => item.COrden.COrden)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.CEmpleado.NEmpleado)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.CProducto.NProducto)
+        </th>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
