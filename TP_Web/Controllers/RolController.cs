@@ -25,7 +25,7 @@ namespace TP_PIZZA.Controllers
         public ActionResult Create(Rol rol)
         {
             bool rpta = rolservice.Insert(rol);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }

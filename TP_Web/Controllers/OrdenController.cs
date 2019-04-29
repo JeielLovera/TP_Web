@@ -14,6 +14,7 @@ namespace TP_PIZZA.Controllers
         // GET: Orden
         private IOrdenService ordenService = new OrdenService();
         private IVentaService ventaService = new VentaService();
+
         public ActionResult Index()
         {
             return View(ordenService.FindAll());
@@ -27,7 +28,7 @@ namespace TP_PIZZA.Controllers
 
         // POST: Orden/Create
         [HttpPost]
-        public ActionResult Create(Orden  orden)
+        public ActionResult Create(Orden orden)
         {
             ViewBag.ventaservice = ventaService.FindAll();
             bool rpta = ordenService.Insert(orden);

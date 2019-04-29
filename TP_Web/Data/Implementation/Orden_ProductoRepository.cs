@@ -35,12 +35,14 @@ namespace Data.Implementation
                         {
                             var orden_producto = new Orden_Producto();
                             var orden = new Orden();
+                            var venta = new Venta();
                             var producto = new Producto();
                             var empleado = new Empleado();
 
                             orden_producto.COrden_Producto = Convert.ToInt32(dr["COrden_Producto"]);
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
-                            orden.CVenta.CVenta = Convert.ToInt32(dr["CVenta"]);
+                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
+                            orden.CVenta = venta;
                             orden_producto.COrden = orden;
                             producto.NProducto = dr["NProducto"].ToString();
                             orden_producto.CProducto = producto;
@@ -115,7 +117,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Producto values (@COrden,@CProducto,@CEmpleado,@QOrdenProducto)", con);
+                    var cmd = new SqlCommand("insert into Orden_Producto values (@COrden,@CProducto,@CEmpleado,@QOrdenProducto)", con);
                     cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
                     cmd.Parameters.AddWithValue("@CProducto", t.CProducto.CProducto);                    
                     cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);

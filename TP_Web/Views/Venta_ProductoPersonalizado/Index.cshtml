@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Entity.Venta_ProductoPersonalizado>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CVenta_Pro_Per)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CVenta.CVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CIngrediente.NIngrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QUsadaIngrediente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioXGramo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CVenta_Pro_Per)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CVenta.CVenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CIngrediente.NIngrediente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QUsadaIngrediente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecioXGramo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -9,45 +9,50 @@
             @Html.DisplayNameFor(model => model.COrden_Producto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QOrdenProducto)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.COrden.COrden)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CEmpleado.NEmpleado)
+            @Html.DisplayNameFor(model => model.COrden.CVenta.CVenta)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CProducto.NProducto)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CEmpleado.NEmpleado)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.QOrdenProducto)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.COrden_Producto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QOrdenProducto)
-        </td>
-
-        <th>
-            @Html.DisplayFor(modelItem => item.COrden.COrden)
-        </th>
-        <th>
-            @Html.DisplayFor(modelItem => item.CEmpleado.NEmpleado)
-        </th>
-        <th>
-            @Html.DisplayFor(modelItem => item.CProducto.NProducto)
-        </th>
-
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.COrden_Producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COrden.COrden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.COrden.CVenta.CVenta)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.CProducto.NProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CEmpleado.NEmpleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QOrdenProducto)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

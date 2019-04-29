@@ -57,11 +57,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Local where CLocal='"+id+"'", con);
+                    var cmd = new SqlCommand("select CLocal, TDireccionLocal, NumTelefono from Local where CLocal='" + id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
+                            local = new Local();
                             local.CLocal = Convert.ToInt32(dr["CLocal"]);
                             local.TDireccionLocal = dr["TDireccionLocal"].ToString();
                             local.NumTelefono = Convert.ToInt32(dr["NumTelefono"]);

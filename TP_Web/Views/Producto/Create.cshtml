@@ -8,15 +8,15 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Producto</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.NProducto, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -38,7 +38,7 @@
             @Html.LabelFor(model => model.CTipoProducto, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CTipoProducto.CTipoProducto,
-                                    new SelectList(ViewBag.tpproducto, "CTipoProducto","NTipoProducto"), "---Select---", "")
+                                    new SelectList(ViewBag.tpproducto, "CTipoProducto", "NTipoProducto"), "---Select---", "")
                 @Html.ValidationMessageFor(model => model.CTipoProducto.NTipoProducto, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -1,56 +1,56 @@
 ﻿@model Entity.Orden_ProductoPersonalizado
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Orden_ProductoPersonalizado</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.QOrdenProductoPersonalizado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.QOrdenProductoPersonalizado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.QOrdenProductoPersonalizado, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-horizontal">
+        <h4>Orden_ProductoPersonalizado</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.COrden, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.COrden.COrden,
+        <div class="form-group">
+            @Html.LabelFor(model => model.COrden, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.COrden.COrden,
                                 new SelectList(ViewBag.orden, "COrden", "COrden"), "---Select---", "")
-            @Html.ValidationMessageFor(model => model.COrden.COrden, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.COrden.COrden, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CIngrediente.NIngrediente, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.CIngrediente.NIngrediente,
+        <div class="form-group">
+            @Html.LabelFor(model => model.CIngrediente, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CIngrediente.CIngrediente,
                                 new SelectList(ViewBag.ingrediente, "CIngrediente", "NIngrediente"), "---Select---", "")
-            @Html.ValidationMessageFor(model => model.CIngrediente.NIngrediente, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.CIngrediente.CIngrediente, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CEmpleado.NEmpleado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.CEmpleado.NEmpleado,
+        <div class="form-group">
+            @Html.LabelFor(model => model.CEmpleado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CEmpleado.CEmpleado,
                                 new SelectList(ViewBag.empleado, "CEmpleado", "NEmpleado"), "---Select---", "")
-            @Html.ValidationMessageFor(model => model.CEmpleado.NEmpleado, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.CEmpleado.CEmpleado, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.QOrdenProductoPersonalizado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QOrdenProductoPersonalizado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QOrdenProductoPersonalizado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 <div>

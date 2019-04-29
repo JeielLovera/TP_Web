@@ -31,7 +31,7 @@ namespace TP_PIZZA.Controllers
             ViewBag.tipodirec = tpdirecService.FindAll();
             ViewBag.distrito = distritoservice.FindAll();
             bool rpta = direccionservice.Insert(direc);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }

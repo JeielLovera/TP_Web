@@ -27,26 +27,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CDireccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NDireccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CTipoDireccion.NTipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CDistrito.NDistrito)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CDireccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NDireccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CTipoDireccion.NTipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CDistrito.NDistrito)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

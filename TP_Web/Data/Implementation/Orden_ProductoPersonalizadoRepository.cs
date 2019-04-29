@@ -35,12 +35,14 @@ namespace Data.Implementation
                         {
                             var orden_p_p = new Orden_ProductoPersonalizado();
                             var orden = new Orden();
+                            var venta = new Venta();
                             var empleado = new Empleado();
                             var ingrediente = new Ingrediente();
 
                             orden_p_p.COrden_Pro_Per = Convert.ToInt32(dr["COrden_Pro_Per"]);
                             orden.COrden = Convert.ToInt32(dr["COrden"]);
-                            orden.CVenta.CVenta = Convert.ToInt32(dr["CVenta"]);
+                            venta.CVenta = Convert.ToInt32(dr["CVenta"]);
+                            orden.CVenta = venta;
                             orden_p_p.COrden = orden;
                             ingrediente.NIngrediente = dr["NIngrediente"].ToString();
                             orden_p_p.CIngrediente = ingrediente;
@@ -113,7 +115,7 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@COrden", t.COrden.COrden);
                     cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
                     cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado.CEmpleado);
-                    cmd.Parameters.AddWithValue("@QOrdenProductoPerzonalizado", t.QOrdenProductoPersonalizado);
+                    cmd.Parameters.AddWithValue("@QOrdenProductoPersonalizado", t.QOrdenProductoPersonalizado);
 
                     cmd.ExecuteNonQuery();
                     rpta = true;

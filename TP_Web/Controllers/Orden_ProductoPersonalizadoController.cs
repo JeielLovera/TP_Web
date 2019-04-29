@@ -9,7 +9,7 @@ using Entity;
 
 namespace TP_PIZZA.Controllers
 {
-    public class Orden_Producto_PersonalizadoController : Controller
+    public class Orden_ProductoPersonalizadoController : Controller
     {
         // GET: Orden_Producto_Personalizado
 

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Business;
 using Business.Implementation;
 using Entity;
+
 namespace TP_PIZZA.Controllers
 {
     public class ProductoController : Controller
@@ -35,11 +36,11 @@ namespace TP_PIZZA.Controllers
         {
             ViewBag.tpproducto = tpproductoservice.FindAll();
             bool rpta = productoservice.Insert(prod);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
-             
+
             return View();
         }
 
@@ -51,7 +52,7 @@ namespace TP_PIZZA.Controllers
             ViewBag.tpproducto = tpproductoservice.FindAll();
             bool rpta = productoservice.Update(prod);
 
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }

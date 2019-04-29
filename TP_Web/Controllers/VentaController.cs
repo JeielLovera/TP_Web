@@ -33,7 +33,7 @@ namespace TP_PIZZA.Controllers
             ViewBag.motorizado = motorizadoservice.FindAll();
             ViewBag.cliente = clienteservice.FindAll();
             bool rpta = ventaservice.Insert(venta);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }

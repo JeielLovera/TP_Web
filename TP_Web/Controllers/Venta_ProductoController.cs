@@ -20,7 +20,7 @@ namespace TP_PIZZA.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.producto= productoservice.FindAll();
+            ViewBag.producto = productoservice.FindAll();
             ViewBag.venta = ventaservice.FindAll();
             return View();
         }
