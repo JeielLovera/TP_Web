@@ -38,5 +38,32 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.tipoingrediente = tpingredienteService.FindAll();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Ingrediente ingrdnt = ingredienteService.FindById(id);
+            return View(ingrdnt);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Ingrediente ingrdnt)
+        {
+            ViewBag.tipoingrediente = tpingredienteService.FindAll();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = ingredienteService.Update(ingrdnt);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
