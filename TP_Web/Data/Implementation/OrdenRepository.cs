@@ -60,7 +60,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select * from Orden o where o.CVenta='" + id + "'", con);
+                    var cmd = new SqlCommand("select * from Orden where COrden='" + id + "'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -96,8 +96,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("insert into Orden values(@COrden,@CVenta, @FOrdenAtendida, @DHoraEntrega)", con);
-                    cmd.Parameters.AddWithValue("@COrden", t.COrden);
+                    var cmd = new SqlCommand("insert into Orden values(@CVenta, @FOrdenAtendida, @DHoraEntrega)", con);
                     cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);                    
                     cmd.Parameters.AddWithValue("@FOrdenAtendida", t.FOrdenAtendida);
                     cmd.Parameters.AddWithValue("@DHoraEntrega", t.DHoraEntrega);
