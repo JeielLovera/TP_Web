@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Entity.Orden>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COrden)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CVenta.CVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FOrdenAtendida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DHoraEntrega)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.COrden)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.CVenta.CVenta)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.FOrdenAtendida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DHoraEntrega)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

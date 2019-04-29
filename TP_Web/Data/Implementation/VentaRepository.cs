@@ -26,12 +26,13 @@ namespace Data.Implementation
                 using(var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.CEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.Cliente=cl.Cliente and dir.CDireccion=cl.CDireccion", con);
+                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.CEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.CCliente= cl.CCliente and dir.CDireccion=cl.CDireccion", con);
                     using(var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             var venta = new Venta();
+
                             var local = new Local();
                             var motorizado = new Empleado();
                             var cliente = new Cliente();
@@ -40,12 +41,15 @@ namespace Data.Implementation
                             venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             local.CLocal = Convert.ToInt32(dr["CLocal"]);
                             venta.CLocal = local;
+
                             venta.MCostoVenta = Convert.ToDouble(dr["MCostoVenta"]);
                             venta.DFechaVenta = Convert.ToDateTime(dr["DFechaVenta"]);
                             venta.QDescuento = Convert.ToDouble(dr["QDescuento"]);
                             venta.IGV = Convert.ToDouble(dr["IGV"]);
+
                             motorizado.NEmpleado = dr["NMotorizado"].ToString();
                             venta.CMotorizado = motorizado;
+
                             cliente.NCliente = dr["NCliente"].ToString();
                             direccion.NDireccion = dr["NDireccion"].ToString();
                             cliente.CDireccion = direccion;
