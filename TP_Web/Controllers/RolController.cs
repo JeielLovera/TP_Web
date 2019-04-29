@@ -31,5 +31,30 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Rol rol = rolservice.FindById(id);
+            return View(rol);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Rol rol)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = rolservice.Update(rol);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

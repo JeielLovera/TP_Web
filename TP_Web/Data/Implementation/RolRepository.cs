@@ -104,7 +104,7 @@ namespace Data.Implementation
             bool rpta = false;
             try
             {
-                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BS_Piazza"].ToString()))
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
                     var cmd = new SqlCommand("update Rol set NRol=@nRol, MSueldo=@MSueldo where CRol=@cRol", con);
