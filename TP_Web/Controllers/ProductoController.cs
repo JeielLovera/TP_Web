@@ -23,13 +23,6 @@ namespace TP_PIZZA.Controllers
             ViewBag.tpproducto = tpproductoservice.FindAll();
             return View();
         }
-        public ActionResult Edit(int? id)
-        {
-            if (id == null) { return HttpNotFound(); }
-            ViewBag.tpproducto = tpproductoservice.FindAll();
-            Producto producto = productoservice.FindById(id);
-            return View(producto);
-        }
 
         [HttpPost]
         public ActionResult Create(Producto prod)
@@ -44,19 +37,32 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.tpproducto = tpproductoservice.FindAll();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Producto prod = productoservice.FindById(id);
+            return View(prod);
+        }
+
         [HttpPost]
         public ActionResult Edit(Producto prod)
         {
-            if (!ModelState.IsValid) { return View(); }
-
             ViewBag.tpproducto = tpproductoservice.FindAll();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             bool rpta = productoservice.Update(prod);
-
             if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
+
     }
 }
