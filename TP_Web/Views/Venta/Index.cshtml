@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Entity.Venta>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CLocal.CLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MCostoVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DFechaVenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QDescuento)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.IGV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CMotorizado.NEmpleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CCliente.NCliente)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.CCliente.CDireccion.NDireccion)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.DHoraEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TReferencia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CVenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLocal.CLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MCostoVenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DFechaVenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QDescuento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IGV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CMotorizado.NEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCliente.NCliente)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CCliente.CDireccion.NDireccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DHoraEntrega.Hour):@Html.DisplayFor(modelItem => item.DHoraEntrega.Minute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TReferencia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
