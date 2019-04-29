@@ -34,5 +34,29 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            TipoProducto tp = tipoproductoservice.FindById(id);
+            return View(tp);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(TipoProducto tp)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = tipoproductoservice.Update(tp);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
