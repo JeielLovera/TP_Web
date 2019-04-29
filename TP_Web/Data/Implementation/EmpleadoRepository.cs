@@ -138,8 +138,8 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Empleado set @NEmpleado,@CDniEmpleado,@TDireccionEmpleado,@NumTelefonoEmpleado, @FActivo,@CRol, @CJefe where CEmpleado=@CEmpleado", con);
-
+                    var cmd = new SqlCommand("update Empleado set NEmpleado=@NEmpleado,CDniEmpleado=@CDniEmpleado,TDireccionEmpleado=@TDireccionEmpleado,NumTelefonoEmpleado=@NumTelefonoEmpleado, FActivo=@FActivo,CRol=@CRol, CJefe=@CJefe where CEmpleado=@CEmpleado", con);
+                    cmd.Parameters.AddWithValue("@CEmpleado", t.CEmpleado);
                     cmd.Parameters.AddWithValue("@NEmpleado", t.NEmpleado);
                     cmd.Parameters.AddWithValue("@CDniEmpleado", t.CDniEmpleado);
                     cmd.Parameters.AddWithValue("@TDireccionEmpleado", t.TDireccionEmpleado);
