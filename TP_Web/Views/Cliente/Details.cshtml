@@ -1,0 +1,50 @@
+﻿@model Entity.Cliente
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumTelefonoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumTelefonoCliente)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CDireccion.NDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CDireccion.NDireccion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.CCliente}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
