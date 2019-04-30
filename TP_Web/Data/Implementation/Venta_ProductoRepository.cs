@@ -127,6 +127,7 @@ namespace Data.Implementation
                     cmd.Parameters.AddWithValue("@cproducto", t.CProducto.CProducto);
                     cmd.Parameters.AddWithValue("@cventa", t.CVenta.CVenta);
                     cmd.Parameters.AddWithValue("@cantidad", t.QCantidad);
+                    cmd.ExecuteNonQuery();
                     con.Close();
                     rpta = true;
                 }
