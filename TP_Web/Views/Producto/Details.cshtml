@@ -1,0 +1,51 @@
+﻿@model Entity.Producto
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NProducto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MPrecio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MPrecio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTipoProducto.NTipoProducto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model=>model.CTipoProducto.NTipoProducto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.CProducto  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

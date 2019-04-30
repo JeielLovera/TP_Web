@@ -18,6 +18,17 @@ namespace TP_PIZZA.Controllers
         {
             return View(productoservice.FindAll());
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Producto prod = productoservice.FindById(id);
+            return View(prod);
+        }
+
         public ActionResult Create()
         {
             ViewBag.tpproducto = tpproductoservice.FindAll();

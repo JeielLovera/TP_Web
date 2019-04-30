@@ -17,6 +17,16 @@ namespace TP_PIZZA.Controllers
             return View(tipoproductoservice.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            TipoProducto tp = tipoproductoservice.FindById(id);
+            return View(tp);
+        }
+
         public ActionResult Create()
         {
             return View();
