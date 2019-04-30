@@ -1,0 +1,98 @@
+﻿@model Entity.Venta
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Venta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CVenta)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CLocal.CLocal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLocal.CLocal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MCostoVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MCostoVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DFechaVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DFechaVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QDescuento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QDescuento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IGV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IGV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CMotorizado.NEmpleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CMotorizado.NEmpleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCliente.NCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCliente.NCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DHoraEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DHoraEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TReferencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TReferencia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.CVenta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
