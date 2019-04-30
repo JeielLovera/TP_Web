@@ -53,25 +53,36 @@ namespace TP_PIZZA.Controllers
         }
 
         // GET: Orden_Producto_Personalizado/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            ViewBag.orden = ordenService.FindAll();
+            ViewBag.ingrediente = ingredienteService.FindAll();
+            ViewBag.empleado = empleadoService.FindAll();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Orden_ProductoPersonalizado orden_ProductoPersonalizado = orden_ProductoPersonalizadoService.FindById(id);
+            return View(orden_ProductoPersonalizado);
         }
 
         // POST: Orden_Producto_Personalizado/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Orden_ProductoPersonalizado orden_ProductoPersonalizado)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+            ViewBag.orden = ordenService.FindAll();
+            ViewBag.ingrediente = ingredienteService.FindAll();
+            ViewBag.empleado = empleadoService.FindAll();
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+            bool rpta = orden_ProductoPersonalizadoService.Update(orden_ProductoPersonalizado);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
