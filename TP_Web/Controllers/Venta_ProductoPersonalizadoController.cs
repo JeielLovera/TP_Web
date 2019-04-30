@@ -67,5 +67,14 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+        public ActionResult Details(int?id)
+        {
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            Venta_ProductoPersonalizado venta_proper = ventprodctperService.FindById(id);
+            return View(venta_proper);
+        }
     }
 }
