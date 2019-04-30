@@ -79,5 +79,14 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+        public ActionResult Details(int? id)
+        {
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            Orden_Producto ordenProd = orden_ProductoService.FindById(id);
+            return View(ordenProd);
+        }
     }
 }
