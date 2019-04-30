@@ -16,6 +16,17 @@ namespace TP_PIZZA.Controllers
         {
             return View(rolservice.FindAll());
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Rol rol = rolservice.FindById(id);
+            return View(rol);
+        }
+
         public ActionResult Create()
         {
             return View();

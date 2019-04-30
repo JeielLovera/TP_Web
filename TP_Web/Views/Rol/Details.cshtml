@@ -1,0 +1,43 @@
+﻿@model Entity.Rol
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rol</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CRol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NRol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NRol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MSueldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MSueldo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.CRol  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

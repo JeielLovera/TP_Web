@@ -22,6 +22,16 @@ namespace TP_PIZZA.Controllers
             return View(empleadoService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Empleado empl = empleadoService.FindById(id);
+            return View(empl);
+        }
+
         public ActionResult Create()
         {
             ViewBag.rol = rolService.FindAll();
