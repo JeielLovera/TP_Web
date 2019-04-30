@@ -26,13 +26,12 @@ namespace Data.Implementation
                 using(var con=new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.CEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.CCliente= cl.CCliente and dir.CDireccion=cl.CDireccion", con);
+                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.NEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.CCliente=cl.CCliente and dir.CDireccion=cl.CDireccion", con);
                     using(var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
                         {
                             var venta = new Venta();
-
                             var local = new Local();
                             var motorizado = new Empleado();
                             var cliente = new Cliente();
@@ -41,15 +40,12 @@ namespace Data.Implementation
                             venta.CVenta = Convert.ToInt32(dr["CVenta"]);
                             local.CLocal = Convert.ToInt32(dr["CLocal"]);
                             venta.CLocal = local;
-
                             venta.MCostoVenta = Convert.ToDouble(dr["MCostoVenta"]);
                             venta.DFechaVenta = Convert.ToDateTime(dr["DFechaVenta"]);
                             venta.QDescuento = Convert.ToDouble(dr["QDescuento"]);
                             venta.IGV = Convert.ToDouble(dr["IGV"]);
-
                             motorizado.NEmpleado = dr["NMotorizado"].ToString();
                             venta.CMotorizado = motorizado;
-
                             cliente.NCliente = dr["NCliente"].ToString();
                             direccion.NDireccion = dr["NDireccion"].ToString();
                             cliente.CDireccion = direccion;
@@ -77,7 +73,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.CEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.CCliente=cl.CCliente and dir.CDireccion=cl.CDireccion and v.CVenta='"+id+"'", con);
+                    var cmd = new SqlCommand("select v.CVenta, v.CLocal, v.MCostoVenta, v.DFechaVenta, v.QDescuento, v.IGV, ep.NEmpleado NMotorizado, cl.NCliente, dir.NDireccion, v.DHoraEntrega , v.TReferencia Referencia from Venta v, Empleado ep, Cliente cl, Direccion dir where v.CMotorizado=ep.CEmpleado and v.CCliente=cl.CCliente and dir.CDireccion=cl.CDireccion and v.CVenta='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -154,6 +150,7 @@ namespace Data.Implementation
                 {
                     con.Open();
                     var cmd = new SqlCommand("update Venta set CLocal=@clocal, MCostoVenta=@costo, DFechaVenta=@fecha, QDescuento=@descuento, IGV=@igv, CMotorizado=@cmotorizado, CCliente=@ccliente, DHoraEntrega=@hora, TReferencia=@referencia where CVenta=@idventa", con);
+                    cmd.Parameters.AddWithValue("@idventa", t.CVenta);
                     cmd.Parameters.AddWithValue("@clocal", t.CLocal.CLocal);
                     cmd.Parameters.AddWithValue("@costo", t.MCostoVenta);
                     cmd.Parameters.AddWithValue("@fecha", t.DFechaVenta);
