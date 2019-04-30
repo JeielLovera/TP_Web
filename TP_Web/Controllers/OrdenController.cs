@@ -43,19 +43,18 @@ namespace TP_PIZZA.Controllers
         // GET: Orden/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null) { return HttpNotFound(); }
             ViewBag.ventaservice = ventaService.FindAll();
+            if (id == null) { return HttpNotFound(); }            
             Orden orden = ordenService.FindById(id);
             return View(orden);
         }
 
         // POST: Orden/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Orden orden)
+        public ActionResult Edit( Orden orden)
         {
-            if (!ModelState.IsValid) { return View(); }
-
             ViewBag.ventaservice = ventaService.FindAll();
+            if (!ModelState.IsValid) { return View(); }
             bool rpta = ordenService.Update(orden);
             if (rpta)
             {
