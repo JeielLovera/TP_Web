@@ -1,0 +1,43 @@
+﻿@model Entity.Local
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Local</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CLocal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLocal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDireccionLocal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDireccionLocal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumTelefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumTelefono)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.CLocal  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
