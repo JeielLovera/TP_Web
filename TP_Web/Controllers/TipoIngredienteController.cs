@@ -23,6 +23,16 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            TipoIngrediente tpingrediente = tpingredienteService.FindById(id);
+            return View(tpingrediente);
+        }
+
 
         [HttpPost]
         public ActionResult Create(TipoIngrediente tpingrediente)

@@ -1,0 +1,60 @@
+﻿@model Entity.Ingrediente
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ingrediente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUnidadMedidaIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUnidadMedidaIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUnidadMedidaIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUnidadMedidaIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model=> model.CTipoIngrediente.NTipoIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model=>model.CTipoIngrediente.NTipoIngrediente)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.CIngrediente  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

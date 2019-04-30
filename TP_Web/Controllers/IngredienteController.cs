@@ -20,6 +20,17 @@ namespace TP_PIZZA.Controllers
             return View(ingredienteService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            ViewBag.tipoingrediente = tpingredienteService.FindAll();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Ingrediente ingrdnt = ingredienteService.FindById(id);
+            return View(ingrdnt);
+        }
+
         public ActionResult Create()
         {
             ViewBag.tipoingrediente = tpingredienteService.FindAll();
