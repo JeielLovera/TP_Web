@@ -32,5 +32,29 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Local local = localservice.FindById(id);
+            return View(local);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Local local)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = localservice.Update(local);
+            if(rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
