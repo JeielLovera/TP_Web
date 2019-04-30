@@ -40,5 +40,32 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+        public ActionResult Edit(int?id)
+        {
+            ViewBag.venta = ventaService.FindAll();
+            ViewBag.ingrediente = ingrdntService.FindAll();
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            Venta_ProductoPersonalizado ventaper = ventprodctperService.FindById(id);
+            return View(ventaper);
+        }
+        [HttpPost]
+        public ActionResult Edit(Venta_ProductoPersonalizado ventaper)
+        {
+            ViewBag.venta = ventaService.FindAll();
+            ViewBag.ingrediente = ingrdntService.FindAll();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = ventprodctperService.Update(ventaper);
+            if(rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
