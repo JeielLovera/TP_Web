@@ -1,0 +1,59 @@
+﻿@model Entity.Venta_ProductoPersonalizado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Venta_ProductoPersonalizado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CVenta_Pro_Per)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CVenta_Pro_Per)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CVenta.CVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CVenta.CVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CIngrediente.NIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CIngrediente.NIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUsadaIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUsadaIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioXGramo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioXGramo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CVenta_Pro_Per  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
