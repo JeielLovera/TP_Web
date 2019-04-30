@@ -127,8 +127,10 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Venta_ProductoPersonalizado set QUsadaIngrediente = @QUsadaIngrediente, PrecioXGramo=@PrecioXGramo where CVenta_Pro_Per=@id", con);
+                    var cmd = new SqlCommand("update Venta_ProductoPersonalizado set CVenta=@CVenta,CIngrediente=@CIngrediente, QUsadaIngrediente = @QUsadaIngrediente, PrecioXGramo=@PrecioXGramo where CVenta_Pro_Per=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CVenta_Pro_Per);
+                    cmd.Parameters.AddWithValue("@CVenta", t.CVenta.CVenta);
+                    cmd.Parameters.AddWithValue("@CIngrediente", t.CIngrediente.CIngrediente);
                     cmd.Parameters.AddWithValue("@QUsadaIngrediente", t.QUsadaIngrediente);
                     cmd.Parameters.AddWithValue("@PrecioXGramo", t.PrecioXGramo);
                     cmd.ExecuteNonQuery();
