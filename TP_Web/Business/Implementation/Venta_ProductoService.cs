@@ -45,7 +45,7 @@ namespace Business.Implementation
             Producto producto = productoRepository.FindById(t.CProducto.CProducto);
             t.CProducto = producto;
             t.CVenta = venta;
-            return vntprodctRepository.Insert(t);
+            return vntprodctRepository.Update(t);
         }
              
     }
