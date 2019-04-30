@@ -24,24 +24,23 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CLocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TDireccionLocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumTelefono)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDireccionLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumTelefono)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CLocal }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CLocal }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CLocal })
+        </td>
+    </tr>
+}
 
 </table>
