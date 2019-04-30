@@ -33,7 +33,37 @@ namespace TP_PIZZA.Controllers
             ViewBag.motorizado = motorizadoservice.FindAll();
             ViewBag.cliente = clienteservice.FindAll();
             bool rpta = ventaservice.Insert(venta);
-            if (rpta)
+            if(rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.local = localservice.FindAll();
+            ViewBag.motorizado = motorizadoservice.FindAll();
+            ViewBag.cliente = clienteservice.FindAll();
+            
+            if (id==null)
+            {
+                return HttpNotFound();
+            }
+            Venta venta = ventaservice.FindById(id);
+            return View(venta);
+        }
+        [HttpPost]
+        public ActionResult Edit(Venta venta)
+        {
+            ViewBag.local = localservice.FindAll();
+            ViewBag.motorizado = motorizadoservice.FindAll();
+            ViewBag.cliente = clienteservice.FindAll();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = ventaservice.Update(venta);
+            if(rpta)
             {
                 return RedirectToAction("Index");
             }
