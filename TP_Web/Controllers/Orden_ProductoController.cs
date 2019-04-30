@@ -48,27 +48,36 @@ namespace TP_PIZZA.Controllers
 
             return View();
         }
-
-        // GET: Orden_Producto/Edit/5
-        public ActionResult Edit(int id)
+        
+        public ActionResult Edit(int? id)
         {
-            return View();
-        }
-
-        // POST: Orden_Producto/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            ViewBag.orden = ordenService.FindAll();
+            ViewBag.producto = productoService.FindAll();
+            ViewBag.empleado = empleadoService.FindAll();
+            if(id==null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
-            catch
+            Orden_Producto ordenprod = orden_ProductoService.FindById(id);
+            return View(ordenprod);
+        }
+        
+        [HttpPost]
+        public ActionResult Edit(Orden_Producto ordenprod)
+        {
+            ViewBag.orden = ordenService.FindAll();
+            ViewBag.producto = productoService.FindAll();
+            ViewBag.empleado = empleadoService.FindAll();
+            if(!ModelState.IsValid)
             {
                 return View();
             }
+            bool rpta = orden_ProductoService.Update(ordenprod);
+            if(rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
