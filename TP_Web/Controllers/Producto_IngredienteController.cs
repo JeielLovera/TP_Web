@@ -21,6 +21,16 @@ namespace TP_PIZZA.Controllers
             return View(prodct_ingrdntService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Producto_Ingrediente prodct_ingrdnt = prodct_ingrdntService.FindById(id);
+            return View(prodct_ingrdnt);
+        }
+
         public ActionResult Create()
         {
             ViewBag.producto = prodctService.FindAll();
@@ -34,6 +44,35 @@ namespace TP_PIZZA.Controllers
             ViewBag.producto = prodctService.FindAll();
             ViewBag.ingrediente = ingrdntService.FindAll();
             bool rpta = prodct_ingrdntService.Insert(prodct_ingrdnt);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.producto = prodctService.FindAll();
+            ViewBag.ingrediente = ingrdntService.FindAll();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Producto_Ingrediente prodct_ingrdnt = prodct_ingrdntService.FindById(id);
+            return View(prodct_ingrdnt);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Producto_Ingrediente prodct_ingrdnt)
+        {
+            ViewBag.producto = prodctService.FindAll();
+            ViewBag.ingrediente = ingrdntService.FindAll();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = prodct_ingrdntService.Update(prodct_ingrdnt);
             if (rpta)
             {
                 return RedirectToAction("Index");
