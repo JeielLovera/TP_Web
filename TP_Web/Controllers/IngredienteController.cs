@@ -22,7 +22,6 @@ namespace TP_PIZZA.Controllers
 
         public ActionResult Details(int? id)
         {
-            ViewBag.tipoingrediente = tpingredienteService.FindAll();
             if (id == null)
             {
                 return HttpNotFound();
