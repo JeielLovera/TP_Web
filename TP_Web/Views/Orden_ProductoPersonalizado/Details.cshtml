@@ -1,0 +1,58 @@
+﻿@model Entity.Orden_ProductoPersonalizado
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Orden_ProductoPersonalizado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.COrden_Pro_Per)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COrden_Pro_Per)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QOrdenProductoPersonalizado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QOrdenProductoPersonalizado)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CIngrediente.NIngrediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CIngrediente.NIngrediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CEmpleado.NEmpleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CEmpleado.NEmpleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COrden.COrden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COrden.COrden)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.COrden_Pro_Per }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -29,5 +29,19 @@ namespace TP_PIZZA.Controllers
             if (rpta) { return RedirectToAction("Index"); }
             return View();
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Distrito distrito = distritoService.FindById(id);
+            return View(distrito);
+        }
+
     }
+
+
+
 }

@@ -60,5 +60,16 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Tipo_Direccion tipo_Direccion = tpdireccionService.FindById(id);
+            return View(tipo_Direccion);
+        }
+
     }
 }
