@@ -15,7 +15,7 @@ namespace Business.Implementation
         private ITipoProductoRepository tipoProductoRepository = new TipoProductoRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return ProductoRepository.Delete(id);
         }
 
         public List<Producto> FindAll()
