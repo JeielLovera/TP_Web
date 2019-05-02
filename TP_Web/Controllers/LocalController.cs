@@ -65,5 +65,25 @@ namespace TP_PIZZA.Controllers
             Local local = localservice.FindById(id);
             return View(local);
         }
+        public ActionResult Delete(int? id)
+        {
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            Local local = localservice.FindById(id);
+            return View(local);
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = localservice.Delete(id);
+            if(rpta)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }

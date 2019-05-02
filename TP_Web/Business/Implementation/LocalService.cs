@@ -14,7 +14,7 @@ namespace Business.Implementation
         private ILocalRepository LocalRepository= new LocalRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return LocalRepository.Delete(id);
         }
 
         public List<Local> FindAll()

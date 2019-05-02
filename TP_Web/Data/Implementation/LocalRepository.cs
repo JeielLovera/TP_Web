@@ -14,7 +14,24 @@ namespace Data.Implementation
     {
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("delete from Local where CLocal='"+id+"'", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    rpta = true;
+                }
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
 
         public List<Local> FindAll()
@@ -57,7 +74,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("select CLocal, TDireccionLocal, NumTelefono from Local where CLocal='" + id+"'", con);
+                    var cmd = new SqlCommand("select * from Local where CLocal='"+id+"'", con);
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
