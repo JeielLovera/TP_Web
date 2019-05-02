@@ -18,6 +18,16 @@ namespace TP_PIZZA.Controllers
             return View(distritoService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Distrito distrito = distritoService.FindById(id);
+            return View(distrito);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -30,7 +40,7 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -40,8 +50,40 @@ namespace TP_PIZZA.Controllers
             return View(distrito);
         }
 
+        [HttpPost]
+        public ActionResult Edit(Distrito distrito)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = distritoService.Update(distrito);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Distrito distrito = distritoService.FindById(id);
+            return View(distrito);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = distritoService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
-
-
-
 }

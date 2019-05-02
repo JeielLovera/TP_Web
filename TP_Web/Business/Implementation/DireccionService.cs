@@ -17,7 +17,7 @@ namespace Business.Implementation
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return calle_rep.Delete(id);
         }
 
         public List<Direccion> FindAll()

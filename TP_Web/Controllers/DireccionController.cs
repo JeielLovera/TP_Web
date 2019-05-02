@@ -19,6 +19,16 @@ namespace TP_PIZZA.Controllers
             return View(direccionservice.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Direccion direccion = direccionservice.FindById(id);
+            return View(direccion);
+        }
+
         public ActionResult Create()
         {
             ViewBag.tipodirec = tpdirecService.FindAll();
@@ -37,7 +47,38 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
-        public ActionResult Details(int? id)
+
+        public ActionResult Edit(int? id)
+        {
+            ViewBag.tipodirec = tpdirecService.FindAll();
+            ViewBag.distrito = distritoservice.FindAll();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Direccion direccion = direccionservice.FindById(id);
+
+            return View(direccion);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Direccion direccion)
+        {
+            ViewBag.tipodirec = tpdirecService.FindAll();
+            ViewBag.distrito = distritoservice.FindAll();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            bool rpta = direccionservice.Update(direccion);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -47,5 +88,15 @@ namespace TP_PIZZA.Controllers
             return View(direccion);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = direccionservice.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

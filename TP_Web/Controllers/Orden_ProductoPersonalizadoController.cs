@@ -25,6 +25,16 @@ namespace TP_PIZZA.Controllers
             return View(orden_ProductoPersonalizadoService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Orden_ProductoPersonalizado orden_ProductoPersonalizado = orden_ProductoPersonalizadoService.FindById(id);
+            return View(orden_ProductoPersonalizado);
+        }
+
         // GET: Orden_Producto_Personalizado/Create
         public ActionResult Create()
         {
@@ -85,7 +95,7 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -95,5 +105,15 @@ namespace TP_PIZZA.Controllers
             return View(orden_ProductoPersonalizado);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = orden_ProductoPersonalizadoService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

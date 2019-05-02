@@ -15,7 +15,23 @@ namespace Data.Implementation
     {
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("delete from Direccion where CDireccion='" + id + "'", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    rpta = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
 
         public List<Direccion> FindAll()
@@ -131,13 +147,12 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Direccion set NDireccion=@ndireccion , CDistrito=@cdistrito, CTipoDireccion=@ctipo where CDireccion=@cdireccion", con);
-
+                    var cmd = new SqlCommand("update Direccion set NDireccion=@ndireccion , CTipoDireccion=@ctipo, CDistrito=@cdistrito where CDireccion=@cdireccion", con);
                     cmd.Parameters.AddWithValue("@cdireccion", t.CDireccion);
                     cmd.Parameters.AddWithValue("@ndireccion", t.NDireccion);
-                    cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);
                     cmd.Parameters.AddWithValue("@ctipo", t.CTipoDireccion.CTipo);
-
+                    cmd.Parameters.AddWithValue("@cdistrito", t.CDistrito.CDistrito);
+                    
                     cmd.ExecuteNonQuery();
 
                     rpta = true;
