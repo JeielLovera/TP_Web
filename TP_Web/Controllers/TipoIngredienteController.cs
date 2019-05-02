@@ -69,5 +69,27 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            TipoIngrediente tpingrediente = tpingredienteService.FindById(id);
+            return View(tpingrediente);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = tpingredienteService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }

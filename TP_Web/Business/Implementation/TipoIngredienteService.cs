@@ -14,7 +14,7 @@ namespace Business.Implementation
         private ITipoIngredienteRepository tpingredienteRepository = new TipoIngredienteRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return tpingredienteRepository.Delete(id);
         }
 
         public List<TipoIngrediente> FindAll()
