@@ -15,7 +15,23 @@ namespace Data.Implementation
     {
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("delete from Venta_Producto where CVenta_Producto='" + id + "'", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    rpta = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
 
         public List<Venta_Producto> FindAll()
@@ -122,7 +138,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
                 {
                     con.Open();
-                    var cmd = new SqlCommand("update Venta_Producto set CProducto = @cproducto, CVenta = @cventa, QCantidad = @cantidad where CVenta_Producto = @id", con);
+                    var cmd = new SqlCommand("update Venta_Producto set CProducto=@cproducto,CVenta=@cventa, QCantidad=@cantidad where CVenta_Producto=@id", con);
                     cmd.Parameters.AddWithValue("@id", t.CVenta_Producto);
                     cmd.Parameters.AddWithValue("@cproducto", t.CProducto.CProducto);
                     cmd.Parameters.AddWithValue("@cventa", t.CVenta.CVenta);

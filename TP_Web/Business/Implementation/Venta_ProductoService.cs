@@ -17,7 +17,7 @@ namespace Business.Implementation
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return vntprodctRepository.Delete(id);
         }
 
         public List<Venta_Producto> FindAll()
