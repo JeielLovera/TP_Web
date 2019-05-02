@@ -1,0 +1,55 @@
+﻿@model Entity.Direccion
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Direccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CDireccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NDireccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NDireccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTipoDireccion.NTipo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CTipoDireccion.NTipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CDistrito.NDistrito)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CDistrito.NDistrito)
+        </dd>   
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

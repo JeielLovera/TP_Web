@@ -20,7 +20,17 @@ namespace TP_PIZZA.Controllers
         {
             return View(ventprodctperService.FindAll());
         }
-        
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Venta_ProductoPersonalizado venta_proper = ventprodctperService.FindById(id);
+            return View(venta_proper);
+        }
+
         public ActionResult Create()
         {
             ViewBag.venta = ventaService.FindAll();
@@ -40,11 +50,12 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
-        public ActionResult Edit(int?id)
+
+        public ActionResult Edit(int? id)
         {
             ViewBag.venta = ventaService.FindAll();
             ViewBag.ingrediente = ingrdntService.FindAll();
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -61,20 +72,32 @@ namespace TP_PIZZA.Controllers
                 return View();
             }
             bool rpta = ventprodctperService.Update(ventaper);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
-        public ActionResult Details(int?id)
+
+        public ActionResult Delete(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
-            Venta_ProductoPersonalizado venta_proper = ventprodctperService.FindById(id);
-            return View(venta_proper);
+            Venta_ProductoPersonalizado ventaper = ventprodctperService.FindById(id);
+            return View(ventaper);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = ventprodctperService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
