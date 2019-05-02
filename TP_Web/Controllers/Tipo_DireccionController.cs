@@ -19,6 +19,17 @@ namespace TP_PIZZA.Controllers
             return View(tpdireccionService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Tipo_Direccion tpdirec = tpdireccionService.FindById(id);
+            return View(tpdirec);
+        }
+
+
         public ActionResult Create()
         {
             return View();
@@ -61,15 +72,25 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return HttpNotFound();
             }
-            Tipo_Direccion tipo_Direccion = tpdireccionService.FindById(id);
-            return View(tipo_Direccion);
+            Tipo_Direccion tpdirec = tpdireccionService.FindById(id);
+            return View(tpdirec);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = tpdireccionService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

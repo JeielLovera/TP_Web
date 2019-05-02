@@ -15,7 +15,23 @@ namespace Data.Implementation
     {
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("delete from TipoDireccion where CTipoDireccion='" + id + "'", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    rpta = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
 
         public List<Entity.Tipo_Direccion> FindAll()

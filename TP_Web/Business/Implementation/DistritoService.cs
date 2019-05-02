@@ -14,7 +14,7 @@ namespace Business.Implementation
         private IDistritoRepository distrito = new DistritoRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return distrito.Delete(id);
         }
 
         public List<Distrito> FindAll()
