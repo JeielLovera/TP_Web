@@ -70,5 +70,25 @@ namespace TP_PIZZA.Controllers
             Cliente cliente = clienteservice.FindById(id);
             return View(cliente);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            Cliente cliente = clienteservice.FindById(id);
+            return View(cliente);
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = clienteservice.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Business.Implementation
         private IDireccionRepository direccionRepository = new DireccionRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return clienteRepository.Delete(id);
         }
 
         public List<Cliente> FindAll()
