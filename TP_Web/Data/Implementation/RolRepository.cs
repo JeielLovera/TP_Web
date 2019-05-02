@@ -14,7 +14,23 @@ namespace Data.Implementation
     {
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Pizza"].ToString()))
+                {
+                    con.Open();
+                    var cmd = new SqlCommand("delete from Rol where CRol='" + id + "'", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    rpta = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rpta;
         }
 
         public List<Rol> FindAll()

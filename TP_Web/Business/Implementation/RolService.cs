@@ -14,7 +14,7 @@ namespace Business.Implementation
         private IRolRepository RolRepository = new RolRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return RolRepository.Delete(id);
         }
 
         public List<Rol> FindAll()

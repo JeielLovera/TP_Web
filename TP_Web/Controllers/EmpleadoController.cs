@@ -80,5 +80,26 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Empleado empl = empleadoService.FindById(id);
+            return View(empl);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = empleadoService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

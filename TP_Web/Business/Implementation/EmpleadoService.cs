@@ -16,7 +16,7 @@ namespace Business.Implementation
         IEmpleadoRepository jefeRepository = new EmpleadoRepository();
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return empleadorepo.Delete(id);
         }
 
         public List<Empleado> FindAll()
