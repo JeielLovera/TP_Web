@@ -19,6 +19,17 @@ namespace TP_PIZZA.Controllers
         {
             return View(ventaservice.FindAll());
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Venta venta = ventaservice.FindById(id);
+            return View(venta);
+        }
+
         public ActionResult Create()
         {
             ViewBag.local = localservice.FindAll();
@@ -33,19 +44,20 @@ namespace TP_PIZZA.Controllers
             ViewBag.motorizado = motorizadoservice.FindAll();
             ViewBag.cliente = clienteservice.FindAll();
             bool rpta = ventaservice.Insert(venta);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
+
         public ActionResult Edit(int? id)
         {
             ViewBag.local = localservice.FindAll();
             ViewBag.motorizado = motorizadoservice.FindAll();
             ViewBag.cliente = clienteservice.FindAll();
-            
-            if (id==null)
+
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -63,20 +75,33 @@ namespace TP_PIZZA.Controllers
                 return View();
             }
             bool rpta = ventaservice.Update(venta);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
-        public ActionResult Details(int?id)
+
+        public ActionResult Delete(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
             Venta venta = ventaservice.FindById(id);
             return View(venta);
         }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = ventaservice.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }
