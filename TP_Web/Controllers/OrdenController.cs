@@ -71,5 +71,24 @@ namespace TP_PIZZA.Controllers
             Orden orden = ordenService.FindById(id);
             return View(orden);
         }
+        public ActionResult Delete(int? id)
+        {
+            if(id==null)
+            {
+                return HttpNotFound();
+            }
+            Orden orden = ordenService.FindById(id);
+            return View(orden);
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = ordenService.Delete(id);
+            if(rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
