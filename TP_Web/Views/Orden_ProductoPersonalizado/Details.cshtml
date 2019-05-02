@@ -6,6 +6,7 @@
 }
 
 <h2>Details</h2>
+
 <div>
     <h4>Orden_ProductoPersonalizado</h4>
     <hr />
@@ -19,13 +20,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.QOrdenProductoPersonalizado)
+            @Html.DisplayNameFor(model => model.COrden.COrden)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.QOrdenProductoPersonalizado)
+            @Html.DisplayFor(model => model.COrden.COrden)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.COrden.CVenta.CVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COrden.CVenta.CVenta)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.CIngrediente.NIngrediente)
@@ -44,15 +52,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.COrden.COrden)
+            @Html.DisplayNameFor(model => model.QOrdenProductoPersonalizado)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.COrden.COrden)
+            @Html.DisplayFor(model => model.QOrdenProductoPersonalizado)
         </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.COrden_Pro_Per }) |
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.COrden_Pro_Per }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

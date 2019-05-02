@@ -90,7 +90,7 @@ namespace TP_PIZZA.Controllers
             }
             Venta venta = ventaservice.FindById(id);
             return View(venta);
-        }
+       }
 
         [HttpPost]
         public ActionResult Delete(int id)

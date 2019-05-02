@@ -19,7 +19,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CEmpleado.NEmpleado)
-        </th>        
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.QOrdenProducto)
         </th>
@@ -36,8 +36,8 @@
                 @Html.DisplayFor(modelItem => item.COrden.COrden)
             </td>
             <td>
-                @Html.DisplayFor(modelItem=>item.COrden.CVenta.CVenta)
-            </td>            
+                @Html.DisplayFor(modelItem => item.COrden.CVenta.CVenta)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CProducto.NProducto)
             </td>
@@ -48,9 +48,9 @@
                 @Html.DisplayFor(modelItem => item.QOrdenProducto)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.COrden_Producto  }) |
-                @Html.ActionLink("Details", "Details", new { id=item.COrden_Producto }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.COrden_Producto })
+                @Html.ActionLink("Edit", "Edit", new { id = item.COrden_Producto }) |
+                @Html.ActionLink("Details", "Details", new { id = item.COrden_Producto }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.COrden_Producto })
             </td>
         </tr>
     }

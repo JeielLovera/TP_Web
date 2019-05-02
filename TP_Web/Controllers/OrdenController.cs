@@ -19,6 +19,17 @@ namespace TP_PIZZA.Controllers
         {
             return View(ordenService.FindAll());
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Orden orden = ordenService.FindById(id);
+            return View(orden);
+        }
+
         // GET: Orden/Create
         public ActionResult Create()
         {
@@ -44,14 +55,14 @@ namespace TP_PIZZA.Controllers
         public ActionResult Edit(int? id)
         {
             ViewBag.ventaservice = ventaService.FindAll();
-            if (id == null) { return HttpNotFound(); }            
+            if (id == null) { return HttpNotFound(); }
             Orden orden = ordenService.FindById(id);
             return View(orden);
         }
 
         // POST: Orden/Edit/5
         [HttpPost]
-        public ActionResult Edit( Orden orden)
+        public ActionResult Edit(Orden orden)
         {
             ViewBag.ventaservice = ventaService.FindAll();
             if (!ModelState.IsValid) { return View(); }
@@ -62,18 +73,10 @@ namespace TP_PIZZA.Controllers
             }
             return View();
         }
-        public ActionResult Details(int?id)
-        {
-            if(id==null)
-            {
-                return HttpNotFound();
-            }
-            Orden orden = ordenService.FindById(id);
-            return View(orden);
-        }
+
         public ActionResult Delete(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -84,7 +87,7 @@ namespace TP_PIZZA.Controllers
         public ActionResult Delete(int id)
         {
             bool rpta = ordenService.Delete(id);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }

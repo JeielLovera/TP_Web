@@ -18,6 +18,16 @@ namespace TP_PIZZA.Controllers
             return View(clienteservice.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Cliente cliente = clienteservice.FindById(id);
+            return View(cliente);
+        }
+
         public ActionResult Create()
         {
             ViewBag.direccion = direccionservice.FindAll();
@@ -35,10 +45,10 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
-        public ActionResult Edit(int?id)
+        public ActionResult Edit(int? id)
         {
             ViewBag.direccion = direccionservice.FindAll();
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -55,25 +65,16 @@ namespace TP_PIZZA.Controllers
             }
 
             bool rpta = clienteservice.Update(cliente);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
-        public ActionResult Details(int? id)
-        {
-            if(id==null)
-            {
-                return RedirectToAction("Index");
-            }
-            Cliente cliente = clienteservice.FindById(id);
-            return View(cliente);
-        }
 
         public ActionResult Delete(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }

@@ -73,7 +73,7 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CJefe.CEmpleado,
                                     new SelectList(ViewBag.jefe, "CEmpleado", "NEmpleado"), "---Select---", "")
-                @Html.ValidationMessageFor(model => model.CJefe.NEmpleado, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.CJefe.CEmpleado, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -17,6 +17,16 @@ namespace TP_PIZZA.Controllers
             return View(localservice.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Local local = localservice.FindById(id);
+            return View(local);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -45,29 +55,21 @@ namespace TP_PIZZA.Controllers
         [HttpPost]
         public ActionResult Edit(Local local)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View();
             }
             bool rpta = localservice.Update(local);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-            Local local = localservice.FindById(id);
-            return View(local);
-        }
+
         public ActionResult Delete(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -78,7 +80,7 @@ namespace TP_PIZZA.Controllers
         public ActionResult Delete(int id)
         {
             bool rpta = localservice.Delete(id);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }

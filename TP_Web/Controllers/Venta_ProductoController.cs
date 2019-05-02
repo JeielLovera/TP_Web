@@ -18,6 +18,17 @@ namespace TP_PIZZA.Controllers
         {
             return View(venta_productoservice.FindAll());
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Venta_Producto ventaprod = venta_productoservice.FindById(id);
+            return View(ventaprod);
+        }
+
         public ActionResult Create()
         {
             ViewBag.producto = productoservice.FindAll();
@@ -37,17 +48,18 @@ namespace TP_PIZZA.Controllers
             return View();
         }
 
-        public ActionResult Edit(int?id)
+        public ActionResult Edit(int? id)
         {
             ViewBag.producto = productoservice.FindAll();
             ViewBag.venta = ventaservice.FindAll();
-            if (id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
             Venta_Producto ventaprod = venta_productoservice.FindById(id);
             return View(ventaprod);
         }
+
         [HttpPost]
         public ActionResult Edit(Venta_Producto ventaprod)
         {
@@ -58,21 +70,13 @@ namespace TP_PIZZA.Controllers
                 return View();
             }
             bool rpta = venta_productoservice.Update(ventaprod);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
-        public ActionResult Details(int ?id)
-        {
-            if(id==null)
-            {
-                return HttpNotFound();
-            }
-            Venta_Producto ventaprod = venta_productoservice.FindById(id);
-            return View(ventaprod);
-        }
+
         public ActionResult Delete(int? id)
         {
             if (id == null)

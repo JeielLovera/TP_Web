@@ -76,11 +76,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CJefe, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CJefe.CEmpleado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CJefe.CEmpleado,
                                     new SelectList(ViewBag.jefe, "CEmpleado", "NEmpleado"), "---Select---", "")
-                @Html.ValidationMessageFor(model => model.CJefe.NEmpleado, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.CJefe.CEmpleado, "", new { @class = "text-danger" })
             </div>
         </div>
 
