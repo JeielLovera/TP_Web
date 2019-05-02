@@ -23,6 +23,16 @@ namespace TP_PIZZA.Controllers
             return View(orden_ProductoService.FindAll());
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Orden_Producto ordenProd = orden_ProductoService.FindById(id);
+            return View(ordenProd);
+        }
+
         // GET: Orden_Producto/Create
         public ActionResult Create()
         {
@@ -48,45 +58,57 @@ namespace TP_PIZZA.Controllers
 
             return View();
         }
-        
+
         public ActionResult Edit(int? id)
         {
             ViewBag.orden = ordenService.FindAll();
             ViewBag.producto = productoService.FindAll();
             ViewBag.empleado = empleadoService.FindAll();
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
             Orden_Producto ordenprod = orden_ProductoService.FindById(id);
             return View(ordenprod);
         }
-        
+
         [HttpPost]
         public ActionResult Edit(Orden_Producto ordenprod)
         {
             ViewBag.orden = ordenService.FindAll();
             ViewBag.producto = productoService.FindAll();
             ViewBag.empleado = empleadoService.FindAll();
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View();
             }
             bool rpta = orden_ProductoService.Update(ordenprod);
-            if(rpta)
+            if (rpta)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
-        public ActionResult Details(int? id)
+
+        public ActionResult Delete(int? id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
-            Orden_Producto ordenProd = orden_ProductoService.FindById(id);
-            return View(ordenProd);
+            Orden_Producto ordenprod = orden_ProductoService.FindById(id);
+            return View(ordenprod);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            bool rpta = orden_ProductoService.Delete(id);
+            if (rpta)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
